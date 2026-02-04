@@ -1,0 +1,71 @@
+# Guided Journey Flow: Design Review
+
+## 1. Current State vs. Proposed Flow
+
+| Feature | Current Implementation | User Proposed "Guided Flow" | Gap |
+| :--- | :--- | :--- | :--- |
+| **Baseline** | ✅ Dashboards/Questionnaires exist and update live. | Same. | **None** |
+| **Start Point** | ❌ "Quick Actions" are specific scenarios (Buy Home, Pension). | **Journey Categories**: "Set Goals", "Improve Health", "Test Events". | **High**: Need high-level "Journey Menu" before specific scenarios. |
+| **Discovery** | ⚠️ Passive. Waits for user to type or click static buttons. | **Active**: Agent "suggests prompts" tailored to the journey. | **Medium**: Need dynamic "Suggestion Chips" based on context. |
+| **Simulation** | ✅ Maps input -> Scenario actions. | **Structured**: Schema first, then Archetype fallback. | **Low**: Logic exists, just needs explicit prioritizing in System Prompt. |
+
+## 2. Proposed Architecture
+
+To strictly adhere to your flow, we need to restructure the Chat Interface into **active modes**:
+
+### A. The "What would you like to do?" Menu
+Instead of listing specific scenarios like "Buy Home", the initial state should offer **3 distinct Journeys**:
+1.  🎯 **Set Goals** (Growth Focused)
+2.  💪 **Improve Financial Health** (Optimization Focused)
+3.  ⚡ **Test Unforeseen Events** (Resilience Focused)
+
+### B. Dynamic Suggestion Chips
+Once a journey is selected, the "Quick Actions" should dynamically swap to relevant prompts:
+
+*   **If "Set Goals" selected:**
+    *   [🏠 Buy a House] [🚗 Buy a Car] [💍 Wedding] [Custom Goal]
+*   **If "Improve Health" selected:**
+    *   [📉 Reduce Expenses] [💰 Maximize ISA] [💳 Clear Debt]
+*   **If "Test Events" selected:**
+    *   [📉 Market Crash] [🏥 Illness] [👶 Job Loss]
+
+### C. The "Schema vs Archetype" Logic
+Current logic tries to "fuzzy match" everything. The new flow requires a strict decision tree in the System Prompt:
+1.  **Is this a Standard Scenario?** (e.g., "Buy Home") -> **Use Config Form**.
+2.  **Is this a Known Archetype?** (e.g., "I want to buy a horse") -> **Use Custom Goal (Universal)**.
+    *   *Note*: The "Custom Goal" form we built is effectively the UI for the "One-Off Expense" archetype.
+
+## 3. Shortcomings & Critiques
+
+### Critique 1: The "Blank Canvas" Problem in Journey Mode
+*   **Risk**: User clicks "Set Goals" and the agent just says "Okay, what goals?".
+*   **Fix**: The agent must **immediately offer examples**.
+    *   *Bad*: "What goals do you have?"
+    *   *Good*: "Great! Are we talking about big milestones like a **House**, or lifestyle goals like a **Holiday**? I can also help with **Custom Goals**."
+
+### Critique 2: "Improve Health" is Vague
+*   **Risk**: Users might not know *how* to improve health.
+*   **Fix**: The agent should scan the profile *before* asking.
+    *   *Logic*: If `savings_rate < 0`, suggest "Reduce Expenses". If `cash > 20000`, suggest "Start Investing".
+    *   *Feature*: **Context-Aware Suggestions** (Phase 3 in current plan).
+
+### Critique 3: Rigid Modality
+*   **Risk**: User is in "Actions" mode but wants to add a "Goal".
+*   **Fix**: Allow jumping. Even if I'm in "Health" mode, if I say "I want to buy a Ferrari", the agent should switch modes seamlessly. Don't lock the user into a "wizard".
+
+## 4. Implementation Goals
+
+1.  **UI Update**: Replace static `QUICK_ACTIONS` with a **Dynamic Suggestion Engine**.
+    *   State 0: Journey Menu (Goals, Health, Events).
+    *   State 1: Contextual Chips (House, ISA, Crash).
+2.  **System Prompt Update**: Define the 3 Personas.
+    *   *Goal Setter*: Enthusiastic, focuses on "How much/When".
+    *   *Health Coach*: Critical, focuses on "Savings Rate/Efficiency".
+    *   *Stress Tester*: Cautious, focuses on "Safety Nets".
+3.  **Backend Logic**: Enforce the `Schema -> Archetype` fallback explicitly.
+
+## Recommendation
+This flow is **better** than the current one because it groups the 55 scenarios into cognitive chunks. A list of 55 items is overwhelming; 3 paths are manageable.
+
+**Proceed?**
+Shall we implement the **Journey Menu** and **Dynamic Chips** to realize this flow?

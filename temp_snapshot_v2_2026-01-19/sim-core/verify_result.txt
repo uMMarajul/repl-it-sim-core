@@ -1,0 +1,2 @@
+
+✅ PASS: Simulator correctly flagged insolvency.

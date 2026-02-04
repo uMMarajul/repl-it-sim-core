@@ -1,0 +1,37 @@
+[ScenarioExplorer] Component rendered/mounted
+injected.js:27 [CHECKBOX] onClick fired! Object
+injected.js:27 [CHECKBOX] onChange fired! Object
+injected.js:27 [ScenarioItem] handleToggle called: Object
+injected.js:27 [ScenarioItem] Toggling existing scenario: Object
+injected.js:27 [scenarioReducer] Action: TOGGLE_SCENARIO Object
+injected.js:27 [scenarioReducer] Action: TOGGLE_SCENARIO Object
+injected.js:27 [useSimulation] Recomputing with scenarios: Object
+injected.js:27 [useSimulation] Built 0 modifiers from 0 enabled scenarios
+injected.js:27 [useSimulation] Scenario has 0 modifiers
+injected.js:27 ✨ Auto-created Cash Savings account: 0% interest, tracks unallocated surplus
+injected.js:27 [useSimulation] Recomputing with scenarios: Object
+injected.js:27 [useSimulation] Built 0 modifiers from 0 enabled scenarios
+injected.js:27 [useSimulation] Scenario has 0 modifiers
+injected.js:27 ✨ Auto-created Cash Savings account: 0% interest, tracks unallocated surplus
+2injected.js:27 [ScenarioExplorer] Component rendered/mounted
+anchor?ar=1&k=6Ldqhw…jQ0Mw..&hl=en&v=…:1 Uncaught (in promise) Timeout (o)
+injected.js:27 [CHECKBOX] onClick fired! Object
+injected.js:27 [CHECKBOX] onChange fired! Object
+injected.js:27 [ScenarioItem] handleToggle called: Object
+injected.js:27 [transformJobLoss] Object
+injected.js:27 [ScenarioItem] Adding new scenario with defaults: Object
+injected.js:27 [scenarioReducer] Action: ADD_SCENARIO Object
+injected.js:27 [scenarioReducer] Action: ADD_SCENARIO Object
+injected.js:27 [useSimulation] Recomputing with scenarios: Object
+injected.js:27 [useSimulation] Processing event E1 - Job Loss (Temporary Unemployment): Object
+injected.js:27 [useSimulation] Event modifier created: Object
+injected.js:27 [useSimulation] Built 1 modifiers from 1 enabled scenarios
+injected.js:27 [useSimulation] Scenario has 1 modifiers
+injected.js:27 ✨ Auto-created Cash Savings account: 0% interest, tracks unallocated surplus
+injected.js:27 [useSimulation] Recomputing with scenarios: Object
+injected.js:27 [useSimulation] Processing event E1 - Job Loss (Temporary Unemployment): Object
+injected.js:27 [useSimulation] Event modifier created: Object
+injected.js:27 [useSimulation] Built 1 modifiers from 1 enabled scenarios
+injected.js:27 [useSimulation] Scenario has 1 modifiers
+injected.js:27 ✨ Auto-created Cash Savings account: 0% interest, tracks unallocated surplus
+2injected.js:27 [ScenarioExplorer] Component rendered/mounted

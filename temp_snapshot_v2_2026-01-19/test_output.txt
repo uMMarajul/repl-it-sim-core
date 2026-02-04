@@ -1,0 +1,4 @@
+PASS: AI warned about insolvency.
+PASS: AI mentioned surplus. Message: It looks like you've already set up a wedding goal for £150k by January 2025. However, I must warn you that this plan could push you into debt by that time. 
+
+With your current £200/month surplus, you might need to either lower the budget or push the date further out to make it more realistic. Would you like to adjust the plan?

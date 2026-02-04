@@ -1,0 +1,351 @@
+# Bidirectional AI-Simulation Integration with Financial Coaching
+
+## Objective
+
+Transform the AI from a simple intent detector into a **context-aware financial coach** that can:
+1. **Read** current simulation state (profile, scenarios, projections)
+2. **Execute** actions on scenarios (create, modify, activate, delete)
+3. **Guide** users with educational coaching (non-FCA compliant)
+
+---
+
+## Architecture
+
+### Current (One-Way)
+```
+User → AI → Intent Detection → Open Config Modal
+```
+
+### New (Bidirectional)
+```
+Frontend State ←→ AI Backend ←→ Actions
+    ↓                ↓              ↓
+Profile +      Understands    Execute Changes
+Scenarios      Context        on Simulation
+```
+
+---
+
+## Implementation: Part 1 - Context Passing
+
+### Frontend → Backend (Send Context)
+
+**Update ChatRequest to include simulation state:**
+
+```python
+class ChatRequest(BaseModel):
+    message: str
+    sessionId: Optional[str] = None
+    context: Optional[Dict[str, Any]] = None  # NEW
+    
+# Context structure:
+{
+  "profile": {
+    "age": 28,
+    "income": 45000,
+    "expenses": 30000,
+    "savings": 10000,
+    "name": "Alpha"
+  },
+  "activeScenarios": [
+    {
+      "id": "emergency_fund_1",
+      "type": "EMERGENCY_FUND",
+      "params": {"targetAmount": 15000},
+      "status": "active"
+    }
+  ],
+  "projections": {
+    "netWorthIn10Years": 250000,
+    "monthlyDisposableIncome": 1250
+  }
+}
+```
+
+**Frontend sends this on every chat message:**
+
+```typescript
+const response = await fetch('http://localhost:8000/api/chat', {
+    method: 'POST',
+    body: JSON.stringify({
+        message: userInput,
+        sessionId: sessionId,
+        context: {
+            profile: state.selectedProfile,
+            activeScenarios: state.scenarios.filter(s => s.active),
+            projections: calculateProjections(state)
+        }
+    })
+})
+```
+
+---
+
+## Implementation: Part 2 - Action System
+
+### Backend → Frontend (Return Actions)
+
+**Update ChatResponse with actions:**
+
+```python
+class ScenarioAction(BaseModel):
+    type: str  # CREATE, MODIFY, ACTIVATE, DEACTIVATE, DELETE
+    scenarioId: str
+    params: Optional[Dict[str, Any]] = None
+    
+class ChatResponse(BaseModel):
+    message: str
+    sessionId: str
+    intent: Optional[str] = None
+    params: Optional[Dict[str, Any]] = None
+    action: Optional[ScenarioAction] = None  # NEW
+    guidance: Optional[str] = None  # Educational insights
+```
+
+**Action Types:**
+
+1. **CREATE_SCENARIO** - Add new scenario
+2. **MODIFY_SCENARIO** - Update existing scenario params
+3. **ACTIVATE_SCENARIO** - Turn scenario on
+4. **DEACTIVATE_SCENARIO** - Turn scenario off
+5. **DELETE_SCENARIO** - Remove scenario
+6. **OPEN_CONFIG** - Open config modal (current behavior)
+
+---
+
+## Implementation: Part 3 - Context-Aware AI
+
+### Updated System Prompt
+
+```python
+"""You are a UK financial coach helping users explore their financial future through simulation.
+
+IMPORTANT: You provide EDUCATIONAL guidance only - not regulated financial advice.
+
+CONTEXT AWARENESS:
+You can see the user's:
+- Current profile (income, expenses, savings, age)
+- Active scenarios and goals
+- Projected outcomes
+
+COACHING APPROACH:
+✅ Educational: "Emergency funds typically cover 3-6 months"
+✅ Exploratory: "Would you like to see how that affects your projections?"
+✅ Informational: "Many people prioritize X before Y"
+❌ NOT advice: "You should invest in X"
+❌ NOT prescriptive: "You must do X"
+
+SCENARIO ACTIONS:
+When user wants to change something, return an action:
+- "Add £300k house deposit goal" → CREATE_SCENARIO
+- "Pause my pension" → DEACTIVATE_SCENARIO  
+- "Increase to £400k" → MODIFY_SCENARIO
+
+EXAMPLE CONVERSATIONS:
+
+User: "I want to save for a house"
+You see: No house deposit scenario active
+Response: "Great goal! A house deposit typically ranges from 10-20% of the property value. What's your target purchase price?"
+Action: None (gather info first)
+
+User: "£300k house"
+Response: "Perfect. For a £300k property, you'd typically need £30-60k for a deposit. Would you like me to set up a deposit savings goal?"
+Action: {type: "OPEN_CONFIG", scenarioId: "HOUSE_DEPOSIT_FUND", params: {targetAmount: 60000}}
+
+User: "How am I doing on my emergency fund?"
+You see: EMERGENCY_FUND active, £8,000 / £15,000 target
+Response: "You're making good progress! You've saved £8,000 of your £15,000 target. That's currently about 3.2 months of expenses covered."
+Action: None
+
+Remember: You're a coach helping them EXPLORE options, not telling them what to do."""
+```
+
+---
+
+## Implementation: Part 4 - Frontend Action Executor
+
+```typescript
+// In ChatAssistant.tsx
+function handleAIResponse(data) {
+    // Display message
+    setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: data.message
+    }])
+    
+    // Execute action if present
+    if (data.action) {
+        executeAction(data.action)
+    }
+}
+
+function executeAction(action: ScenarioAction) {
+    const { addScenario, updateScenario, toggleScenario } = useScenarioStore()
+    
+    switch(action.type) {
+        case 'CREATE_SCENARIO':
+            addScenario({
+                id: generateId(),
+                type: action.scenarioId,
+                params: action.params,
+                active: true
+            })
+            break
+            
+        case 'MODIFY_SCENARIO':
+            updateScenario(action.scenarioId, action.params)
+            break
+            
+        case 'ACTIVATE_SCENARIO':
+            toggleScenario(action.scenarioId, true)
+            break
+            
+        case 'DEACTIVATE_SCENARIO':
+            toggleScenario(action.scenarioId, false)
+            break
+            
+        case 'OPEN_CONFIG':
+            triggerScenarioConfig(action.scenarioId, action.params)
+            break
+    }
+}
+```
+
+---
+
+## Implementation: Part 5 - Educational Guidance
+
+### Coaching Knowledge Base
+
+Add to AI's system prompt:
+
+```
+FINANCIAL COACHING KNOWLEDGE:
+
+Emergency Funds:
+- Typical target: 3-6 months of essential expenses
+- Priority: Usually the first goal
+- Location: Easy-access savings account
+
+House Deposits:
+- UK typical: 10-20% of property value
+- Help to Buy ISA: Up to £3,000 bonus
+- Timeline: Minimum 6-12 months for most savers
+
+Pensions:
+- Annual allowance: £60,000
+- Tax relief: 20-45% depending on income
+- Employer matching: "Free money" - maximize it
+
+Debt Priorities:
+- High interest first (credit cards, typically 20%+)
+- Student loans: Plan 2 = 9% above £27,295
+- Consider consolidation if multiple debts
+
+Investment Order (rough guide):
+1. Build emergency fund (3-6 months)
+2. Clear high-interest debt
+3. Maximize employer pension match
+4. Consider ISA for tax-free growth
+5. Additional pension contributions
+```
+
+---
+
+## Example User Journeys
+
+### Journey 1: Complete Beginner
+```
+User: "I don't know where to start"
+AI sees: No active scenarios, £10k savings
+AI: "Great question! Most people start with an emergency fund - typically 3-6 months of expenses. 
+     Looking at your profile, that would be around £15,000. You have £10k saved already. 
+     Would you like to set this as a goal?"
+Action: None (educational, waiting for confirmation)
+
+User: "Yes please"
+AI: "Perfect! Setting up a £15,000 emergency fund goal."
+Action: CREATE_SCENARIO (emergency_fund, target: 15000)
+```
+
+### Journey 2: Scenario Management
+```
+User: "Pause my pension for now"
+AI sees: PENSION_CONTRIBUTION active, £500/month
+AI: "I can pause your £500/month pension contributions. Just to note - you'll miss out on 
+     employer matching (if applicable) and tax relief. Are you sure?"
+Action: None (checking first)
+
+User: "Yes, I need the cash flow"  
+AI: "Understood. I've paused your pension contributions. Your monthly cash flow will 
+     increase by £500. You can resume anytime."
+Action: DEACTIVATE_SCENARIO (pension_contribution)
+```
+
+### Journey 3: Context-Aware Guidance
+```
+User: "Should I invest in an ISA?"
+AI sees: No emergency fund, £5k savings
+AI: "ISAs are great for tax-free growth! Before investing though, many people ensure they have 
+     an emergency fund (3-6 months of expenses) in easy-access savings. You have £5k saved - 
+     would you like to explore building an emergency fund first, or proceed with an ISA?"
+Action: None (educational guidance based on context)
+```
+
+---
+
+## Legal/Compliance Considerations
+
+### Disclaimers to Add
+
+**In chat UI:**
+> "💡 Educational guidance only - not regulated financial advice"
+
+**In system prompt:**
+```
+LEGAL BOUNDARIES:
+- You are an educational tool, not a financial advisor
+- Do not provide regulated investment advice
+- Do not recommend specific products or providers
+- Focus on helping users EXPLORE scenarios
+- If complex tax/legal questions arise, suggest they consult a qualified advisor
+```
+
+---
+
+## Implementation Priority
+
+### Phase 1: Context Passing (Week 1)
+- [ ] Update API models (ChatRequest, ChatResponse)
+- [ ] Frontend: Extract and send context
+- [ ] Backend: Parse and store context
+- [ ] AI: Read context in prompt
+
+### Phase 2: Action System (Week 2)
+- [ ] Define action types
+- [ ] Backend: Generate actions
+- [ ] Frontend: Action executor
+- [ ] Test create/modify/activate scenarios
+
+### Phase 3: Coaching Enhancement (Week 3)
+- [ ] Expand AI knowledge base
+- [ ] Add educational guidance
+- [ ] Implement compliance guardrails
+- [ ] Add disclaimers to UI
+
+### Phase 4: Polish (Week 4)
+- [ ] Handle edge cases
+- [ ] Improve context summarization
+- [ ] Add confirmation steps for destructive actions
+- [ ] User testing & refinement
+
+---
+
+## Success Criteria
+
+✅ AI can see and understand user's current financial state  
+✅ AI can create/modify scenarios via chat  
+✅ Educational guidance feels helpful, not preachy  
+✅ Clear compliance boundaries maintained  
+✅ Users can manage their entire simulation via chat  
+✅ Seamless integration with existing UI

@@ -1,0 +1,4 @@
+{
+  "extends": ["next"],
+  "ignorePatterns": ["archive/**/*", "node_modules/**/*", ".next/**/*"]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@financial-sandbox/sim-core",
+  "version": "1.0.0",
+  "description": "Pure TypeScript financial simulation engine for UK-specific 70-year projections with scenario modeling",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/cli.ts",
+    "test": "ts-node tests/runSimulation.ts"
+  },
+  "keywords": [
+    "financial",
+    "simulation",
+    "projection",
+    "scenario-modeling",
+    "uk-finance"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "date-fns": "^3.0.0",
+    "openai": "^6.15.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}

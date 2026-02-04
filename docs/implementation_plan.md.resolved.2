@@ -1,0 +1,76 @@
+# AI Intent Detection + Config Window Integration
+
+## Goal
+
+Enable the AI chat to:
+1. **Detect user intents** for existing scenarios → Open config window
+2. **Extract parameters** from conversation → Pre-fill values
+3. **Create custom goals** when no existing scenario fits → Generate new scenario
+
+## Decision Tree
+
+```
+User Request
+    ↓
+Matches Existing Scenario? 
+    ├── YES → Extract params → Open config window (pre-filled)
+    └── NO → Create custom scenario → Open custom config window
+```
+
+## Implementation Steps
+
+### 1. Backend: Intent Detection + Classification
+
+Add to [api/agent_service.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent_service.py):
+- Detect if request matches **existing scenario** OR needs **custom scenario**
+- Extract parameters for either case
+- Return: `{intent: "BUY_HOME" | "CUSTOM", params: {...}, customScenario: {...}}`
+
+**Existing scenarios**: EMERGENCY_FUND, BUY_HOME, PENSION_CONTRIBUTION, etc.  
+**Custom scenarios**: Unique goals like "Save for wedding in Bali" or "Fund daughter's education"
+
+### 2. Frontend: Dual Handler
+
+Update [ChatAssistant.tsx](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/components/ChatAssistant.tsx):
+- **Existing intent** → [triggerScenarioConfig(scenarioId, params)](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/components/ChatAssistant.tsx#57-63)
+- **Custom intent** → `createCustomScenario(scenarioDetails)`
+
+### 3. Custom Scenario Structure
+
+When AI creates custom goal:
+```json
+{
+  "intent": "CUSTOM",
+  "customScenario": {
+    "name": "Save for Wedding in Bali",
+    "description": "Save £15,000 for destination wedding",
+    "targetAmount": 15000,
+    "timeframe": 24,
+    "category": "lifestyle"
+  }
+}
+```
+
+### 4. Parameter Extraction
+
+**Common params**:
+- `targetAmount`, `timeframe`, `monthlyContribution`, `currentBalance`, `interestRate`
+
+**Custom params**:
+- `scenarioName`, `description`, `category`, `milestones`
+
+## Test Cases
+
+✅ "Emergency fund £10k" → EMERGENCY_FUND config  
+✅ "Buy £350k house" → BUY_HOME config  
+✅ "Save for wedding in Bali, £15k" → Custom scenario  
+✅ "Fund daughter's uni" → Custom scenario  
+✅ General chat → No config
+
+## Success Criteria
+
+✅ Existing scenarios open config windows automatically  
+✅ Custom goals create new scenarios  
+✅ Parameters pre-filled from conversation  
+✅ User can edit before confirming  
+✅ Chat flows naturally

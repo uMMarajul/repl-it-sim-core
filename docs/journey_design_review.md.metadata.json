@@ -1,0 +1,5 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_OTHER",
+  "summary":  "Design review of the proposed 'Guided Journey' flow. Analyzes current adherence, identifies gaps in UI/Logic, and critiques shortcomings (rigidity, discovery). Proposes a 3-mode architecture (Goal Setter, Health Optimizer, Stress Tester) with dynamic suggestion chips.",
+  "updatedAt":  "2026-01-11T12:05:58.424357100Z"
+}

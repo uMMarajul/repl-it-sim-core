@@ -1,0 +1,17 @@
+# Setup Local Development Environment for replit-sim-core
+
+## Project Setup
+- [ ] Verify Node.js installation
+- [ ] Initialize Git repository and connect to remote
+- [ ] Install dependencies for sim-core
+- [ ] Install dependencies for app-ui
+- [ ] Verify build processes work
+
+## Development Environment Configuration
+- [ ] Check environment variables in app-ui
+- [ ] Verify TypeScript configurations
+- [ ] Test development server
+
+## Documentation
+- [ ] Create development workflow guide
+- [ ] Document common commands

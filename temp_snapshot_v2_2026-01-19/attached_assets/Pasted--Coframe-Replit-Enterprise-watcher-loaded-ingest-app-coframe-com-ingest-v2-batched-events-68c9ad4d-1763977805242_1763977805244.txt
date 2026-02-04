@@ -1,0 +1,2022 @@
+ [Coframe] Replit Enterprise watcher loaded
+ingest.app.coframe.com/ingest/v2/batched_events/68c9ad4d4cddb58cf3a1f93d/:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+ingest.app.coframe.com/ingest/v2/batched_monitoring/68c9ad4d4cddb58cf3a1f93d/:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+ingest.app.coframe.com/ingest/v2/session_result/:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+The source list for the Content Security Policy directive 'default-src' contains an invalid source: ''unsafe-dynamic''. It will be ignored.
+The source list for the Content Security Policy directive 'default-src' contains an invalid source: ''unsafe-dynamic''. It will be ignored.
+The source list for the Content Security Policy directive 'default-src' contains an invalid source: ''unsafe-dynamic''. It will be ignored.
+The source list for the Content Security Policy directive 'default-src' contains an invalid source: ''unsafe-dynamic''. It will be ignored.
+The source list for the Content Security Policy directive 'default-src' contains an invalid source: ''unsafe-dynamic''. It will be ignored.
+The source list for the Content Security Policy directive 'default-src' contains an invalid source: ''unsafe-dynamic''. It will be ignored.
+The source list for the Content Security Policy directive 'default-src' contains an invalid source: ''unsafe-dynamic''. It will be ignored.
+The source list for the Content Security Policy directive 'default-src' contains an invalid source: ''unsafe-dynamic''. It will be ignored.
+The source list for the Content Security Policy directive 'default-src' contains an invalid source: ''unsafe-dynamic''. It will be ignored.
+The Content-Security-Policy directive 'default-src' contains 'report-uri' as a source expression. Did you want to add it as a directive and forget a semicolon?
+The Content-Security-Policy directive 'default-src' contains 'report-uri' as a source expression. Did you want to add it as a directive and forget a semicolon?
+The Content-Security-Policy directive 'default-src' contains 'report-uri' as a source expression. Did you want to add it as a directive and forget a semicolon?
+The Content-Security-Policy directive 'default-src' contains 'report-uri' as a source expression. Did you want to add it as a directive and forget a semicolon?
+The Content-Security-Policy directive 'default-src' contains 'report-uri' as a source expression. Did you want to add it as a directive and forget a semicolon?
+The Content-Security-Policy directive 'default-src' contains 'report-uri' as a source expression. Did you want to add it as a directive and forget a semicolon?
+The Content-Security-Policy directive 'default-src' contains 'report-uri' as a source expression. Did you want to add it as a directive and forget a semicolon?
+The Content-Security-Policy directive 'default-src' contains 'report-uri' as a source expression. Did you want to add it as a directive and forget a semicolon?
+The Content-Security-Policy directive 'default-src' contains 'report-uri' as a source expression. Did you want to add it as a directive and forget a semicolon?
+The source list for Content Security Policy directive 'default-src' contains a source with an invalid path: '/api/4509669501698048/security/?sentry_key=7eb3d90eb4660416caf507087367e67e'. The query component, including the '?', will be ignored.
+The source list for Content Security Policy directive 'default-src' contains a source with an invalid path: '/api/4509669501698048/security/?sentry_key=7eb3d90eb4660416caf507087367e67e'. The query component, including the '?', will be ignored.
+The source list for Content Security Policy directive 'default-src' contains a source with an invalid path: '/api/4509669501698048/security/?sentry_key=7eb3d90eb4660416caf507087367e67e'. The query component, including the '?', will be ignored.
+The source list for Content Security Policy directive 'default-src' contains a source with an invalid path: '/api/4509669501698048/security/?sentry_key=7eb3d90eb4660416caf507087367e67e'. The query component, including the '?', will be ignored.
+The source list for Content Security Policy directive 'default-src' contains a source with an invalid path: '/api/4509669501698048/security/?sentry_key=7eb3d90eb4660416caf507087367e67e'. The query component, including the '?', will be ignored.
+The source list for Content Security Policy directive 'default-src' contains a source with an invalid path: '/api/4509669501698048/security/?sentry_key=7eb3d90eb4660416caf507087367e67e'. The query component, including the '?', will be ignored.
+The source list for Content Security Policy directive 'default-src' contains a source with an invalid path: '/api/4509669501698048/security/?sentry_key=7eb3d90eb4660416caf507087367e67e'. The query component, including the '?', will be ignored.
+The source list for Content Security Policy directive 'default-src' contains a source with an invalid path: '/api/4509669501698048/security/?sentry_key=7eb3d90eb4660416caf507087367e67e'. The query component, including the '?', will be ignored.
+The source list for Content Security Policy directive 'default-src' contains a source with an invalid path: '/api/4509669501698048/security/?sentry_key=7eb3d90eb4660416caf507087367e67e'. The query component, including the '?', will be ignored.
+sim-core:1 The source list for the Content Security Policy directive 'default-src' contains an invalid source: ''unsafe-dynamic''. It will be ignored.
+sim-core:1 The Content-Security-Policy directive 'default-src' contains 'report-uri' as a source expression. Did you want to add it as a directive and forget a semicolon?
+sim-core:1 The source list for Content Security Policy directive 'default-src' contains a source with an invalid path: '/api/4509669501698048/security/?sentry_key=7eb3d90eb4660416caf507087367e67e'. The query component, including the '?', will be ignored.
+ 
+      /////////////////////
+   ///////////////////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////        Curious and driven?
+  ///////////////@@@@@@@///////        Work with us!
+  ///////////////@@@@@@@///////
+  ///////////////@@@@@@@///////        https://join.replit.com/hack.with.us
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@#//////////////
+   ///////////////////////////
+      /////////////////////
+      
+ Download the Apollo DevTools for a better development experience: https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977748898&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977748899&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2008&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/diagnostic/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977749043&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+ [LaunchDarkly] LaunchDarkly client initialized
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977749455&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2008&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977749459&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977749544&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+ Cache data may be lost when replacing the dealContext field of a Org object.
+
+This could cause additional (usually avoidable) network requests to fetch data that were otherwise cached.
+
+To address this problem (which is not a bug in Apollo Client), either ensure all objects of type OrgDealContext have an ID or a custom merge function, or define a custom merge function for the Org.dealContext field, so InMemoryCache can safely merge these objects:
+
+  existing: {"__typename":"OrgDealContext","dealType":"default","salesContactEmail":null}
+  incoming: {"__typename":"OrgDealContext","dealType":"default"}
+
+For more information about these options, please refer to the documentation:
+
+  * Ensuring entity objects have IDs: https://go.apollo.dev/c/generating-unique-identifiers
+  * Defining custom merge functions: https://go.apollo.dev/c/merging-non-normalized-objects
+
+(anonymous) @ 1d175b218ac613db.js:2
+ Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'ambient-light-sensor'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'battery'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'execution-while-not-rendered'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'execution-while-out-of-viewport'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'layout-animations'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'legacy-image-formats'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'navigation-override'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'oversized-images'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'publickey-credentials'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'speaker-selection'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'unoptimized-images'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'unsized-media'.
+z @ ed1e693c96a75807.js:2
+ Unrecognized feature: 'pointer-lock'.
+z @ ed1e693c96a75807.js:2
+ Allow attribute will take precedence over 'allowfullscreen'.
+z @ ed1e693c96a75807.js:2
+ Allow attribute will take precedence over 'allowpaymentrequest'.
+z @ ed1e693c96a75807.js:2
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'ambient-light-sensor'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'battery'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'execution-while-not-rendered'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'execution-while-out-of-viewport'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'layout-animations'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'legacy-image-formats'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'navigation-override'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'oversized-images'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'publickey-credentials'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'speaker-selection'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'unoptimized-images'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Unrecognized feature: 'unsized-media'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Allow attribute will take precedence over 'allowfullscreen'.
+workspace_iframe.html?initialPath=%2F&id=%3Ar1g%3A:32 Allow attribute will take precedence over 'allowpaymentrequest'.
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+events.launchdarkly.com/events/bulk/62b35a865152ab14c5942820:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977751497&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2008&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977751498&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977751545&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+/public/js/beacon.js:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977756000&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2008&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+  ERROR  [Statsig] A networking error occurred during POST request to https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977756000&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2008&gz=1. TypeError: Failed to fetch 
+(anonymous) @ 1d175b218ac613db.js:2
+   WARN  [Statsig] Failed to flush events.
+(anonymous) @ 1d175b218ac613db.js:2
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977756001&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+  ERROR  [Statsig] A networking error occurred during POST request to https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977756001&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1. TypeError: Failed to fetch 
+(anonymous) @ 1d175b218ac613db.js:2
+   WARN  [Statsig] Failed to flush events.
+(anonymous) @ 1d175b218ac613db.js:2
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977756047&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+  ERROR  [Statsig] A networking error occurred during POST request to https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977756047&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2&gz=1. TypeError: Failed to fetch 
+(anonymous) @ 1d175b218ac613db.js:2
+   WARN  [Statsig] Failed to flush events.
+(anonymous) @ 1d175b218ac613db.js:2
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977758293&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 134): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 146): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 158): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 170): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 182): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 194): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 206): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 218): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 230): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 238): £212.78 exceeds annual limit (used: £17571.70 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £212.78
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £2428.30 (reduction: £212.78)
+ ℹ️  Routing ISA overflow (£212.78) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 239): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 240): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 241): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 242): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 250): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 251): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 252): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 253): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 254): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 262): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 263): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 264): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 265): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 266): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 274): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 275): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 276): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 277): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 278): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 286): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 287): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 288): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 289): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 290): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 298): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 299): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 300): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 301): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 302): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 310): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 311): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 312): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 313): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 314): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 322): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 323): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 324): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 325): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 326): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 334): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 335): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 336): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 337): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 338): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 346): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 347): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 348): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 349): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 350): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 358): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 359): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 360): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 361): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 362): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 370): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 371): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 372): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 373): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 374): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 382): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 383): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 384): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 385): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 386): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 394): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 395): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 396): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 397): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 398): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 405): £410.21 exceeds annual limit (used: £17494.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £410.21
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £2505.54 (reduction: £410.21)
+ ℹ️  Routing ISA overflow (£410.21) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 406): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 407): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 408): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 409): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 410): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 417): £410.21 exceeds annual limit (used: £17494.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £410.21
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £2505.54 (reduction: £410.21)
+ ℹ️  Routing ISA overflow (£410.21) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 418): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 419): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 420): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 421): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 422): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 429): £410.21 exceeds annual limit (used: £17494.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £410.21
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £2505.54 (reduction: £410.21)
+ ℹ️  Routing ISA overflow (£410.21) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 430): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 431): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+ ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 14): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 26): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 38): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 50): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 62): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 74): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 86): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 98): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 110): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 122): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 134): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 146): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 158): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 170): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 182): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 194): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 206): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 218): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 230): £1703.05 exceeds annual limit (used: £19894.46 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1703.05
+    DEBUG: equities currentAllocation = £1808.59, totalISAContribution = £1808.59
+    Reducing equities allocation: £1808.59 → £105.54 (reduction: £1703.05)
+ ℹ️  Routing ISA overflow (£1703.05) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 238): £212.78 exceeds annual limit (used: £17571.70 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £212.78
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £2428.30 (reduction: £212.78)
+ ℹ️  Routing ISA overflow (£212.78) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 239): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 240): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 241): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 242): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 250): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 251): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 252): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 253): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 254): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 262): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 263): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 264): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 265): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 266): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 274): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 275): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 276): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 277): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 278): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 286): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 287): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 288): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 289): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 290): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 298): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 299): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 300): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 301): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 302): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 310): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 311): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 312): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 313): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 314): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 322): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 323): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 324): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 325): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 326): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 334): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 335): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 336): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 337): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 338): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 346): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 347): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 348): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 349): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 350): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 358): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 359): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 360): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 361): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 362): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 370): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 371): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 372): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 373): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 374): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 382): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+ ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 383): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 384): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 385): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 386): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+ ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+ 🚨 ISA overflow detected (Period 394): £1128.70 exceeds annual limit (used: £18487.61 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £1128.70
+injected.js:37    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+injected.js:37    Reducing equities allocation: £2641.09 → £1512.39 (reduction: £1128.70)
+injected.js:37 ℹ️  Routing ISA overflow (£1128.70) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 395): £2641.09 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2641.09
+injected.js:37    DEBUG: equities currentAllocation = £2641.09, totalISAContribution = £2641.09
+injected.js:37    Reducing equities allocation: £2641.09 → £0.00 (reduction: £2641.09)
+injected.js:37 ℹ️  Routing ISA overflow (£2641.09) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 396): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 397): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 398): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 405): £410.21 exceeds annual limit (used: £17494.46 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £410.21
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £2505.54 (reduction: £410.21)
+injected.js:37 ℹ️  Routing ISA overflow (£410.21) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 406): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 407): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 408): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 409): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 410): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 417): £410.21 exceeds annual limit (used: £17494.46 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £410.21
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £2505.54 (reduction: £410.21)
+injected.js:37 ℹ️  Routing ISA overflow (£410.21) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 418): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 419): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 420): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 421): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 422): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 429): £410.21 exceeds annual limit (used: £17494.46 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £410.21
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £2505.54 (reduction: £410.21)
+injected.js:37 ℹ️  Routing ISA overflow (£410.21) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 430): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 🚨 ISA overflow detected (Period 431): £2915.74 exceeds annual limit (used: £20000.00 / £20000)
+injected.js:37    DEBUG: isaAssetClasses = [equities], overflow = £2915.74
+injected.js:37    DEBUG: equities currentAllocation = £2915.74, totalISAContribution = £2915.74
+injected.js:37    Reducing equities allocation: £2915.74 → £0.00 (reduction: £2915.74)
+injected.js:37 ℹ️  Routing ISA overflow (£2915.74) to DEFAULT_SAVINGS (default behavior)
+injected.js:37 [useSimulation] Year 2025 scenarioNetCashFlow: 0 (from breakdown.scenarioNetCashFlow)
+injected.js:37 [useSimulation] Active allocation changes: Array(0)
+injected.js:37 [useSimulation] Account contributions before seeding: Array(4)
+injected.js:37 [useSimulation] Account contributions after seeding: Object
+injected.js:37 [ScenarioExplorer] Component rendered/mounted
+injected.js:37 [ScenarioExplorer] Component rendered/mounted
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977759041&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+ingest.app.coframe.com/ingest/v2/batched_events/68c9ad4d4cddb58cf3a1f93d/:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977762389&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977762832&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=503&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977763338&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=503&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+ingest.app.coframe.com/ingest/v2/batched_events/68c9ad4d4cddb58cf3a1f93d/:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977765344&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=503&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977765646&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977766199&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977766892&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2&gz=1:1  Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+1d175b218ac613db.js:2  ERROR  [Statsig] A networking error occurred during POST request to https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977766892&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=2&gz=1. TypeError: Failed to fetch TypeError: Failed to fetch
+    at 1d175b218ac613db.js:2:106527
+    at t.<anonymous> (e7f41799b4d05fca.js:2:45850)
+    at Object.next (aef1f2c6f8544e95.js:2:11778)
+    at e7f41799b4d05fca.js:2:42952
+    at new Promise (<anonymous>)
+    at u (e7f41799b4d05fca.js:2:42706)
+    at t.value (e7f41799b4d05fca.js:2:44940)
+    at e7f41799b4d05fca.js:2:31768
+    at e.value (e7f41799b4d05fca.js:2:32175)
+    at e.<computed> [as _sendRequest] (e7f41799b4d05fca.js:2:31708)
+    at t.<anonymous> (e7f41799b4d05fca.js:2:47326)
+    at Object.next (aef1f2c6f8544e95.js:2:11778)
+    at s (e7f41799b4d05fca.js:2:42762)
+(anonymous) @ 1d175b218ac613db.js:2
+1d175b218ac613db.js:2   WARN  [Statsig] Failed to flush events.
+(anonymous) @ 1d175b218ac613db.js:2
+1d175b218ac613db.js:2  POST https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977768441&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ 1d175b218ac613db.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+1d175b218ac613db.js:2  POST https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977769849&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=503&gz=1 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ 1d175b218ac613db.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+1d175b218ac613db.js:2  ERROR  [Statsig] A networking error occurred during POST request to https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977769849&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=503&gz=1. TypeError: Failed to fetch TypeError: Failed to fetch
+    at 1d175b218ac613db.js:2:106527
+    at t.<anonymous> (e7f41799b4d05fca.js:2:45850)
+    at Object.next (aef1f2c6f8544e95.js:2:11778)
+    at e7f41799b4d05fca.js:2:42952
+    at new Promise (<anonymous>)
+    at u (e7f41799b4d05fca.js:2:42706)
+    at t.value (e7f41799b4d05fca.js:2:44940)
+    at e7f41799b4d05fca.js:2:31768
+    at e.value (e7f41799b4d05fca.js:2:32175)
+    at e.<computed> [as _sendRequest] (e7f41799b4d05fca.js:2:31708)
+    at t.<anonymous> (e7f41799b4d05fca.js:2:47326)
+    at Object.next (aef1f2c6f8544e95.js:2:11778)
+    at s (e7f41799b4d05fca.js:2:42762)
+(anonymous) @ 1d175b218ac613db.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+1d175b218ac613db.js:2   WARN  [Statsig] Failed to flush events.
+(anonymous) @ 1d175b218ac613db.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+1d175b218ac613db.js:2  POST https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977772181&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1005&gz=1 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ 1d175b218ac613db.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+r._notifyVisibilityChanged @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+E.t.HTMLElement.focus @ 207f0174f3482c02.js:2
+H @ fa82eb0d68e09b4b.js:2
+(anonymous) @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+eG.mousedown @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+o @ 1d175b218ac613db.js:2
+cf.js?config=%257B%2522projectId%2522%253A%252268c9ad4d4cddb58cf3a1f93d%2522%252C%2522startTime%2522%253A1763977748220%252C%2522timeoutMs%2522%253A1000%252C%2522currentUrl%2522%253A%2522https%253A%252F%252Freplit.com%252Ft%252Fmoola-money%252Frepls%252Fsim-core%2522%252C%2522trackingOnly%2522%253Atrue%257D:10  POST https://ingest.app.coframe.com/ingest/v2/batched_events/68c9ad4d4cddb58cf3a1f93d/ net::ERR_BLOCKED_BY_CLIENT
+q @ cf.js?config=%257B%2522projectId%2522%253A%252268c9ad4d4cddb58cf3a1f93d%2522%252C%2522startTime%2522%253A1763977748220%252C%2522timeoutMs%2522%253A1000%252C%2522currentUrl%2522%253A%2522https%253A%252F%252Freplit.com%252Ft%252Fmoola-money%252Frepls%252Fsim-core%2522%252C%2522trackingOnly%2522%253Atrue%257D:10
+M @ cf.js?config=%257B%2522projectId%2522%253A%252268c9ad4d4cddb58cf3a1f93d%2522%252C%2522startTime%2522%253A1763977748220%252C%2522timeoutMs%2522%253A1000%252C%2522currentUrl%2522%253A%2522https%253A%252F%252Freplit.com%252Ft%252Fmoola-money%252Frepls%252Fsim-core%2522%252C%2522trackingOnly%2522%253Atrue%257D:10
+(anonymous) @ cf.js?config=%257B%2522projectId%2522%253A%252268c9ad4d4cddb58cf3a1f93d%2522%252C%2522startTime%2522%253A1763977748220%252C%2522timeoutMs%2522%253A1000%252C%2522currentUrl%2522%253A%2522https%253A%252F%252Freplit.com%252Ft%252Fmoola-money%252Frepls%252Fsim-core%2522%252C%2522trackingOnly%2522%253Atrue%257D:10
+1d175b218ac613db.js:2  POST https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977772688&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1005&gz=1 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ 1d175b218ac613db.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+r._notifyVisibilityChanged @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+E.t.HTMLElement.focus @ 207f0174f3482c02.js:2
+H @ fa82eb0d68e09b4b.js:2
+(anonymous) @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+eG.mousedown @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+o @ 1d175b218ac613db.js:2
+1d175b218ac613db.js:2  POST https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977772944&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ 1d175b218ac613db.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+1d175b218ac613db.js:2  ERROR  [Statsig] A networking error occurred during POST request to https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977772944&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1. TypeError: Failed to fetch TypeError: Failed to fetch
+    at 1d175b218ac613db.js:2:106527
+    at t.<anonymous> (e7f41799b4d05fca.js:2:45850)
+    at Object.next (aef1f2c6f8544e95.js:2:11778)
+    at e7f41799b4d05fca.js:2:42952
+    at new Promise (<anonymous>)
+    at u (e7f41799b4d05fca.js:2:42706)
+    at t.value (e7f41799b4d05fca.js:2:44940)
+    at e7f41799b4d05fca.js:2:31768
+    at e.value (e7f41799b4d05fca.js:2:32175)
+    at e.<computed> [as _sendRequest] (e7f41799b4d05fca.js:2:31708)
+    at t.<anonymous> (e7f41799b4d05fca.js:2:47326)
+    at Object.next (aef1f2c6f8544e95.js:2:11778)
+    at s (e7f41799b4d05fca.js:2:42762)
+(anonymous) @ 1d175b218ac613db.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+1d175b218ac613db.js:2   WARN  [Statsig] Failed to flush events.
+(anonymous) @ 1d175b218ac613db.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+1d175b218ac613db.js:2  POST https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977774700&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1005&gz=1 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ 1d175b218ac613db.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+r._notifyVisibilityChanged @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+E.t.HTMLElement.focus @ 207f0174f3482c02.js:2
+H @ fa82eb0d68e09b4b.js:2
+(anonymous) @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+eG.mousedown @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+o @ 1d175b218ac613db.js:2
+1d175b218ac613db.js:2  POST https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977779203&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1005&gz=1 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ 1d175b218ac613db.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+r._notifyVisibilityChanged @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+E.t.HTMLElement.focus @ 207f0174f3482c02.js:2
+H @ fa82eb0d68e09b4b.js:2
+(anonymous) @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+eG.mousedown @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+o @ 1d175b218ac613db.js:2
+1d175b218ac613db.js:2  ERROR  [Statsig] A networking error occurred during POST request to https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977779203&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1005&gz=1. TypeError: Failed to fetch TypeError: Failed to fetch
+    at 1d175b218ac613db.js:2:106527
+    at t.<anonymous> (e7f41799b4d05fca.js:2:45850)
+    at Object.next (aef1f2c6f8544e95.js:2:11778)
+    at e7f41799b4d05fca.js:2:42952
+    at new Promise (<anonymous>)
+    at u (e7f41799b4d05fca.js:2:42706)
+    at t.value (e7f41799b4d05fca.js:2:44940)
+    at e7f41799b4d05fca.js:2:31768
+    at e.value (e7f41799b4d05fca.js:2:32175)
+    at e.<computed> [as _sendRequest] (e7f41799b4d05fca.js:2:31708)
+    at t.<anonymous> (e7f41799b4d05fca.js:2:47326)
+    at Object.next (aef1f2c6f8544e95.js:2:11778)
+    at s (e7f41799b4d05fca.js:2:42762)
+(anonymous) @ 1d175b218ac613db.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+r._notifyVisibilityChanged @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+E.t.HTMLElement.focus @ 207f0174f3482c02.js:2
+H @ fa82eb0d68e09b4b.js:2
+(anonymous) @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+eG.mousedown @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+o @ 1d175b218ac613db.js:2
+1d175b218ac613db.js:2   WARN  [Statsig] Failed to flush events.
+(anonymous) @ 1d175b218ac613db.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+r._notifyVisibilityChanged @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+E.t.HTMLElement.focus @ 207f0174f3482c02.js:2
+H @ fa82eb0d68e09b4b.js:2
+(anonymous) @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+eG.mousedown @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+value @ fa82eb0d68e09b4b.js:2
+o @ 1d175b218ac613db.js:2
+cf.js?config=%257B%2522projectId%2522%253A%252268c9ad4d4cddb58cf3a1f93d%2522%252C%2522startTime%2522%253A1763977748220%252C%2522timeoutMs%2522%253A1000%252C%2522currentUrl%2522%253A%2522https%253A%252F%252Freplit.com%252Ft%252Fmoola-money%252Frepls%252Fsim-core%2522%252C%2522trackingOnly%2522%253Atrue%257D:10  POST https://ingest.app.coframe.com/ingest/v2/batched_events/68c9ad4d4cddb58cf3a1f93d/ net::ERR_BLOCKED_BY_CLIENT
+q @ cf.js?config=%257B%2522projectId%2522%253A%252268c9ad4d4cddb58cf3a1f93d%2522%252C%2522startTime%2522%253A1763977748220%252C%2522timeoutMs%2522%253A1000%252C%2522currentUrl%2522%253A%2522https%253A%252F%252Freplit.com%252Ft%252Fmoola-money%252Frepls%252Fsim-core%2522%252C%2522trackingOnly%2522%253Atrue%257D:10
+M @ cf.js?config=%257B%2522projectId%2522%253A%252268c9ad4d4cddb58cf3a1f93d%2522%252C%2522startTime%2522%253A1763977748220%252C%2522timeoutMs%2522%253A1000%252C%2522currentUrl%2522%253A%2522https%253A%252F%252Freplit.com%252Ft%252Fmoola-money%252Frepls%252Fsim-core%2522%252C%2522trackingOnly%2522%253Atrue%257D:10
+(anonymous) @ cf.js?config=%257B%2522projectId%2522%253A%252268c9ad4d4cddb58cf3a1f93d%2522%252C%2522startTime%2522%253A1763977748220%252C%2522timeoutMs%2522%253A1000%252C%2522currentUrl%2522%253A%2522https%253A%252F%252Freplit.com%252Ft%252Fmoola-money%252Frepls%252Fsim-core%2522%252C%2522trackingOnly%2522%253Atrue%257D:10
+1d175b218ac613db.js:2  POST https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977798865&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ 1d175b218ac613db.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+t @ e7f41799b4d05fca.js:2
+o @ 1d175b218ac613db.js:2
+1d175b218ac613db.js:2  POST https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977799369&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ 1d175b218ac613db.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+t @ e7f41799b4d05fca.js:2
+o @ 1d175b218ac613db.js:2
+1d175b218ac613db.js:2  POST https://prodregistryv2.org/v1/rgstr?k=client-Bp7m7pNB6H0fnSGjVtxN5BeWQw4BSAat4OFsXa3VcTF&st=javascript-client&sv=3.26.0&t=1763977801378&sid=9d061343-bb08-44ed-91aa-b4ec4cf519f4&ec=1&gz=1 net::ERR_BLOCKED_BY_CLIENT
+(anonymous) @ 1d175b218ac613db.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+s @ e7f41799b4d05fca.js:2
+Promise.then
+l @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+u @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+(anonymous) @ aef1f2c6f8544e95.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+l @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+(anonymous) @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+e.<computed> @ e7f41799b4d05fca.js:2
+value @ e7f41799b4d05fca.js:2
+t @ e7f41799b4d05fca.js:2
+o @ 1d175b218ac613db.js:2

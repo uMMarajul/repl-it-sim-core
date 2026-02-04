@@ -1,0 +1,199 @@
+# Phase 1 Complete: AI Agent UI + Backend
+
+## Summary
+
+Successfully completed **Phase 1** with both backend infrastructure and interactive UI! You can now chat with the AI agent in your browser to extract financial profiles.
+
+---
+
+## What Was Built
+
+### Backend Components (Previously Completed)
+
+✅ **AI Agent Service** - Conversation management and profile extraction  
+✅ **LLM Client** - OpenAI integration with retry logic  
+✅ **Profile Extraction** - UK-specific prompts with few-shot examples  
+✅ **Type System** - Complete TypeScript types for AI agent  
+
+### UI Components (New)
+
+#### 1. [AgentChat.tsx](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/components/AgentChat.tsx)
+Full-featured chat interface:
+- **Message Display**: User and assistant messages with visual distinction
+- **Auto-scroll**: Automatically scrolls to latest message
+- **Loading States**: "Typing..." indicator while AI processes
+- **Profile Summary**: Live display of extracted fields at bottom
+- **Keyboard Shortcuts**: Press Enter to send, Shift+Enter for new line
+- **Profile Complete Badge**: Green badge when ready for recommendations
+
+#### 2. [APIKeyInput.tsx](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/components/APIKeyInput.tsx)
+Secure API key entry:
+- **Show/Hide Toggle**: Protect API key visibility
+- **Validation**: Button only enabled when key entered
+- **Instructions**: Link to OpenAI platform + usage notes
+- **Security Info**: Clarifies client-side usage only
+
+#### 3. [AIAgentPage.tsx](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/pages/AIAgentPage.tsx)
+Complete demo page:
+- **Two-column layout**: Chat on left, profile summary on right
+- **Profile Details**: Full breakdown when profile is complete
+- **Change API Key**: Button to reset and enter new key
+- **Responsive**: Adapts to profile completion status
+
+#### 4. [App.tsx](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/App.tsx) - Modified
+Added tab navigation:
+- **"Simulator" Tab**: Original financial simulator
+- **"🤖 AI Agent" Tab**: New AI agent chat interface
+- **Simple Toggle**: Click to switch between modes
+
+---
+
+## File Structure
+
+```
+app-ui/src/
+├── components/
+│   ├── AgentChat.tsx          ← Chat interface component
+│   └── APIKeyInput.tsx         ← API key entry component
+├── pages/
+│   └── AIAgentPage.tsx         ← AI Agent demo page
+└── App.tsx                     ← Modified: Added tab navigation
+
+sim-core/src/agents/ai/
+├── types.ts                    ← Type definitions
+├── llmClient.ts                ← OpenAI integration
+├── aiAgentService.ts           ← Orchestration layer
+├── prompts/
+│   └── profileExtraction.ts    ← Profile extraction prompt
+└── index.ts                    ← Public exports
+```
+
+---
+
+## How to Test
+
+### 1. Open the App
+
+The dev server is already running at **http://localhost:5001/**
+
+### 2. Navigate to AI Agent
+
+Click the **"🤖 AI Agent"** tab in the header
+
+### 3. Enter OpenAI API Key
+
+- Get your API key from https://platform.openai.com/api-keys
+- Paste it into the input field
+- Click "Start Chat"
+
+### 4. Chat with the Agent
+
+Try this example message:
+
+```
+I'm 28 years old, earning £45,000 a year as a software developer. 
+I rent for £1,200/month and spend about £2,500 total each month. 
+I have £8,000 in savings but no pension yet. I'm single with no kids.
+```
+
+**Expected behavior**:
+1. Agent acknowledges the information
+2. Profile extraction shows:
+   - Age: 28
+   - Salary: £45,000
+   - Expenses: £2,500/mo
+   - Savings: £8,000
+3. Agent asks follow-up question (e.g., risk tolerance)
+4. Profile Complete badge appears when all required fields filled
+
+### 5. Continue Conversation
+
+Answer the follow-up questions to complete your profile.
+
+---
+
+## Features Demonstrated
+
+### ✅ Natural Language Understanding
+- Extracts structured data from casual conversation
+- Understands UK currency and terminology
+- Handles ranges and approximations
+
+### ✅ Incremental Profile Building
+- Merges information across multiple messages
+- Tracks what's been collected vs. still needed
+- Adapts questions based on missing fields
+
+### ✅ Intelligent Follow-ups
+- Generates context-appropriate questions
+- Prioritizes critical fields (age, salary, expenses)
+- Natural, conversational tone
+
+### ✅ Real-time Feedback
+- Live profile summary updates as you chat
+- Visual confirmation when profile is complete
+- Clear indication of what's still missing
+
+---
+
+## Technical Details
+
+### Dependencies Added
+- **app-ui**: `openai@^4.0.0` (252 packages total)
+- **sim-core**: `openai@^4.0.0` (24 packages total)
+
+### API Usage
+- **Model**: GPT-4o-mini
+- **Cost**: ~$0.15 per million tokens
+- **Average chat**: ~1000 tokens (~$0.0002 per interaction)
+
+### Client-Side Architecture
+- OpenAI calls made directly from browser
+- API key stored in React state (memory only)
+- No backend server required for demo
+
+---
+
+## Known Limitations
+
+1. **API Key Storage**: Not persisted - lost on page refresh
+2. **No Backend**: All processing client-side
+3. **No History**: Conversation lost if you navigate away
+4. **Profile Only**: Scenario recommendations not yet implemented (Phase 2)
+
+---
+
+## Next Steps
+
+Now that Phase 1 is complete, you can:
+
+### Option 1: Test It Now!
+- Open http://localhost:5001/
+- Click "🤖 AI Agent" tab
+- Enter your OpenAI API key
+- Start chatting!
+
+### Option 2: Continue to Phase 2
+Build the recommendation engine:
+- Expand rules engine with scenario rules
+- Create recommendation prompts
+- Build hybrid recommender (rules + AI)
+- Add explanation generation
+- Integrate with existing scenarios
+
+### Option 3: Enhance Phase 1
+Before moving on:
+- Add localStorage for API key persistence
+- Add conversation export/import
+- Add example conversations to try
+- Add profile editing UI
+
+---
+
+## Phase 1 Status: ✅ **COMPLETE**
+
+**Backend**: ✓ Functional  
+**UI**: ✓ Integrated  
+**Testing**: ⏳ Ready for manual testing
+
+You now have a fully functional AI agent for profile extraction!

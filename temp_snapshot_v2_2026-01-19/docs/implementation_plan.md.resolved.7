@@ -1,0 +1,189 @@
+# Expanding AI Recommendation Engine to All Scenarios
+
+## Goal
+Expand the AI agent's intent detection from 10 hardcoded scenarios to support **all 55 scenarios** dynamically, organized across 6 thematic categories.
+
+## Current State
+
+### What Works
+- ✅ Intent detection for ~10 scenarios (house deposit, emergency fund, pension, ISA, etc.)
+- ✅ Parameter extraction (amounts, dates)
+- ✅ Config dialog triggering with pre-filled values
+- ✅ Context-aware responses
+
+### Limitations
+- ❌ Only 10 out of 55 scenarios supported
+- ❌ Hardcoded regex patterns (not scalable)
+- ❌ No support for thematic recommendations
+- ❌ Limited to obvious keyword matches
+
+## Available Scenarios (55 Total)
+
+### Foundational Stability (9)
+- Emergency Fund, House Deposit Fund, Debt Consolidation, Accelerate Debt, Student Loan, Pension Contribution, Start Investing ISA, Start Investing GIA, Transfer Balance
+
+### Housing & Assets (7)
+- Buy Home, Apply Mortgage, Refinance Mortgage, Home Improvement, Buy Vehicle, Sell Asset, Property Damage
+
+### Family & Care (8)
+- Marriage, Childbirth, IVF Treatment, Education Fund, Elder Care, Divorce, Death of Partner
+
+### Career & Income (12)
+- Salary Increase, Side Income, Reduce Expenses, Quit Job, Job Loss, Income Reduction, Income Interruption, Business Venture, Sell Business, Training, Work Equipment, Sabbatical
+
+### Health & Protection (7)
+- Medical Emergency, Family Illness, Long-Term Illness, Disability Support, Unexpected Expense, Tax Bill, Fraud/Theft
+
+### Market & Economic (12)
+- Market Crash, Market Boom, Interest Rate Increase, Interest Rate Decrease, Cost of Living Shock, Inheritance, Large Windfall, Insurance Payout, Pension Withdrawal (One-off), Pension Withdrawal (Recurring), ISA Withdrawal, Retirement Drawdown Test
+
+## Proposed Solution
+
+### Approach: Hybrid AI + Pattern Library
+
+Instead of hardcoding all 55 regex patterns, use a **two-tier system**:
+
+1. **Pattern Library (JSON)** - Maintainable keyword mappings
+2. **LLM Classification** - For ambiguous queries
+
+### Architecture
+
+```
+User Input
+    ↓
+[Pattern Matcher] → Direct match? → Return scenario + confidence
+    ↓ (No match)
+[LLM Classifier] → Closest scenarios (top 3) → Present options
+    ↓
+[Parameter Extractor] → Extract values from conversation
+    ↓
+[Action Generator] → OPEN_CONFIG with scenario + params
+```
+
+## Implementation Plan
+
+### Phase 1: Pattern Library (Priority)
+**Goal**: Create a maintainable, scalable keyword mapping system
+
+**Files to Create/Modify**:
+- [api/scenario_patterns.json](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/scenario_patterns.json) - Keyword patterns for all 55 scenarios
+- [api/pattern_matcher.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/pattern_matcher.py) - Pattern matching logic
+- [api/agent_service.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent_service.py) - Use pattern library instead of hardcoded regex
+
+**Pattern Format**:
+```json
+{
+  "house_deposit_fund": {
+    "keywords": ["house deposit", "save for deposit", "property deposit", "first home deposit"],
+    "themes": ["housing_assets", "foundational_stability"],
+    "requires_params": ["target_amount", "target_date"]
+  }
+}
+```
+
+**Tasks**:
+- [  ] Create [scenario_patterns.json](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/scenario_patterns.json) with all 55 scenarios
+- [  ] Build pattern matching engine
+- [  ] Replace hardcoded regex in [agent_service.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent_service.py)
+- [  ] Test with sample queries for each theme
+
+### Phase 2: LLM Fallback Classifier
+**Goal**: Handle ambiguous queries that don't match patterns
+
+**Tasks**:
+- [  ] Create LLM prompt for scenario classification
+- [  ] Return top 3 scenario suggestions with explanations
+- [  ] Let user confirm or refine via chat
+
+### Phase 3: Multi-Scenario Recommendations
+**Goal**: Suggest multiple related scenarios
+
+**Example**: User says "I'm having a baby"
+- Suggest: Childbirth (event), Education Fund (goal), Increase Life Insurance (action)
+
+**Tasks**:
+- [  ] Build scenario relationship graph
+- [  ] Recommend complementary scenarios
+- [  ] Present as "You might also want to consider..."
+
+### Phase 4: Confidence Scoring
+**Goal**: Show AI confidence and allow user to override
+
+**Tasks**:
+- [  ] Add confidence scores to matches
+- [  ] Display to user: "I think you're asking about X (85% confident)"
+- [  ] Let user say "No, actually Y" to correct
+
+## Success Criteria
+
+- ✅ All 55 scenarios detectable from natural language
+- ✅ Pattern library is easy to maintain (non-technical team can add keywords)
+- ✅ LLM handles edge cases gracefully
+- ✅ User can configure any scenario via chat
+- ✅ Multi-scenario recommendations work for common life events
+
+## Technical Decisions
+
+### Why Pattern Library over Full LLM?
+- **Reliability**: Regex/keyword matches are deterministic
+- **Speed**: No LLM call for common queries
+- **Cost**: Saves API calls
+- **Maintainability**: Easy to add new keywords
+
+### Why Keep LLM Fallback?
+- **Flexibility**: Handles synonyms and creative phrasing
+- **Discovery**: Helps identify missing patterns
+- **UX**: Better than "Sorry, I don't understand"
+
+## Next Steps
+
+1. Create comprehensive [scenario_patterns.json](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/scenario_patterns.json)
+2. Build pattern matching engine
+3. Integrate with existing intent detection
+### Phase 3: Financial Coaching (Bidirectional)
+**Goal**: Transform the assistant from a "form filler" to a "knowledgeable guide".
+
+**Components**:
+1.  **Knowledge Base ([api/financial_knowledge.json](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/financial_knowledge.json))**:
+    *   Structured rules for UK finance (e.g., "ISA Limit: £20k/year").
+    *   Descriptions of key concepts.
+2.  **Persona Update**:
+    *   Inject "Coach" instructions into System Prompt.
+    *   Rule: "Explain WHY before asking WHAT".
+3.  **Compliance**:
+    *   Standard footer: "I am an AI. This is for simulation only, not regulated advice."
+
+**Tasks**:
+- [x] Create [financial_knowledge.json](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/financial_knowledge.json)
+- [x] Update [agent_service.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent_service.py) to load and inject knowledge
+- [x] Add Disclaimer to [ChatAssistant.tsx](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/components/ChatAssistant.tsx) footer
+- [x] Test Q&A capabilities
+
+### Phase 4: Custom Scenario Generation
+**Goal**: Allow users to define unique goals not covered by standard templates.
+
+**Components**:
+1.  **Custom Goal Type**: `CUSTOM_GOAL` scenario in registry logic.
+2.  **Smart Template**: Generic form with [Name](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/config/archetypeBuilders.ts#329-338), `Amount`, [Date](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/config/configTransformers.ts#3-11) + `Direction` (Save/Spend) + `Frequency` (Lump/Monthly).
+3.  **Transformer**: Logic to map generic inputs to specific simulation archetypes (One-Off, Recurring).
+
+**Tasks**:
+- [x] Add `custom_goal` to Registry
+- [x] Create flexible UI template in [simplifiedTemplates.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/config/simplifiedTemplates.ts)
+- [x] Implement smart transformer in [configTransformers.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/config/configTransformers.ts)
+- [x] Update AI prompt to handle custom intents
+
+### Phase 5: Guided Journeys & Archetypes
+**Goal**: Restructure AI interaction into a "Baseline -> Journey -> Scenario -> Archetype" flow.
+
+**Flow**:
+1.  **Baseline Check**: Confirm user has set up profile.
+2.  **Journey Selection**: Offer "Set Goals", "Improve Financial Health", "Test Events".
+3.  **Scenario Discovery**: Match user intent to existing Schema.
+4.  **Archetype Fallback**: If no schema match, use `custom_scenario`/Generic Archetypes directly.
+
+**Tasks**:
+- [ ] Implement "Suggested Prompts" in UI/Prompt
+- [ ] Update System Prompt with distinct Journey Phases
+- [ ] Enhance `custom_goal` to be a generic `custom_scenario`
+- [ ] Implement decision tree logic in Prompt

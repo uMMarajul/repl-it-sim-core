@@ -1,0 +1,238 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background: white;
+  color: #2d3748;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fffbf0;
+}
+
+.app-header p {
+  font-size: 1rem;
+  color: #fffbf0;
+}
+
+.app-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr 350px;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  flex: 1;
+}
+
+/* Left Panel */
+.left-panel {
+  background: #fffbf0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: calc(100vh - 140px);
+}
+
+.scenario-controls h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: #1a2332;
+}
+
+.control-group {
+  margin-bottom: 1.5rem;
+}
+
+.control-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1a2332;
+}
+
+.control-group select,
+.control-group input {
+  width: 100%;
+  padding: 0.75rem;
+  background: white;
+  border: 2px solid #1a2332;
+  border-radius: 8px;
+  color: #1a2332;
+  font-size: 0.875rem;
+}
+
+.control-group select:focus,
+.control-group input:focus {
+  outline: none;
+  border-color: #ff6b35;
+}
+
+.description {
+  font-size: 0.75rem;
+  color: #4a5568;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.profile-summary {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #1a2332;
+}
+
+.profile-summary h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #1a2332;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.summary-item span:first-child {
+  color: #4a5568;
+}
+
+.summary-item span:last-child {
+  color: #1a2332;
+  font-weight: 600;
+}
+
+.pension-type-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.toggle-button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 2px solid #1a2332;
+  color: #1a2332;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.toggle-button:hover {
+  background: #f7f7f7;
+  border-color: #ff6b35;
+}
+
+.toggle-button.active {
+  background: #ff6b35;
+  border-color: #ff6b35;
+  color: #fffbf0;
+}
+
+.pension-info {
+  margin-top: 0.75rem;
+  font-size: 13px;
+  color: #10b981;
+  font-weight: 500;
+}
+
+/* Middle Panel */
+.middle-panel {
+  background: #fffbf0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: calc(100vh - 140px);
+}
+
+.charts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.chart-section {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 2px solid #1a2332;
+}
+
+.chart-section h3 {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  color: #1a2332;
+}
+
+.chart-placeholder {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #1a2332;
+  border-radius: 8px;
+  color: #4a5568;
+}
+
+/* Right Panel */
+.right-panel {
+  background: #fffbf0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: calc(100vh - 140px);
+}
+
+.scenario-explorer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.scenario-section {
+  background: white;
+  border-radius: 8px;
+  padding: 1.25rem;
+  border: 2px solid #1a2332;
+}
+
+.scenario-section h3 {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  color: #1a2332;
+}
+
+.placeholder {
+  color: #4a5568;
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 2rem 0;
+}

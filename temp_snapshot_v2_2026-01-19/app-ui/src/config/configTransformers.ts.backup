@@ -1,0 +1,2430 @@
+import { Scenario, GoalType, ActionType, EventType } from '../../../sim-core/src/config/scenarios'
+import type { ScenarioId } from '../../../sim-core/src/config/index'
+import { thematicIdToLegacy } from '../../../sim-core/src/config/index'
+import { ensureDate, ensureNumber } from '../../../sim-core/src'
+import { ScenarioArchetype } from '../../../sim-core/src/config/archetypes'
+import type { ScenarioModifier } from '../../../sim-core/src/engine/scenarioSimulator'
+import { calculateNetSalary } from '../../../sim-core/src/engine/ukTaxCalculator'
+
+/**
+ * Transform simplified form inputs directly into ScenarioModifiers.
+ * This allows users to fill in 3-5 simple fields which are expanded into
+ * the detailed ScenarioModifier objects expected by sim-core.
+ * 
+ * Direct transformer architecture:
+ * - Each scenario has a dedicated transformer function
+ * - Transformers return ScenarioModifier (single) or ScenarioModifier[] (multiple components)
+ * - Multi-component scenarios (e.g., business) return explicit arrays instead of using secondaryArchetypes
+ * - No intermediate config layers or converters needed
+ * 
+ * Wave 2 Architecture:
+ * - TRANSFORMERS uses legacy IDs as keys to preserve all 55 unique scenarios
+ * - transformSimplifiedConfig accepts thematic IDs and maps to legacy IDs for lookup
+ * - This avoids duplicate key issues from consolidations (58 → 54 scenarios)
+ * - In Wave 3, transformer functions will be consolidated to match thematic IDs
+ */
+
+type TransformerFunction = (data: Record<string, any>, profile?: any) => ScenarioModifier | ScenarioModifier[]
+
+/**
+ * Flat lookup map: scenario ID → transformer function
+ * Eliminates three-level routing (type → enum → transformer)
+ */
+const TRANSFORMERS: Record<string, TransformerFunction> = {
+  // Goals (24 total)
+  [Scenario.BUSINESS_LAUNCH]: transformBusinessLaunch,
+  [Scenario.BUSINESS_GROWTH]: transformBusinessGrowth,
+  [Scenario.EDUCATION_TRAINING]: transformEducationTraining,
+  [Scenario.WORK_EQUIPMENT]: transformWorkEquipment,
+  [Scenario.BUYING_A_CAR]: transformBuyingCar,
+  [Scenario.BUYING_A_PROPERTY]: transformBuyingProperty,
+  [Scenario.HOLIDAY_TRAVEL]: transformHolidayTravel,
+  [Scenario.WEDDING_FUND]: transformWeddingFund,
+  [Scenario.BUILD_EMERGENCY_FUND]: transformEmergencyFund,
+  [Scenario.PAY_OFF_DEBT]: transformPayOffDebt,
+  [Scenario.CHILDS_EDUCATION_FUND]: transformChildEducationFund,
+  [Scenario.CHILDCARE_COSTS_ONGOING]: transformChildcareCosts,
+  [Scenario.SCHOOL_FEES]: transformSchoolFees,
+  [Scenario.PENSION_TOP_UP]: transformPensionTopUp,
+  [Scenario.HAVING_A_BABY]: transformHavingBaby,
+  [Scenario.IVF_FERTILITY_TREATMENT]: transformIVF,
+  [Scenario.SUPPORTING_PARTNER_RELATIVE]: transformSupportingRelative,
+  [Scenario.RENT_DEPOSIT_MOVING_COSTS]: transformRentDeposit,
+  [Scenario.EXTENDED_TIME_OFF]: transformExtendedTimeOff,
+  [Scenario.FITNESS_GOAL]: transformFitnessGoal,
+  [Scenario.SAVING_FOR_HOUSE_DEPOSIT]: transformSavingHouseDeposit,
+  [Scenario.FURNITURE_HOME_DECOR]: transformFurniture,
+  [Scenario.LONG_TERM_CARE_FUND]: transformLongTermCare,
+  
+  // Actions (8 total - removed 6 redundant actions covered by Portfolio Switch/Transfer)
+  [Scenario.INCREASE_SALARY]: transformIncreaseSalary,
+  [Scenario.ADD_SIDE_INCOME]: transformAddSideIncome,
+  [Scenario.REDUCE_EXPENSES]: transformReduceExpenses,
+  [Scenario.SELL_BUSINESS]: transformSellBusiness,
+  [Scenario.QUIT_JOB]: transformQuitJob,
+  [Scenario.PORTFOLIO_SWITCH]: transformPortfolioSwitch,
+  [Scenario.TRANSFER_PORTFOLIO_BALANCE]: transformTransferPortfolioBalance,
+  [Scenario.AUTO_REBALANCING]: transformAutoRebalancing,
+  [Scenario.REFINANCE_DEBT]: transformRefinanceDebt,
+  [Scenario.ACCELERATED_REPAYMENT]: transformAcceleratedRepayment,
+  [Scenario.APPLY_MORTGAGE]: transformApplyMortgage,
+  [Scenario.APPLY_STUDENT_LOAN]: transformApplyStudentLoan,
+  [Scenario.ONE_OFF_PENSION_WITHDRAWAL]: transformOneOffPensionWithdrawal,
+  [Scenario.RECURRING_PENSION_WITHDRAWAL]: transformRecurringPensionWithdrawal,
+  [Scenario.WITHDRAW_PENSION_ISA]: transformWithdrawPensionISA,
+  [Scenario.SELL_ASSET]: transformSellAsset,
+  
+  // Events (20 total)
+  [Scenario.JOB_LOSS]: transformJobLoss,
+  [Scenario.LARGE_CASH_INFLOW]: transformLargeCashInflow,
+  [Scenario.UNEXPECTED_MEDICAL_EXPENSE]: transformUnexpectedMedicalExpense,
+  [Scenario.UNEXPECTED_REPAIR]: transformUnexpectedRepair,
+  [Scenario.PERMANENT_INCOME_REDUCTION]: transformPermanentIncomeReduction,
+  [Scenario.TEMPORARY_INCOME_INTERRUPTION]: transformTemporaryIncomeInterruption,
+  [Scenario.CASH_LUMP_SUM_RECEIVED]: transformCashLumpSum,
+  [Scenario.FAMILY_MEMBER_ILLNESS]: transformFamilyMemberIllness,
+  [Scenario.LIFE_INSURANCE_PAYOUT]: transformLifeInsurancePayout,
+  [Scenario.DISABILITY_LONG_TERM]: transformDisabilityLongTerm,
+  [Scenario.MARKET_CRASH]: transformMarketCrash,
+  [Scenario.MARKET_BOOM]: transformMarketBoom,
+  [Scenario.INTEREST_RATE_INCREASE]: transformInterestRateIncrease,
+  [Scenario.INTEREST_RATE_DECREASE]: transformInterestRateDecrease,
+  [Scenario.DIVORCE_SEPARATION]: transformDivorceSeparation,
+  [Scenario.UNEXPECTED_TAX_BILL]: transformUnexpectedTaxBill,
+  [Scenario.FRAUD_THEFT]: transformFraudTheft,
+  [Scenario.PROPERTY_DAMAGE]: transformPropertyDamage,
+  [Scenario.CHILDBIRTH_UNPLANNED]: transformChildbirthUnplanned,
+  [Scenario.DEATH_OF_BREADWINNER]: transformDeathOfBreadwinner,
+}
+
+export function transformSimplifiedConfig(
+  _scenarioType: string,
+  scenarioId: string,
+  simplifiedData: Record<string, any>,
+  profile?: any
+): ScenarioModifier | ScenarioModifier[] {
+  // Wave 2: Accept thematic IDs but map to legacy IDs for transformer lookup
+  // This handles consolidations where multiple legacy scenarios map to one thematic ID
+  const legacyId = thematicIdToLegacy(scenarioId as ScenarioId) || scenarioId
+  const transformer = TRANSFORMERS[legacyId]
+  
+  if (!transformer) {
+    console.warn(`[configTransformers] No transformer for scenario: ${scenarioId} (legacy: ${legacyId})`)
+    throw new Error(`No transformer found for scenario: ${scenarioId}`)
+  }
+  
+  return transformer(simplifiedData, profile)
+}
+
+// ============================================================================
+// TRANSFORMER FUNCTIONS
+// ============================================================================
+
+function transformBusinessLaunch(data: Record<string, any>, profile?: any): ScenarioModifier[] {
+  // Business scenario with four explicit modifiers:
+  // 1. Revenue modifier (RECURRING_INCOME)
+  // 2. Costs modifier (RECURRING_EXPENSE)
+  // 3. Setup modifier (ONE_OFF_EXPENSE)
+  // 4. Equity tracker (ONE_OFF_ACCOUNT_CONTRIBUTION) - Tracks business value appreciation
+  
+  const monthlyRevenue = ensureNumber(data.monthlyRevenue, 8000)
+  const monthlyCosts = ensureNumber(data.monthlyCosts, 3500)
+  const oneOffCosts = ensureNumber(data.oneOffCosts, 20000)
+  const revenueDelayMonths = ensureNumber(data.revenueDelayMonths, 3)
+  const setupDate = ensureDate(data.startDate)
+  
+  // Business runs until age 100 (or until sold)
+  const currentAge = profile?.currentAge || 35
+  const durationYears = Math.max(1, 100 - currentAge)
+  
+  // Revenue starts after delay
+  const revenueStartDate = new Date(setupDate.getTime() + revenueDelayMonths * 30 * 24 * 60 * 60 * 1000)
+  
+  // Business valuation estimate based on monthly net profit (typical multiple: 2-3x annual profit)
+  const monthlyProfit = monthlyRevenue - monthlyCosts
+  const annualProfit = monthlyProfit * 12
+  const businessValuation = annualProfit * 2.5  // Conservative 2.5x multiple
+  const annualAppreciation = ensureNumber(data.annualAppreciation, 5)  // Business value growth rate
+  
+  const scenarioName = GoalType.BUSINESS_LAUNCH
+  
+  return [
+    // 1. Revenue modifier (RECURRING_INCOME) - Business income subject to corporation tax
+    {
+      id: `goal-${scenarioName}-revenue`,
+      name: `${scenarioName} - Revenue`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.RECURRING_INCOME,
+      incomeType: 'business' as const,
+      targetAmount: 0,
+      amountInterpretation: 'monthly' as const,
+      monthlyContribution: monthlyRevenue,
+      startDate: revenueStartDate,
+      targetDate: revenueStartDate,
+      duration: durationYears,
+      frequency: 'monthly' as const,
+      assumptions: {
+        monthlyRevenue,
+        revenueDelayMonths,
+        durationYears
+      }
+    },
+    // 2. Costs modifier (RECURRING_EXPENSE) - Business costs deducted before corporation tax
+    {
+      id: `goal-${scenarioName}-costs`,
+      name: `${scenarioName} - Costs`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.RECURRING_EXPENSE,
+      incomeType: 'business' as const,
+      targetAmount: 0,
+      amountInterpretation: 'monthly' as const,
+      monthlyContribution: monthlyCosts,
+      targetDate: setupDate,
+      startDate: setupDate,
+      duration: durationYears,
+      frequency: 'monthly' as const,
+      assumptions: {
+        monthlyCosts,
+        durationYears
+      }
+    },
+    // 3. Setup modifier (ONE_OFF_EXPENSE)
+    {
+      id: `goal-${scenarioName}-setup`,
+      name: `${scenarioName} - Setup`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+      targetAmount: oneOffCosts,
+      targetDate: setupDate,
+      assumptions: {
+        setupCosts: oneOffCosts,
+        setupDate
+      }
+    },
+    // 4. Business equity tracker (ONE_OFF_ACCOUNT_CONTRIBUTION) - Tracks business value appreciation
+    {
+      id: `goal-${scenarioName}-equity`,
+      name: 'Business Equity',
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_CONTRIBUTION,
+      cashFlowBehavior: 'asset' as const,  // Non-cash bookkeeping entry
+      targetAmount: businessValuation,
+      targetDate: revenueStartDate,  // Start tracking once revenue begins
+      startDate: revenueStartDate,
+      startingAmount: businessValuation,
+      performance: annualAppreciation,
+      monthlyContribution: 0,  // No cash contribution (value grows via appreciation)
+      assumptions: {
+        businessValuation,
+        annualAppreciation,
+        profitMultiple: 2.5,
+        isTransfer: true  // Skip cash flow - this is a bookkeeping entry only
+      }
+    }
+  ]
+}
+
+function transformBusinessGrowth(data: Record<string, any>, profile?: any): ScenarioModifier[] {
+  // Business expansion scenario with four explicit modifiers:
+  // 1. Revenue modifier (RECURRING_INCOME)
+  // 2. Costs modifier (RECURRING_EXPENSE)
+  // 3. Expansion modifier (ONE_OFF_EXPENSE)
+  // 4. Equity tracker (ONE_OFF_ACCOUNT_CONTRIBUTION) - Tracks business value appreciation from expansion
+  
+  const additionalMonthlyRevenue = ensureNumber(data.additionalMonthlyRevenue, 5000)
+  const additionalMonthlyCosts = ensureNumber(data.additionalMonthlyCosts, 2000)
+  const oneOffCosts = ensureNumber(data.oneOffCosts, 15000)
+  const revenueDelayMonths = ensureNumber(data.revenueDelayMonths, 6)
+  const expansionDate = ensureDate(data.startDate)
+  
+  // Business runs until age 100
+  const currentAge = profile?.currentAge || 35
+  const durationYears = Math.max(1, 100 - currentAge)
+  
+  // Additional revenue starts after delay
+  const revenueStartDate = new Date(expansionDate.getTime() + revenueDelayMonths * 30 * 24 * 60 * 60 * 1000)
+  
+  // Business valuation estimate based on additional monthly net profit (typical multiple: 2-3x annual profit)
+  const monthlyProfit = additionalMonthlyRevenue - additionalMonthlyCosts
+  const annualProfit = monthlyProfit * 12
+  const businessValuation = annualProfit * 2.5  // Conservative 2.5x multiple
+  const annualAppreciation = ensureNumber(data.annualAppreciation, 5)  // Business value growth rate
+  
+  const scenarioName = GoalType.BUSINESS_GROWTH
+  
+  return [
+    // 1. Revenue modifier (RECURRING_INCOME) - Business income subject to corporation tax
+    {
+      id: `goal-${scenarioName}-revenue`,
+      name: `${scenarioName} - Revenue`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.RECURRING_INCOME,
+      incomeType: 'business' as const,
+      targetAmount: 0,
+      amountInterpretation: 'monthly' as const,
+      monthlyContribution: additionalMonthlyRevenue,
+      startDate: revenueStartDate,
+      targetDate: revenueStartDate,
+      duration: durationYears,
+      frequency: 'monthly' as const,
+      assumptions: {
+        additionalMonthlyRevenue,
+        revenueDelayMonths,
+        durationYears
+      }
+    },
+    // 2. Costs modifier (RECURRING_EXPENSE) - Business costs deducted before corporation tax
+    {
+      id: `goal-${scenarioName}-costs`,
+      name: `${scenarioName} - Costs`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.RECURRING_EXPENSE,
+      incomeType: 'business' as const,
+      targetAmount: 0,
+      amountInterpretation: 'monthly' as const,
+      monthlyContribution: additionalMonthlyCosts,
+      targetDate: expansionDate,
+      startDate: expansionDate,
+      duration: durationYears,
+      frequency: 'monthly' as const,
+      assumptions: {
+        additionalMonthlyCosts,
+        durationYears
+      }
+    },
+    // 3. Expansion modifier (ONE_OFF_EXPENSE)
+    {
+      id: `goal-${scenarioName}-expansion`,
+      name: `${scenarioName} - Expansion`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+      targetAmount: oneOffCosts,
+      targetDate: expansionDate,
+      assumptions: {
+        expansionInvestment: oneOffCosts,
+        expansionDate
+      }
+    },
+    // 4. Business equity tracker (ONE_OFF_ACCOUNT_CONTRIBUTION) - Tracks business value appreciation from expansion
+    {
+      id: `goal-${scenarioName}-equity`,
+      name: 'Business Equity',
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_CONTRIBUTION,
+      cashFlowBehavior: 'asset' as const,  // Non-cash bookkeeping entry
+      targetAmount: businessValuation,
+      targetDate: revenueStartDate,  // Start tracking once revenue begins
+      startDate: revenueStartDate,
+      startingAmount: businessValuation,
+      performance: annualAppreciation,
+      monthlyContribution: 0,  // No cash contribution (value grows via appreciation)
+      assumptions: {
+        businessValuation,
+        annualAppreciation,
+        profitMultiple: 2.5,
+        isTransfer: true  // Skip cash flow - this is a bookkeeping entry only
+      }
+    }
+  ]
+}
+
+function transformEducationTraining(data: Record<string, any>, profile?: any): ScenarioModifier[] {
+  // Multi-modifier pattern: education/training with separate modifiers for:
+  // 1. Course fees (ONE_OFF_EXPENSE)
+  // 2. Living costs during study (RECURRING_EXPENSE) - if applicable
+  // 3. Salary increase after completion (RECURRING_INCOME)
+  
+  const oneOffCosts = ensureNumber(data.oneOffCosts, 5000)
+  const monthlyCosts = ensureNumber(data.monthlyCosts, 1000)
+  const durationMonths = ensureNumber(data.durationMonths, 12)
+  const salaryIncreasePercent = ensureNumber(data.salaryIncreasePercent, 10)
+  const trainingStartDate = ensureDate(data.startDate)
+  const trainingEndDate = new Date(trainingStartDate.getTime() + durationMonths * 30 * 24 * 60 * 60 * 1000)
+  
+  // Calculate permanent salary increase after training (with UK tax)
+  const baselineGrossSalary = ensureNumber(profile?.currentSalary, 75000)
+  const salaryIncreaseAmount = baselineGrossSalary * (salaryIncreasePercent / 100)
+  const newGrossSalary = baselineGrossSalary + salaryIncreaseAmount
+  
+  const baselineNet = calculateNetSalary(baselineGrossSalary)
+  const newNet = calculateNetSalary(newGrossSalary)
+  const annualNetIncrease = newNet - baselineNet
+  const monthlyNetIncrease = annualNetIncrease / 12
+  
+  // Income boost lasts from training completion until retirement
+  const currentAge = profile?.currentAge || 35
+  const retirementAge = profile?.retirementAge || 67
+  
+  // Calculate age when training ends (add duration in years to current age)
+  const trainingDurationYears = durationMonths / 12
+  const ageWhenTrainingEnds = currentAge + trainingDurationYears
+  
+  // Calculate career years remaining from training completion to retirement
+  const careerYearsRemaining = Math.max(1, retirementAge - ageWhenTrainingEnds)
+  
+  const scenarioName = GoalType.EDUCATION_TRAINING
+  
+  const modifiers: ScenarioModifier[] = [
+    // 1. Course fees (ONE_OFF_EXPENSE)
+    {
+      id: `goal-${scenarioName}-fees`,
+      name: `${scenarioName} - Course Fees`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+      targetAmount: oneOffCosts,
+      targetDate: trainingStartDate,
+      assumptions: {
+        oneOffCosts: oneOffCosts,
+        trainingStartDate: trainingStartDate
+      }
+    }
+  ]
+  
+  // 2. Living costs during study (RECURRING_EXPENSE) - only if applicable
+  if (monthlyCosts > 0) {
+    modifiers.push({
+      id: `goal-${scenarioName}-living`,
+      name: `${scenarioName} - Living Costs`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.RECURRING_EXPENSE,
+      targetAmount: 0,
+      amountInterpretation: 'monthly' as const,
+      monthlyContribution: monthlyCosts,
+      startDate: trainingStartDate,
+      targetDate: trainingEndDate,
+      duration: durationMonths / 12,
+      frequency: 'monthly' as const,
+      assumptions: {
+        monthlyCosts: monthlyCosts,
+        durationMonths: durationMonths
+      }
+    })
+  }
+  
+  // 3. Salary increase after completion (RECURRING_INCOME)
+  modifiers.push({
+    id: `goal-${scenarioName}-salary-increase`,
+    name: `${scenarioName} - Salary Increase`,
+    scenarioId: scenarioName,
+    archetype: ScenarioArchetype.RECURRING_INCOME,
+    targetAmount: 0,
+    amountInterpretation: 'monthly' as const,
+    monthlyContribution: monthlyNetIncrease,
+    startDate: trainingEndDate,
+    targetDate: trainingEndDate,
+    duration: careerYearsRemaining,
+    frequency: 'monthly' as const,
+    assumptions: {
+      salaryIncreasePercent: salaryIncreasePercent,
+      baselineSalary: baselineGrossSalary,
+      newSalary: newGrossSalary,
+      monthlyNetIncrease: monthlyNetIncrease,
+      careerYearsRemaining: careerYearsRemaining,
+      trainingEndDate: trainingEndDate
+    }
+  })
+  
+  return modifiers
+}
+
+function transformWorkEquipment(data: Record<string, any>): ScenarioModifier {
+  // Simplified: one-time equipment/tools purchase expense only (no income boost)
+  const totalCost = ensureNumber(data.totalCost, 3000)
+  const purchaseDate = ensureDate(data.purchaseDate)
+  
+  return {
+    id: `goal-${GoalType.WORK_EQUIPMENT}`,
+    name: GoalType.WORK_EQUIPMENT,
+    scenarioId: GoalType.WORK_EQUIPMENT,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    cashFlowBehavior: 'lump_sum_expense' as const,  // Pure expense (no debt account)
+    targetAmount: totalCost,
+    targetDate: purchaseDate,
+    startDate: purchaseDate,
+    assumptions: {
+      equipmentCost: totalCost,
+      purchaseDate: purchaseDate
+    }
+  }
+}
+
+function transformBuyingCar(data: Record<string, any>): ScenarioModifier[] {
+  // Multi-component scenario: cash outflow + asset tracking with depreciation
+  // Component 1: Cash expense (shows in cash flow charts)
+  // Component 2: Asset account (tracks depreciating value on balance sheet)
+  const totalCost = ensureNumber(data.totalCost, 15000)
+  const purchaseDate = ensureDate(data.purchaseDate)
+  const financingOption = data.financingOption || 'cash'
+  
+  // Cars depreciate approximately 15% per year (industry standard)
+  const depreciationRate = -15
+  
+  const scenarioName = GoalType.BUYING_A_CAR
+  
+  return [
+    // 1. Cash outflow modifier (ONE_OFF_EXPENSE) - Shows purchase in cash flow charts
+    {
+      id: `goal-${scenarioName}-purchase`,
+      name: `${scenarioName} - Purchase`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+      cashFlowBehavior: 'lump_sum_expense' as const,  // Pure expense (no debt account)
+      targetAmount: totalCost,
+      targetDate: purchaseDate,
+      startDate: purchaseDate,
+      assumptions: {
+        purchasePrice: totalCost,
+        financingOption: financingOption
+      }
+    },
+    // 2. Asset tracking modifier (ONE_OFF_ACCOUNT_CONTRIBUTION) - Tracks depreciating value
+    {
+      id: `goal-${scenarioName}-asset`,
+      name: `${scenarioName} - Asset Value`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_CONTRIBUTION,
+      cashFlowBehavior: 'asset' as const,  // Non-cash bookkeeping entry (no additional cash withdrawal)
+      targetAmount: totalCost,  // Initial asset value
+      targetDate: purchaseDate,
+      startDate: purchaseDate,
+      startingAmount: totalCost,  // Asset starts at purchase price
+      performance: depreciationRate,  // Depreciates at -15%/year
+      monthlyContribution: 0,  // No cash contribution (already paid via expense component)
+      assumptions: {
+        assetType: 'vehicle',
+        depreciationRate: depreciationRate,
+        loanInterestRate: financingOption === 'finance' ? 7.9 : undefined,
+        loanTermYears: financingOption === 'finance' ? 5 : undefined
+      }
+    }
+  ]
+}
+
+function transformBuyingProperty(data: Record<string, any>): ScenarioModifier[] {
+  // Simplified: lump sum property purchase + asset tracking with appreciation
+  // Component 1: Cash expense (full property price paid in cash)
+  // Component 2: Asset account (tracks appreciating property value on balance sheet)
+  const propertyPrice = ensureNumber(data.propertyPrice, 300000)
+  const annualAppreciation = ensureNumber(data.annualAppreciation, 3)
+  const purchaseDate = ensureDate(data.purchaseDate)
+  
+  const scenarioName = GoalType.BUYING_A_PROPERTY
+  
+  return [
+    // 1. Cash outflow modifier (ONE_OFF_EXPENSE) - Full property price
+    {
+      id: `goal-${scenarioName}-purchase`,
+      name: `${scenarioName} - Purchase`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+      cashFlowBehavior: 'lump_sum_expense' as const,
+      targetAmount: propertyPrice,
+      targetDate: purchaseDate,
+      startDate: purchaseDate,
+      assumptions: {
+        propertyPrice: propertyPrice
+      }
+    },
+    // 2. Asset tracking modifier (ONE_OFF_ACCOUNT_CONTRIBUTION) - Tracks property value with appreciation
+    {
+      id: `goal-${scenarioName}-asset`,
+      name: `${scenarioName} - Property Value`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_CONTRIBUTION,
+      cashFlowBehavior: 'asset' as const,  // Non-cash bookkeeping entry (no additional cash withdrawal)
+      targetAmount: propertyPrice,
+      targetDate: purchaseDate,
+      startDate: purchaseDate,
+      startingAmount: propertyPrice,  // Asset starts at purchase price
+      performance: annualAppreciation,  // Appreciates (e.g., 3%/year)
+      monthlyContribution: 0,  // No cash contribution (already paid via expense component)
+      assumptions: {
+        propertyPrice: propertyPrice,
+        annualAppreciation: annualAppreciation
+      }
+    }
+  ]
+}
+
+function transformHolidayTravel(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: one-time travel expense
+  const totalCost = ensureNumber(data.totalCost, 3000)
+  const travelDate = ensureDate(data.travelDate)
+  
+  return {
+    id: `goal-${GoalType.HOLIDAY_TRAVEL}`,
+    name: GoalType.HOLIDAY_TRAVEL,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    targetAmount: totalCost,  // Total trip cost
+    targetDate: travelDate,
+    startDate: travelDate,
+    assumptions: {
+      destinationType: 'international',
+      contributionStrategy: 'automatic'
+    }
+  }
+}
+
+function transformWeddingFund(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: one-time wedding expense
+  const totalBudget = ensureNumber(data.totalBudget, 15000)
+  const weddingDate = ensureDate(data.weddingDate)
+  
+  return {
+    id: `goal-${GoalType.WEDDING_FUND}`,
+    name: GoalType.WEDDING_FUND,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    targetAmount: totalBudget,  // Total wedding budget
+    targetDate: weddingDate,
+    startDate: weddingDate,
+    assumptions: {
+      weddingSize: 'medium',
+      contributionStrategy: 'automatic'
+    }
+  }
+}
+
+function transformEmergencyFund(data: Record<string, any>): ScenarioModifier {
+  // Unified savings goal: creates Emergency Fund account with HYSA rate and priority-based allocation
+  // The CashFlowAllocator automatically tops this up from surplus cash until target is reached
+  const targetAmount = ensureNumber(data.targetAmount, 15000)
+  const initialTransfer = ensureNumber(data.initialTransfer, 0)  // Optional: transfer from existing cash
+  
+  const startDate = new Date()
+  
+  return {
+    id: `goal-${GoalType.BUILD_EMERGENCY_FUND}`,
+    name: "Emergency Fund",  // Account name (will be matched by createAccountRegistry)
+    archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_CONTRIBUTION,  // Create account with initial balance
+    targetAmount: initialTransfer,  // Initial transfer from existing cash
+    startingAmount: initialTransfer,  // Starting balance
+    targetDate: startDate,
+    startDate: startDate,
+    performance: 4.5,  // HYSA rate (4.5% annual)
+    linkedAccountName: "Emergency Fund",  // New account name
+    savingsGoalPriority: 1,  // Highest priority (filled first)
+    savingsGoalTarget: targetAmount,  // Target amount to reach
+    savingsGoalType: 'emergency',  // Type identifier
+    assumptions: {
+      targetAmount: targetAmount,
+      initialTransfer: initialTransfer,
+      hysaRate: 4.5,
+      priority: 1,
+      note: 'CashFlowAllocator automatically tops up from surplus until target is reached'
+    }
+  }
+}
+
+function transformPayOffDebt(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: one-time lump sum payment to clear debt
+  // Use ONE_OFF_ACCOUNT_CONTRIBUTION to reduce debt balance (negative contribution)
+  const lumpSumPayment = ensureNumber(data.lumpSumPayment, 10000)
+  const paymentDate = ensureDate(data.paymentDate)
+  const debtType = data.debtType || 'credit_card'
+  
+  return {
+    id: `goal-${GoalType.PAY_OFF_DEBT}`,
+    name: GoalType.PAY_OFF_DEBT,
+    scenarioId: GoalType.PAY_OFF_DEBT,
+    archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_CONTRIBUTION,
+    targetAmount: lumpSumPayment,  // Lump sum payment amount
+    startingAmount: -lumpSumPayment,  // Negative = reduces debt balance
+    targetDate: paymentDate,
+    startDate: paymentDate,
+    linkedAccountName: debtType === 'mortgage' ? 'Mortgage' : 'Debt',  // Link to debt account
+    assumptions: {
+      debtType: debtType,
+      lumpSumPayment: lumpSumPayment,
+      paymentDate: paymentDate
+    }
+  }
+}
+
+function transformChildEducationFund(data: Record<string, any>): ScenarioModifier {
+  // Unified savings goal: creates Education Fund account with HYSA rate and priority-based allocation
+  // The CashFlowAllocator automatically tops this up from surplus cash until target is reached
+  const targetAmount = ensureNumber(data.targetAmount, 50000)
+  const initialTransfer = ensureNumber(data.initialTransfer, 0)  // Optional: transfer from existing cash
+  const childAge = ensureNumber(data.childAge, 5)
+  const universityAge = ensureNumber(data.universityAge, 18)
+  
+  const startDate = new Date()
+  const yearsUntilUniversity = Math.max(1, universityAge - childAge)
+  
+  return {
+    id: `goal-${GoalType.CHILDS_EDUCATION_FUND}`,
+    name: "Education Fund",  // Account name (will be matched by createAccountRegistry)
+    archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_CONTRIBUTION,  // Create account with initial balance
+    targetAmount: initialTransfer,  // Initial transfer from existing cash
+    startingAmount: initialTransfer,  // Starting balance
+    targetDate: startDate,
+    startDate: startDate,
+    performance: 4.5,  // HYSA rate (4.5% annual)
+    linkedAccountName: "Education Fund",  // New account name
+    savingsGoalPriority: 2,  // Second priority (after emergency fund)
+    savingsGoalTarget: targetAmount,  // Target amount to reach
+    savingsGoalType: 'education',  // Type identifier
+    assumptions: {
+      targetAmount: targetAmount,
+      initialTransfer: initialTransfer,
+      childAge: childAge,
+      universityStartAge: universityAge,
+      yearsUntilUniversity: yearsUntilUniversity,
+      hysaRate: 4.5,
+      priority: 2,
+      note: 'CashFlowAllocator automatically tops up from surplus until target is reached'
+    }
+  }
+}
+
+function transformChildcareCosts(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: ongoing childcare costs with recurring monthly expenses
+  const monthlyCost = ensureNumber(data.monthlyCost, 1200)
+  const durationYears = ensureNumber(data.durationYears, 4)
+  const startDate = ensureDate(data.startDate)
+  
+  const targetDate = new Date(startDate)
+  targetDate.setFullYear(targetDate.getFullYear() + durationYears)
+  const totalCost = monthlyCost * durationYears * 12
+  
+  return {
+    id: `goal-${GoalType.CHILDCARE_COSTS_ONGOING}`,
+    name: GoalType.CHILDCARE_COSTS_ONGOING,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: totalCost,  // Total childcare cost over duration
+    monthlyContribution: -monthlyCost,  // Monthly expense (negative)
+    targetDate: targetDate,
+    startDate: startDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    assumptions: {
+      childcareType: 'full_time_nursery',
+      monthlyCost: monthlyCost,
+      durationYears: durationYears,
+      freeHoursEligible: false,
+      taxFreeChildcareEligible: true
+    }
+  }
+}
+
+function transformSchoolFees(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: ongoing private school fees with recurring monthly expenses
+  const annualFees = ensureNumber(data.annualFees, 20000)
+  const monthlyCost = Math.round(annualFees / 12)
+  const durationYears = ensureNumber(data.durationYears, 7)
+  const startDate = ensureDate(data.startDate)
+  
+  const targetDate = new Date(startDate)
+  targetDate.setFullYear(targetDate.getFullYear() + durationYears)
+  const totalCost = annualFees * durationYears
+  
+  return {
+    id: `goal-${GoalType.SCHOOL_FEES}`,
+    name: GoalType.SCHOOL_FEES,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: totalCost,  // Total school fees over duration
+    monthlyContribution: -monthlyCost,  // Monthly expense (negative)
+    targetDate: targetDate,
+    startDate: startDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    assumptions: {
+      annualFees: annualFees,
+      monthlyCost: monthlyCost,
+      durationYears: durationYears
+    }
+  }
+}
+
+function transformPensionTopUp(data: Record<string, any>): ScenarioModifier {
+  // Redirect surplus cash flow to pension via surplus allocation
+  // Routes all surplus cash (after automated allocations & savings goals) to pension
+  const startDate = ensureDate(data.startDate)
+  
+  return {
+    id: `goal-${GoalType.PENSION_TOP_UP}`,
+    name: GoalType.PENSION_TOP_UP,
+    archetype: ScenarioArchetype.ALLOCATION_CONFIG_CHANGE,
+    targetAmount: 0,  // No direct cash flow - routes surplus to pension
+    monthlyContribution: 0,
+    targetDate: new Date(2099, 11, 31),  // Permanent allocation
+    startDate: startDate,
+    duration: 0,
+    frequency: 'monthly' as const,
+    performance: 6,  // Pension returns (6% annual)
+    startingAmount: 0,
+    assumptions: {
+      accountType: 'pension',
+      surplusAllocation: {
+        assetClass: 'pension'
+      },
+      expectedReturn: 6,
+      description: 'Surplus cash auto-allocated to pension'
+    }
+  }
+}
+
+function transformHavingBaby(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: one-time baby expenses (equipment, clothes, setup)
+  const oneOffCosts = ensureNumber(data.oneOffCosts, 3000)
+  const dueDate = ensureDate(data.dueDate)
+  
+  return {
+    id: `goal-${GoalType.HAVING_A_BABY}`,
+    name: GoalType.HAVING_A_BABY,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    targetAmount: oneOffCosts,  // Total upfront baby costs
+    targetDate: dueDate,
+    startDate: dueDate,
+    assumptions: {
+      maternityCosts: oneOffCosts * 0.2,  // Maternity clothes
+      babyEquipment: oneOffCosts * 0.8   // Baby items
+    }
+  }
+}
+
+function transformIVF(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: one-time IVF treatment costs
+  const totalCost = ensureNumber(data.totalCost, 12000)
+  const treatmentDate = ensureDate(data.treatmentDate)
+  const cyclesPlanned = Math.ceil(totalCost / 5000) // Assume £5k per cycle
+  
+  return {
+    id: `goal-${GoalType.IVF_FERTILITY_TREATMENT}`,
+    name: GoalType.IVF_FERTILITY_TREATMENT,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    targetAmount: totalCost,  // Total IVF treatment cost
+    targetDate: treatmentDate,
+    startDate: treatmentDate,
+    assumptions: {
+      numberOfCycles: cyclesPlanned,
+      costPerCycle: totalCost / cyclesPlanned,
+      fundingSource: 'savings'
+    }
+  }
+}
+
+function transformSupportingRelative(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: ongoing support for relative with recurring monthly payments
+  const monthlyAmount = ensureNumber(data.monthlyAmount, 500)
+  const durationYears = ensureNumber(data.durationYears, 5)
+  const startDate = ensureDate(data.startDate)
+  
+  const targetDate = new Date(startDate)
+  targetDate.setFullYear(targetDate.getFullYear() + durationYears)
+  const totalCost = monthlyAmount * durationYears * 12
+  
+  return {
+    id: `goal-${GoalType.SUPPORTING_PARTNER_RELATIVE}`,
+    name: GoalType.SUPPORTING_PARTNER_RELATIVE,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: totalCost,  // Total support cost over duration
+    monthlyContribution: -monthlyAmount,  // Monthly expense (negative)
+    targetDate: targetDate,
+    startDate: startDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    assumptions: {
+      supportType: 'monthly_allowance',
+      monthlyAmount: monthlyAmount,
+      durationYears: durationYears
+    }
+  }
+}
+
+function transformRentDeposit(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: one-time moving costs (deposit + moving expenses)
+  const depositAmount = ensureNumber(data.depositAmount, 2000)
+  const movingCosts = ensureNumber(data.movingCosts, 500)
+  const moveDate = ensureDate(data.moveDate)
+  const totalCost = depositAmount + movingCosts
+  
+  return {
+    id: `goal-${GoalType.RENT_DEPOSIT_MOVING_COSTS}`,
+    name: GoalType.RENT_DEPOSIT_MOVING_COSTS,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    cashFlowBehavior: 'lump_sum_expense' as const,  // Pure expense (no debt account)
+    targetAmount: totalCost,  // Total moving costs
+    targetDate: moveDate,
+    startDate: moveDate,
+    assumptions: {
+      depositAmount: depositAmount,
+      movingCosts: movingCosts
+    }
+  }
+}
+
+function transformExtendedTimeOff(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: sabbatical with recurring monthly expenses
+  const monthlyCosts = ensureNumber(data.monthlyCosts, 2500)
+  const durationMonths = ensureNumber(data.durationMonths, 6)
+  const startDate = ensureDate(data.startDate)
+  const totalCost = monthlyCosts * durationMonths
+  
+  return {
+    id: `goal-${GoalType.EXTENDED_TIME_OFF}`,
+    name: GoalType.EXTENDED_TIME_OFF,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: totalCost,  // Total cost over sabbatical
+    monthlyContribution: -monthlyCosts,  // Monthly expense (negative)
+    targetDate: new Date(startDate.getTime() + durationMonths * 30 * 24 * 60 * 60 * 1000),
+    startDate: startDate,
+    duration: durationMonths / 12,  // Convert to years
+    frequency: 'monthly' as const,
+    assumptions: {
+      sabbaticalType: 'extended_time_off',
+      durationMonths: durationMonths,
+      monthlyCosts: monthlyCosts
+    }
+  }
+}
+
+function transformFitnessGoal(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: fitness goal with upfront costs + recurring membership
+  const oneOffCosts = ensureNumber(data.oneOffCosts, 500)
+  const monthlyMembership = ensureNumber(data.monthlyMembership, 50)
+  const durationMonths = ensureNumber(data.durationMonths, 12)
+  const startDate = ensureDate(data.startDate)
+  
+  const totalCost = oneOffCosts + (monthlyMembership * durationMonths)
+  
+  return {
+    id: `goal-${GoalType.FITNESS_GOAL}`,
+    name: GoalType.FITNESS_GOAL,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: totalCost,  // Total cost over duration
+    monthlyContribution: monthlyMembership,  // Monthly expense (positive)
+    targetDate: new Date(startDate.getTime() + durationMonths * 30 * 24 * 60 * 60 * 1000),
+    startDate: startDate,
+    duration: durationMonths / 12,  // Convert to years
+    frequency: 'monthly' as const,
+    startingAmount: -oneOffCosts,  // Upfront equipment/signup costs (negative)
+    assumptions: {
+      oneOffCosts: oneOffCosts,
+      monthlyMembership: monthlyMembership,
+      durationMonths: durationMonths
+    }
+  }
+}
+
+function transformSavingHouseDeposit(data: Record<string, any>): ScenarioModifier {
+  // Unified savings goal: creates House Deposit account with HYSA rate and priority-based allocation
+  // The CashFlowAllocator automatically tops this up from surplus cash until target is reached
+  const targetAmount = ensureNumber(data.targetAmount, 40000)
+  const initialTransfer = ensureNumber(data.initialTransfer, 0)  // Optional: transfer from existing cash
+  const targetDate = ensureDate(data.targetDate)
+  
+  const startDate = new Date()
+  
+  return {
+    id: `goal-${GoalType.SAVING_FOR_HOUSE_DEPOSIT}`,
+    name: "House Deposit",  // Account name (will be matched by createAccountRegistry)
+    archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_CONTRIBUTION,  // Create account with initial balance
+    targetAmount: initialTransfer,  // Initial transfer from existing cash
+    startingAmount: initialTransfer,  // Starting balance
+    targetDate: startDate,
+    startDate: startDate,
+    performance: 4.5,  // HYSA rate (4.5% annual)
+    linkedAccountName: "House Deposit",  // New account name
+    savingsGoalPriority: 3,  // Third priority (after emergency and education)
+    savingsGoalTarget: targetAmount,  // Target amount to reach
+    savingsGoalType: 'house_deposit',  // Type identifier
+    assumptions: {
+      targetAmount: targetAmount,
+      initialTransfer: initialTransfer,
+      targetPurchaseDate: targetDate,
+      hysaRate: 4.5,
+      priority: 3,
+      note: 'CashFlowAllocator automatically tops up from surplus until target is reached'
+    }
+  }
+}
+
+function transformFurniture(data: Record<string, any>): ScenarioModifier {
+  // Simplified: one-time furniture, renovations, or home improvement expense
+  const totalCost = ensureNumber(data.totalCost, 5000)
+  const purchaseDate = ensureDate(data.purchaseDate)
+  
+  return {
+    id: `goal-${GoalType.FURNITURE_HOME_DECOR}`,
+    name: GoalType.FURNITURE_HOME_DECOR,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    targetAmount: totalCost,  // Total cost for furniture/renovations
+    targetDate: purchaseDate,
+    startDate: purchaseDate,
+    assumptions: {
+      totalCost: totalCost,
+      purchaseDate: purchaseDate
+    }
+  }
+}
+
+function transformLongTermCare(data: Record<string, any>): ScenarioModifier {
+  // Unified savings goal: creates Long-Term Care Fund account with HYSA rate and priority-based allocation
+  // The CashFlowAllocator automatically tops this up from surplus cash until target is reached
+  const targetAmount = ensureNumber(data.targetAmount, 50000)
+  const initialTransfer = ensureNumber(data.initialTransfer || 0, 0)  // Optional: transfer from existing cash
+  
+  const startDate = new Date()
+  
+  return {
+    id: `goal-${GoalType.LONG_TERM_CARE_FUND}`,
+    name: "Long-Term Care Fund",  // Account name (will be matched by createAccountRegistry)
+    archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_CONTRIBUTION,  // Create account with initial balance
+    targetAmount: initialTransfer,  // Initial transfer from existing cash
+    startingAmount: initialTransfer,  // Starting balance
+    targetDate: startDate,
+    startDate: startDate,
+    performance: 4.5,  // HYSA rate (4.5% annual)
+    linkedAccountName: "Long-Term Care Fund",  // New account name
+    savingsGoalPriority: 4,  // Fourth priority (after emergency, education, house deposit)
+    savingsGoalTarget: targetAmount,  // Target amount to reach
+    savingsGoalType: 'general',  // Type identifier
+    assumptions: {
+      targetAmount: targetAmount,
+      initialTransfer: initialTransfer,
+      hysaRate: 4.5,
+      priority: 4,
+      note: 'CashFlowAllocator automatically tops up from surplus until target is reached'
+    }
+  }
+}
+
+// ============= ACTION TRANSFORMERS =============
+// Now using unified schema builders - much simpler and guaranteed complete!
+
+function transformIncreaseSalary(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // Direct ScenarioModifier creation: calculate net-to-net income increase
+  const baselineGrossSalary = ensureNumber(profile?.currentSalary, 75000)
+  const raiseAmount = ensureNumber(data.targetAmount, 10000)  // Annual raise amount from user input
+  const scenarioGrossSalary = baselineGrossSalary + raiseAmount
+  
+  // Calculate net income difference using UK tax calculator
+  const baselineNet = calculateNetSalary(baselineGrossSalary)
+  const scenarioNet = calculateNetSalary(scenarioGrossSalary)
+  const annualNetDifference = scenarioNet - baselineNet  // Positive for income increase
+  const monthlyContribution = annualNetDifference / 12
+  
+  const startDate = ensureDate(data.startDate)
+  
+  // Calculate years until retirement (salary increase stops at retirement)
+  const currentAge = profile?.currentAge || 35
+  const retirementAge = profile?.retirementAge || 67
+  const yearsUntilRetirement = Math.max(1, retirementAge - currentAge)
+  const totalMonths = yearsUntilRetirement * 12
+  
+  return {
+    id: `action-${ActionType.INCREASE_SALARY}`,
+    name: ActionType.INCREASE_SALARY,
+    scenarioId: ActionType.INCREASE_SALARY,
+    archetype: ScenarioArchetype.RECURRING_INCOME,
+    targetAmount: monthlyContribution * totalMonths,  // Total until retirement
+    amountInterpretation: 'monthly' as const,  // Use monthlyContribution, not targetAmount
+    monthlyContribution: monthlyContribution,  // Positive value showing income gain
+    targetDate: new Date(startDate.getTime() + yearsUntilRetirement * 365 * 24 * 60 * 60 * 1000),
+    startDate: startDate,
+    duration: yearsUntilRetirement,  // Until retirement
+    frequency: 'monthly' as const,
+    assumptions: {
+      baselineGrossSalary: baselineGrossSalary,
+      newGrossSalary: scenarioGrossSalary,
+      monthlyNetIncrease: monthlyContribution,
+      yearsUntilRetirement: yearsUntilRetirement
+    }
+  }
+}
+
+function transformAddSideIncome(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // Direct ScenarioModifier creation: additional taxable income from side hustle
+  const monthlyGrossIncome = ensureNumber(data.monthlyIncome, 500)
+  const durationMonths = ensureNumber(data.durationMonths, 24)
+  const startDate = ensureDate(data.startDate)
+  
+  // Side income is taxable, so calculate net after tax
+  const baselineGrossSalary = ensureNumber(profile?.currentSalary, 75000)
+  const additionalAnnualIncome = monthlyGrossIncome * 12
+  const scenarioGrossSalary = baselineGrossSalary + additionalAnnualIncome
+  
+  // Calculate net income difference using UK tax calculator
+  const baselineNet = calculateNetSalary(baselineGrossSalary)
+  const scenarioNet = calculateNetSalary(scenarioGrossSalary)
+  const annualNetDifference = scenarioNet - baselineNet
+  const monthlyNetIncome = annualNetDifference / 12
+  
+  // Cap duration at retirement (side income can't continue past retirement)
+  const currentAge = profile?.currentAge || 35
+  const retirementAge = profile?.retirementAge || 67
+  const monthsUntilRetirement = (retirementAge - currentAge) * 12
+  const effectiveDurationMonths = Math.min(durationMonths, monthsUntilRetirement)
+  const totalNetIncome = monthlyNetIncome * effectiveDurationMonths
+  
+  return {
+    id: `action-${ActionType.ADD_SIDE_INCOME}`,
+    name: ActionType.ADD_SIDE_INCOME,
+    scenarioId: ActionType.ADD_SIDE_INCOME,
+    archetype: ScenarioArchetype.RECURRING_INCOME,
+    targetAmount: totalNetIncome,  // Total net income after tax (capped at retirement)
+    amountInterpretation: 'monthly' as const,  // Use monthlyContribution, not targetAmount
+    monthlyContribution: monthlyNetIncome,  // Monthly net income (positive)
+    targetDate: new Date(startDate.getTime() + effectiveDurationMonths * 30 * 24 * 60 * 60 * 1000),
+    startDate: startDate,
+    duration: effectiveDurationMonths / 12,  // Convert to years (capped at retirement)
+    frequency: 'monthly' as const,
+    assumptions: {
+      monthlyGrossIncome: monthlyGrossIncome,
+      monthlyNetIncome: monthlyNetIncome,
+      requestedDurationMonths: durationMonths,
+      effectiveDurationMonths: effectiveDurationMonths,
+      baselineGrossSalary: baselineGrossSalary,
+      effectiveTaxRate: ((monthlyGrossIncome - monthlyNetIncome) / monthlyGrossIncome) * 100
+    }
+  }
+}
+
+function transformReduceExpenses(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: reduce monthly expenses (increases cash flow)
+  // Use RECURRING_INCOME archetype because expense reduction = cash flow increase
+  const monthlyReduction = ensureNumber(data.monthlyReduction, 200)
+  const durationMonths = ensureNumber(data.durationMonths, 0)  // 0 = permanent
+  const startDate = ensureDate(data.startDate)
+  
+  // Permanent reduction if duration is 0
+  const isPermanent = durationMonths === 0
+  const actualDuration = isPermanent ? 70 : durationMonths / 12
+  const totalSavings = isPermanent ? monthlyReduction * 70 * 12 : monthlyReduction * durationMonths
+  
+  return {
+    id: `action-${ActionType.REDUCE_EXPENSES}`,
+    name: ActionType.REDUCE_EXPENSES,
+    scenarioId: ActionType.REDUCE_EXPENSES,
+    archetype: ScenarioArchetype.RECURRING_INCOME,  // Shows as positive cash flow increase
+    targetAmount: totalSavings,  // Total savings over duration
+    amountInterpretation: 'monthly' as const,  // Use monthlyContribution, not targetAmount
+    monthlyContribution: monthlyReduction,  // Positive = cash flow increase
+    targetDate: isPermanent 
+      ? new Date(startDate.getTime() + 70 * 365 * 24 * 60 * 60 * 1000)
+      : new Date(startDate.getTime() + durationMonths * 30 * 24 * 60 * 60 * 1000),
+    startDate: startDate,
+    duration: actualDuration,
+    frequency: 'monthly' as const,
+    assumptions: {
+      monthlyReduction: monthlyReduction,
+      isPermanent: isPermanent,
+      durationMonths: durationMonths
+    }
+  }
+}
+
+function transformSellAsset(data: Record<string, any>): ScenarioModifier {
+  // Asset sale scenario: Single ONE_OFF_INFLOW modifier for cash proceeds
+  // User provides expected sale proceeds (net of any taxes they've considered)
+  // Asset type (property/vehicle/investment) is stored in assumptions for context
+  
+  const saleProceeds = ensureNumber(data.saleProceeds, 50000)
+  const saleDate = ensureDate(data.saleDate)
+  const assetType = data.assetType || 'investment'
+  
+  const scenarioName = ActionType.SELL_ASSET
+  
+  return {
+    id: `action-${scenarioName}`,
+    name: `${scenarioName} - ${assetType}`,
+    scenarioId: scenarioName,
+    archetype: ScenarioArchetype.ONE_OFF_INFLOW,
+    targetAmount: saleProceeds,
+    startingAmount: saleProceeds,
+    targetDate: saleDate,
+    startDate: saleDate,
+    duration: 0,
+    assumptions: {
+      saleProceeds,
+      assetType,
+      saleDate,
+      note: 'Cash received from asset sale. Consider CGT implications for taxable assets.'
+    }
+  }
+}
+
+function transformSellBusiness(data: Record<string, any>): ScenarioModifier[] {
+  // Business sale scenario with two explicit modifiers:
+  // 1. Sale proceeds inflow (ONE_OFF_INFLOW) - After 10% CGT (UK Business Asset Disposal Relief)
+  // 2. Liquidate business equity account (ONE_OFF_ACCOUNT_WITHDRAWAL)
+  //
+  // Note: Business revenue and costs are automatically terminated by the simulator
+  // when it detects an active SELL_BUSINESS scenarioId. No explicit terminator modifiers needed.
+  
+  const salePrice = ensureNumber(data.salePrice, 100000)
+  const saleDate = ensureDate(data.saleDate)
+  
+  // UK Business Asset Disposal Relief: 10% CGT on qualifying business sales
+  const cgtRate = 0.10
+  const netProceeds = salePrice * (1 - cgtRate)  // Sale price minus 10% CGT
+  
+  const scenarioName = ActionType.SELL_BUSINESS
+  
+  return [
+    // 1. Sale proceeds inflow (ONE_OFF_INFLOW) - After 10% CGT
+    {
+      id: `action-${scenarioName}-proceeds`,
+      name: `${scenarioName} - Sale Proceeds`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.ONE_OFF_INFLOW,
+      targetAmount: netProceeds,
+      startingAmount: netProceeds,
+      targetDate: saleDate,
+      startDate: saleDate,
+      duration: 0,
+      assumptions: {
+        salePrice,
+        cgtRate,
+        netProceeds,
+        saleDate
+      }
+    },
+    // 2. Liquidate business equity account (ONE_OFF_ACCOUNT_WITHDRAWAL)
+    {
+      id: `action-${scenarioName}-liquidate-equity`,
+      name: `${scenarioName} - Liquidate Equity`,
+      scenarioId: scenarioName,
+      archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_WITHDRAWAL,
+      linkedAccountName: 'Business Equity',  // Match account created by BUSINESS_LAUNCH/GROWTH
+      targetAmount: salePrice,  // Withdraw entire equity balance (will be replaced by actual balance at runtime)
+      targetDate: saleDate,
+      startDate: saleDate,
+      assumptions: {
+        liquidationDate: saleDate,
+        accountName: 'Business Equity'
+      }
+    }
+  ]
+}
+
+function transformQuitJob(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // Quit job: acts as a FLAG to stop salary and workplace pension
+  // The simulator detects this modifier and sets salaryIncome=0 and stops pension contributions
+  // No cash flow is applied here - the simulator naturally calculates the impact
+  const quitDate = ensureDate(data.quitDate)
+  const baselineGrossSalary = ensureNumber(profile?.currentSalary, 75000)
+  
+  const currentAge = profile?.currentAge || 35
+  const durationYears = Math.max(1, 100 - currentAge)
+  const targetDate = new Date(quitDate)
+  targetDate.setFullYear(targetDate.getFullYear() + durationYears)
+  
+  return {
+    id: `action-${ActionType.QUIT_JOB}`,
+    name: ActionType.QUIT_JOB,
+    archetype: ScenarioArchetype.ALLOCATION_CONFIG_CHANGE,  // Config change, not cash flow
+    targetAmount: 0,  // No direct cash flow - simulator handles via salary=0
+    targetDate: targetDate,
+    startDate: quitDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    assumptions: {
+      baselineGrossSalary: baselineGrossSalary,
+      currentAge: currentAge,
+      durationYears: durationYears,
+      quitDate: quitDate,
+      note: 'Salary and workplace pension contributions stop on quit date. Simulator detects this flag and sets income to zero.'
+    }
+  }
+}
+
+// ============= EVENT TRANSFORMERS =============
+// Now using unified schema builders - much simpler and guaranteed complete!
+
+function transformJobLoss(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // Direct ScenarioModifier creation: calculate net-to-net income loss
+  const baselineGrossSalary = ensureNumber(profile?.currentSalary, 75000)
+  const unemploymentMonths = ensureNumber(data.unemploymentDuration, 6)
+  const scenarioGrossSalary = baselineGrossSalary * (12 - unemploymentMonths) / 12
+  
+  // Calculate net income difference using UK tax calculator
+  const baselineNet = calculateNetSalary(baselineGrossSalary)
+  const scenarioNet = calculateNetSalary(scenarioGrossSalary)
+  const annualNetDifference = scenarioNet - baselineNet  // Negative for income loss
+  const monthlyContribution = annualNetDifference / 12
+  
+  const durationMonths = unemploymentMonths
+  const durationYears = durationMonths / 12
+  const startDate = ensureDate(data.jobLossDate)
+  
+  console.log('[transformJobLoss]', {
+    baselineGrossSalary,
+    baselineNet,
+    unemploymentMonths,
+    scenarioGrossSalary,
+    scenarioNet,
+    annualNetDifference,
+    monthlyContribution
+  })
+  
+  // Note: Severance pay should be configured as a separate "Windfall" event
+  // Use RECURRING_EXPENSE archetype to properly model income loss as an outflow
+  const monthlyLoss = Math.abs(monthlyContribution)  // Convert negative to positive for expense
+  
+  return {
+    id: `event-${EventType.JOB_LOSS}`,
+    name: EventType.JOB_LOSS,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: monthlyLoss * durationYears * 12,  // Total loss over period
+    monthlyContribution: monthlyLoss,  // Positive value for expense archetype
+    targetDate: new Date(startDate.getTime() + durationYears * 365 * 24 * 60 * 60 * 1000),
+    startDate: startDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    cashFlowBehavior: 'sinking_expense' as const,
+    performance: 0,
+    startingAmount: 0
+  }
+}
+
+function transformLargeCashInflow(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // Enhanced windfall: handles various cash inflows with UK tax treatment
+  // Source types: Asset Sale, Employment Bonus, Lottery/Gift, Inheritance, Life Insurance
+  const sourceType = data.sourceType || 'lottery'
+  const grossAmount = ensureNumber(data.amount, 50000)
+  const startDate = ensureDate(data.inflowDate || data.windfallDate)
+  
+  let netAmount = grossAmount
+  let taxAmount = 0
+  let taxType = 'None'
+  
+  // Apply UK-specific taxes based on source type
+  if (sourceType === 'asset_sale') {
+    // Capital Gains Tax: 20% on gains above £3,000 annual exemption
+    const purchasePrice = ensureNumber(data.purchasePrice, grossAmount * 0.7) // Default assumes 30% gain
+    const capitalGain = Math.max(0, grossAmount - purchasePrice)
+    const CGT_EXEMPTION = 3000
+    const CGT_RATE = 0.20
+    
+    const taxableGain = Math.max(0, capitalGain - CGT_EXEMPTION)
+    taxAmount = taxableGain * CGT_RATE
+    netAmount = grossAmount - taxAmount
+    taxType = 'Capital Gains Tax'
+  } else if (sourceType === 'employment_bonus') {
+    // Employment bonus: Subject to income tax + NI at marginal rates
+    const baselineGrossSalary = ensureNumber(profile?.currentSalary, 75000)
+    const totalIncome = baselineGrossSalary + grossAmount
+    
+    // Calculate tax on baseline vs baseline + bonus
+    const baselineNet = calculateNetSalary(baselineGrossSalary)
+    const withBonusNet = calculateNetSalary(totalIncome)
+    
+    // Tax is the difference between what you'd get vs what you actually get
+    netAmount = grossAmount - (grossAmount - (withBonusNet - baselineNet))
+    taxAmount = grossAmount - netAmount
+    taxType = 'Income Tax + NI'
+  } else {
+    // Lottery, Gift, Inheritance, Life Insurance: Tax-free in the UK
+    netAmount = grossAmount
+    taxAmount = 0
+    taxType = 'Tax-free'
+  }
+  
+  return {
+    id: `event-${EventType.LARGE_CASH_INFLOW}`,
+    name: EventType.LARGE_CASH_INFLOW,
+    archetype: ScenarioArchetype.ONE_OFF_INFLOW,  // One-time cash inflow
+    targetAmount: netAmount,
+    targetDate: startDate,
+    startDate: startDate,
+    duration: 0,
+    frequency: 'monthly' as const,
+    performance: 0,
+    startingAmount: netAmount,  // Amount received into account
+    assumptions: {
+      sourceType: sourceType,
+      grossAmount: grossAmount,
+      taxAmount: taxAmount,
+      taxType: taxType,
+      netAmount: netAmount
+    }
+  }
+}
+
+function transformUnexpectedMedicalExpense(data: Record<string, any>): ScenarioModifier {
+  // One-time expense (negative cash outflow)
+  const targetAmount = ensureNumber(data.totalCost, 8000)
+  const startDate = ensureDate(data.expenseDate)
+  
+  return {
+    id: `event-${EventType.UNEXPECTED_MEDICAL_EXPENSE}`,
+    name: EventType.UNEXPECTED_MEDICAL_EXPENSE,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    targetAmount: targetAmount,
+    targetDate: startDate,
+    startDate: startDate,
+    duration: 1,
+    frequency: 'monthly' as const,
+    performance: 0,
+    startingAmount: 0
+  }
+}
+
+function transformUnexpectedRepair(data: Record<string, any>): ScenarioModifier {
+  // One-time repair expense (negative cash outflow)
+  const targetAmount = ensureNumber(data.repairCost, 2500)
+  const startDate = ensureDate(data.repairDate)
+  
+  return {
+    id: `event-${EventType.UNEXPECTED_REPAIR}`,
+    name: EventType.UNEXPECTED_REPAIR,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    targetAmount: targetAmount,
+    targetDate: startDate,
+    startDate: startDate,
+    duration: 1,
+    frequency: 'monthly' as const,
+    performance: 0,
+    startingAmount: 0
+  }
+}
+
+// ============= ADDITIONAL ACTION TRANSFORMERS =============
+
+function transformPortfolioSwitch(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // Switch Future Allocation
+  // Redirects allocation percentage from source to destination
+  // Only affects NEW surplus cash going forward, doesn't touch existing balances
+  const startDate = ensureDate(data.startDate)
+  const fromAccountType = data.fromAccountType || 'default_savings'
+  const toAccountType = data.toAccountType || 'isa'
+  const rawPercentage = ensureNumber(data.allocationPercentage, 100)
+  const redirectPercentage = Math.max(0, Math.min(100, rawPercentage))
+  
+  // Map UI account types to AssetClass enum values (camelCase!)
+  const assetClassMap: Record<string, string> = {
+    'default_savings': 'defaultSavings',  // AssetClass.DEFAULT_SAVINGS (0% Cash Savings)
+    'general_investment': 'generalInvestment',  // AssetClass.GENERAL_INVESTMENT (GIA)
+    'isa': 'equities',  // AssetClass.EQUITIES (ISA wrapper)
+    'pension': 'pension',  // AssetClass.PENSION
+    'hysa': 'hysa'  // AssetClass.HYSA
+  }
+  
+  const fromAssetClass = assetClassMap[fromAccountType] || 'defaultSavings'
+  const toAssetClass = assetClassMap[toAccountType] || 'equities'
+  
+  // Get baseline allocation from profile (defaults: 10% equities, 5% pension, remainder to defaultSavings)
+  const baselineAllocation = profile?.allocationConfig || { equities: 10, pension: 5 }
+  
+  // Calculate the total allocated percentage
+  const totalAllocated = Object.values(baselineAllocation).reduce((sum: number, val: any) => sum + (typeof val === 'number' ? val : 0), 0)
+  const remainder = Math.max(0, 100 - totalAllocated)  // Remainder goes to defaultSavings
+  
+  // Get baseline percentages (defaultSavings is implicit remainder)
+  let baselineFrom = baselineAllocation[fromAssetClass] as number || 0
+  if (fromAssetClass === 'defaultSavings') {
+    baselineFrom = remainder  // defaultSavings gets the remainder
+  }
+  
+  let baselineTo = baselineAllocation[toAssetClass] as number || 0
+  if (toAssetClass === 'defaultSavings') {
+    baselineTo = remainder  // defaultSavings gets the remainder (shouldn't happen in practice)
+  }
+  
+  // Calculate the delta: redirect X% from source to destination
+  const deltaPercentage = Math.min(redirectPercentage, baselineFrom)  // Can't take more than source has
+  
+  // New allocation: subtract from source, add to destination
+  const automatedAllocationPercentages: Record<string, number> = {
+    [fromAssetClass]: Math.max(0, baselineFrom - deltaPercentage),  // Reduce source
+    [toAssetClass]: baselineTo + deltaPercentage                    // Increase destination
+  }
+  
+  return {
+    id: `action-${ActionType.PORTFOLIO_SWITCH}`,
+    name: ActionType.PORTFOLIO_SWITCH,
+    archetype: ScenarioArchetype.ALLOCATION_CONFIG_CHANGE,
+    targetAmount: 0,  // No direct cash flow - modifies allocation config
+    targetDate: new Date(2099, 11, 31),  // Permanent change
+    startDate: startDate,
+    duration: 0,
+    frequency: 'monthly' as const,
+    performance: 0,
+    assumptions: {
+      fromAccountType: fromAccountType,
+      toAccountType: toAccountType,
+      allocationPercentage: redirectPercentage,
+      baselineFrom: baselineFrom,
+      baselineTo: baselineTo,
+      deltaPercentage: deltaPercentage,
+      automatedAllocationPercentages: automatedAllocationPercentages,
+      description: `Switch ${deltaPercentage}% allocation from ${fromAccountType} to ${toAccountType}`
+    }
+  }
+}
+
+function transformTransferPortfolioBalance(data: Record<string, any>): ScenarioModifier[] {
+  // Transfer Existing Portfolio Balance
+  // One-time transfer of existing money from one account to another
+  // Returns TWO modifiers: withdrawal from source + contribution to destination
+  const transferAmount = ensureNumber(data.transferAmount, 10000)
+  const startDate = ensureDate(data.startDate)
+  const fromAccountType = data.fromAccountType || 'default_savings'
+  const toAccountType = data.toAccountType || 'isa'
+  
+  // Map UI account types to asset classes for intelligent account matching
+  const assetClassMap: Record<string, string> = {
+    'default_savings': 'DEFAULT_SAVINGS',
+    'general_investment': 'GENERAL_INVESTMENT',
+    'isa': 'EQUITIES',
+    'pension': 'PENSION',
+    'hysa': 'HYSA'
+  }
+  
+  const fromAssetClass = assetClassMap[fromAccountType] || 'DEFAULT_SAVINGS'
+  const toAssetClass = assetClassMap[toAccountType] || 'EQUITIES'
+  
+  // Display names for user feedback
+  const displayNames: Record<string, string> = {
+    'default_savings': 'Cash Savings',
+    'general_investment': 'General Investment Account (GIA)',
+    'isa': 'ISA',
+    'pension': 'Pension',
+    'hysa': 'High-Yield Savings (HYSA)'
+  }
+  
+  // Default return rates by account type
+  const returnRates: Record<string, number> = {
+    'default_savings': 0,
+    'general_investment': 7,
+    'isa': 7,
+    'pension': 6,
+    'hysa': 4.5
+  }
+  
+  const toAccountReturn = returnRates[toAccountType] || 7
+  
+  // Modifier 1: Withdraw from source account (uses asset class, not hardcoded name)
+  const withdrawalModifier: ScenarioModifier = {
+    id: `action-${ActionType.TRANSFER_PORTFOLIO_BALANCE}-withdrawal`,
+    name: ActionType.TRANSFER_PORTFOLIO_BALANCE,
+    archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_WITHDRAWAL,
+    targetAmount: transferAmount,
+    targetDate: startDate,
+    startDate: startDate,
+    duration: 0,
+    frequency: 'monthly' as const,
+    performance: 0,
+    linkedAccountName: undefined,  // Don't use name - use asset class instead
+    assumptions: {
+      transferType: 'withdrawal',
+      sourceAccount: fromAccountType,
+      sourceAssetClass: fromAssetClass,  // New: asset class for intelligent matching
+      destinationAccount: toAccountType,
+      destinationAssetClass: toAssetClass,  // New: for consistency
+      transferAmount: transferAmount,
+      isTransfer: true,  // Flag to skip cash flow (balance-only operation)
+      displayName: `Transfer £${transferAmount.toLocaleString()} from ${displayNames[fromAccountType] || 'savings'} to ${displayNames[toAccountType] || 'investment'}`
+    }
+  }
+  
+  // Modifier 2: Contribute to destination account
+  const contributionModifier: ScenarioModifier = {
+    id: `action-${ActionType.TRANSFER_PORTFOLIO_BALANCE}-contribution`,
+    name: ActionType.TRANSFER_PORTFOLIO_BALANCE,
+    archetype: ScenarioArchetype.ONE_OFF_ACCOUNT_CONTRIBUTION,
+    targetAmount: transferAmount,
+    targetDate: startDate,
+    startDate: startDate,
+    duration: 0,
+    frequency: 'monthly' as const,
+    performance: toAccountReturn,
+    startingAmount: transferAmount,
+    linkedAccountName: displayNames[toAccountType],  // Display name for new account
+    assumptions: {
+      transferType: 'contribution',
+      sourceAccount: fromAccountType,
+      sourceAssetClass: fromAssetClass,
+      destinationAccount: toAccountType,
+      destinationAssetClass: toAssetClass,
+      transferAmount: transferAmount,
+      isTransfer: true,  // Flag to skip cash flow (balance-only operation)
+      description: `Transfer £${transferAmount.toLocaleString()} from ${displayNames[fromAccountType] || 'savings'} to ${displayNames[toAccountType] || 'investment'}`
+    }
+  }
+  
+  return [withdrawalModifier, contributionModifier]
+}
+
+function transformAutoRebalancing(data: Record<string, any>): ScenarioModifier {
+  // Task 20: Enable automatic portfolio rebalancing
+  // Rebalances portfolio on selected frequency to maintain target allocation
+  // Improves risk-adjusted returns by 0.5-1% annually
+  const startDate = ensureDate(data.startDate)
+  const frequency = data.rebalanceFrequency || 'annually'
+  
+  // Auto-rebalancing improves returns by selling high and buying low
+  const performanceBoost = frequency === 'quarterly' ? 0.75 : 0.5  // Quarterly slightly better
+  
+  return {
+    id: `action-${ActionType.AUTO_REBALANCING}`,
+    name: ActionType.AUTO_REBALANCING,
+    archetype: ScenarioArchetype.INTEREST_RATE_CHANGE,
+    targetAmount: 0,  // No cash flow impact
+    targetDate: startDate,
+    startDate: startDate,
+    performance: performanceBoost,  // Small boost to effective returns
+    linkedAccountName: 'General Investment Account',  // Must match exact account name
+    assumptions: {
+      rebalancingEnabled: true,
+      frequency: frequency,
+      performanceBoost: performanceBoost,
+      description: 'Maintains target allocation by periodically buying low and selling high'
+    }
+  }
+}
+
+function transformRefinanceDebt(data: Record<string, any>): ScenarioModifier {
+  // Refinance debt: changes interest rate on a specific debt account from refinance date forward
+  // The simulator will detect this modifier and apply the new rate to the specified account
+  const linkedAccountName = data.linkedAccountName || 'Mortgage'  // Default to Mortgage if not specified
+  const oldRate = ensureNumber(data.currentRate, 4.5)
+  const newRate = ensureNumber(data.newRate, 3.5)
+  const startDate = ensureDate(data.startDate)
+  const rateDifference = oldRate - newRate  // Positive = savings
+  
+  return {
+    id: `action-${ActionType.REFINANCE_DEBT}`,
+    name: ActionType.REFINANCE_DEBT,
+    archetype: ScenarioArchetype.INTEREST_RATE_CHANGE,  // Signals rate change to simulator
+    linkedAccountName: linkedAccountName,  // Which debt account to refinance
+    targetAmount: 0,  // No upfront cash impact
+    targetDate: startDate,
+    startDate: startDate,
+    performance: newRate,  // New interest rate (annual %)
+    assumptions: {
+      accountName: linkedAccountName,
+      oldInterestRate: oldRate,
+      newInterestRate: newRate,
+      rateDifference: rateDifference,
+      refinanceDate: startDate
+    }
+  }
+}
+
+function transformAcceleratedRepayment(data: Record<string, any>): ScenarioModifier {
+  // Accelerated debt repayment: extra monthly payments to existing debt account
+  // Uses RECURRING_EXPENSE archetype + linkedAccountName + monthlyContribution for simulator to recognize as debt overpayment
+  const extraMonthlyPayment = ensureNumber(data.extraMonthlyPayment, 250)
+  const durationYears = ensureNumber(data.durationYears, 2)
+  const startDate = ensureDate(data.startDate)
+  const linkedAccountName = data.linkedAccountName || 'Mortgage'  // Default to Mortgage
+  
+  const targetDate = new Date(startDate)
+  targetDate.setFullYear(targetDate.getFullYear() + durationYears)
+  
+  const totalExtraPayment = extraMonthlyPayment * 12 * durationYears
+  
+  return {
+    id: `action-${ActionType.ACCELERATED_REPAYMENT}`,
+    name: ActionType.ACCELERATED_REPAYMENT,
+    scenarioId: ActionType.ACCELERATED_REPAYMENT,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,  // Recurring monthly overpayments to debt account
+    targetAmount: totalExtraPayment,  // Total extra payments over duration
+    monthlyContribution: extraMonthlyPayment,  // Extra payment amount per month (simulator applies to debt account)
+    amountInterpretation: 'monthly' as const,  // CRITICAL: tells simulator to use monthlyContribution instead of targetAmount/duration
+    linkedAccountName: linkedAccountName,  // Which debt account to pay down (exact or substring match)
+    targetDate: targetDate,
+    startDate: startDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    assumptions: {
+      linkedAccountName: linkedAccountName,
+      extraMonthlyPayment: extraMonthlyPayment,
+      durationYears: durationYears,
+      totalExtraPayment: totalExtraPayment,
+      note: 'Recurring overpayments to existing debt account, reduces balance faster and saves on interest'
+    }
+  }
+}
+
+function transformApplyMortgage(data: Record<string, any>): ScenarioModifier[] {
+  // Multi-modifier loan transformer: cash inflow + debt account + monthly payments
+  // Supports mortgages, car loans, personal loans with proper amortization
+  const loanType = data.loanType || 'mortgage'  // mortgage, car, personal
+  
+  // Loan-type-specific defaults
+  const loanDefaults = {
+    mortgage: { amount: 200000, term: 25, rate: 4.5 },
+    car: { amount: 15000, term: 5, rate: 6.0 },
+    personal: { amount: 10000, term: 3, rate: 7.5 }
+  }
+  const defaults = loanDefaults[loanType as keyof typeof loanDefaults] || loanDefaults.mortgage
+  
+  const loanAmount = ensureNumber(data.loanAmount || data.mortgageAmount, defaults.amount)
+  const termYears = ensureNumber(data.termYears, defaults.term)
+  const interestRate = ensureNumber(data.interestRate, defaults.rate)
+  const startDate = ensureDate(data.applicationDate || data.startDate)
+  
+  // Use loan calculator for accurate amortization (imported from sim-core)
+  // Note: Will be imported from sim-core/utils/loanCalculator in next step
+  const monthlyRate = interestRate / 100 / 12
+  const numPayments = termYears * 12
+  const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1)
+  
+  const endDate = new Date(startDate)
+  endDate.setFullYear(endDate.getFullYear() + termYears)
+  
+  // Generate account name based on loan type
+  const accountName = loanType === 'car' 
+    ? `Car Loan £${(loanAmount / 1000).toFixed(0)}k`
+    : loanType === 'personal'
+    ? `Personal Loan £${(loanAmount / 1000).toFixed(0)}k`
+    : `Mortgage £${(loanAmount / 1000).toFixed(0)}k`
+  
+  const scenarioId = `action-${ActionType.APPLY_MORTGAGE}`
+  
+  return [
+    // 1. Cash inflow when loan is disbursed (ONE_OFF_INFLOW creates positive cash flow)
+    {
+      id: `${scenarioId}-disbursement`,
+      name: `${accountName} - Loan Disbursement`,
+      scenarioId: scenarioId,
+      archetype: ScenarioArchetype.ONE_OFF_INFLOW,
+      targetAmount: loanAmount,  // Total cash received
+      targetDate: startDate,
+      startDate: startDate,
+      assumptions: {
+        loanAmount,
+        loanType,
+        note: 'Loan proceeds deposited into current account as one-time cash inflow'
+      }
+    },
+    // 2. Create debt account with interest + monthly payments
+    {
+      id: `${scenarioId}-debt`,
+      name: accountName,
+      scenarioId: scenarioId,
+      archetype: ScenarioArchetype.NEW_DEBT,
+      targetAmount: loanAmount,  // Debt principal (will be stored as negative)
+      monthlyContribution: monthlyPayment,  // Monthly payment reduces debt
+      contributionStopAfterPeriods: numPayments,  // Stop payments after loan is repaid
+      targetDate: endDate,
+      startDate: startDate,
+      duration: termYears,
+      frequency: 'monthly' as const,
+      performance: interestRate,  // Interest rate
+      assumptions: {
+        accountName,
+        loanAmount,
+        termYears,
+        interestRate,
+        monthlyPayment: Math.round(monthlyPayment * 100) / 100,
+        totalInterest: Math.round((monthlyPayment * numPayments - loanAmount) * 100) / 100,
+        loanType,
+        numPayments,
+        note: 'Debt account with negative balance, interest accrues, monthly payments reduce principal'
+      }
+    }
+  ]
+}
+
+function transformApplyStudentLoan(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // UK Student Loan with income-contingent repayment
+  // Payment = 9% of (salary - threshold), varies with plan type
+  const loanAmount = ensureNumber(data.loanAmount, 45000)
+  const startDate = ensureDate(data.startDate)
+  const planType = data.studentLoanPlan || 'plan2'  // plan1, plan2, plan4, plan5
+  
+  // Plan-specific details from loanCalculator
+  const planDetails = {
+    plan1: { threshold: 22015, writeOffYears: 25, writeOffAge: 65, rpiMargin: 1.5 },
+    plan2: { threshold: 27295, writeOffYears: 30, writeOffAge: null, rpiMargin: 3.0 },
+    plan4: { threshold: 27660, writeOffYears: 30, writeOffAge: null, rpiMargin: 1.0 },
+    plan5: { threshold: 25000, writeOffYears: 40, writeOffAge: null, rpiMargin: 3.0 }
+  }
+  
+  const plan = planDetails[planType as keyof typeof planDetails] || planDetails.plan2
+  
+  // Calculate estimated first-year payment based on current salary (if available)
+  const currentSalary = ensureNumber(profile?.currentSalary, 30000)
+  const estimatedAnnualPayment = Math.max(0, (currentSalary - plan.threshold) * 0.09)
+  const estimatedMonthlyPayment = estimatedAnnualPayment / 12
+  
+  // Write-off date: earlier of (start + years) or age 65
+  const writeOffDate = new Date(startDate)
+  if (plan.writeOffYears) {
+    writeOffDate.setFullYear(writeOffDate.getFullYear() + plan.writeOffYears)
+  }
+  
+  const scenarioId = `action-${ActionType.APPLY_STUDENT_LOAN}`
+  
+  return {
+    id: scenarioId,
+    name: `Student Loan (${planType.toUpperCase()})`,
+    scenarioId: scenarioId,
+    archetype: ScenarioArchetype.STUDENT_LOAN,
+    targetAmount: loanAmount,  // Outstanding loan balance
+    monthlyContribution: 0,  // Dynamic - calculated each period based on salary
+    targetDate: writeOffDate,  // Write-off date
+    startDate: startDate,
+    duration: plan.writeOffYears || 30,
+    frequency: 'monthly' as const,
+    performance: 6.5,  // Placeholder - actual rate is RPI + margin, calculated dynamically
+    assumptions: {
+      planType,
+      loanAmount,
+      threshold: plan.threshold,
+      writeOffYears: plan.writeOffYears,
+      writeOffAge: plan.writeOffAge,
+      rpiMargin: plan.rpiMargin,
+      estimatedMonthlyPayment: Math.round(estimatedMonthlyPayment * 100) / 100,
+      estimatedAnnualPayment: Math.round(estimatedAnnualPayment * 100) / 100,
+      currentSalary,
+      note: `Income-contingent: 9% of salary above £${plan.threshold.toLocaleString()}, written off after ${plan.writeOffYears} years${plan.writeOffAge ? ` or at age ${plan.writeOffAge}` : ''}`
+    }
+  }
+}
+
+function transformOneOffPensionWithdrawal(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // One-time withdrawal from Pension or ISA
+  const withdrawalAmount = ensureNumber(data.withdrawalAmount, 10000)
+  const withdrawalDate = ensureDate(data.withdrawalDate)
+  const accountType = (data.accountType as string || 'pension').toLowerCase()
+  const currentAge = ensureNumber(profile?.currentAge, 55)
+  
+  // ISA: Completely tax-free withdrawals at any age
+  if (accountType === 'isa') {
+    return {
+      id: `action-${ActionType.ONE_OFF_PENSION_WITHDRAWAL}`,
+      name: ActionType.ONE_OFF_PENSION_WITHDRAWAL,
+      archetype: ScenarioArchetype.ONE_OFF_INFLOW,
+      targetAmount: withdrawalAmount,
+      startingAmount: withdrawalAmount,
+      targetDate: withdrawalDate,
+      startDate: withdrawalDate,
+      duration: 0,
+      assumptions: {
+        accountType: 'ISA',
+        withdrawalAmount: withdrawalAmount,
+        taxAmount: 0,
+        netAmount: withdrawalAmount,
+        note: 'ISA withdrawals are 100% tax-free at any age. Can be replaced within same tax year.'
+      }
+    }
+  }
+  
+  // Pension: Route through proper UK pension withdrawal system
+  // This ensures 25% lifetime allowance is tracked correctly across all withdrawals
+  const MIN_PENSION_AGE = 55
+  if (currentAge < MIN_PENSION_AGE) {
+    console.warn(`Pension withdrawal at age ${currentAge} is below minimum age ${MIN_PENSION_AGE}`)
+  }
+  
+  return {
+    id: `action-${ActionType.ONE_OFF_PENSION_WITHDRAWAL}`,
+    name: ActionType.ONE_OFF_PENSION_WITHDRAWAL,
+    archetype: ScenarioArchetype.ONE_OFF_INFLOW,
+    targetAmount: withdrawalAmount,  // Gross amount - net calculated by pension system
+    startingAmount: withdrawalAmount,
+    targetDate: withdrawalDate,
+    startDate: withdrawalDate,
+    duration: 0,
+    pensionWithdrawalRequest: {
+      grossAmount: withdrawalAmount,
+      isRecurring: false
+    },
+    assumptions: {
+      accountType: 'Pension',
+      withdrawalAmount: withdrawalAmount,
+      currentAge: currentAge,
+      note: '25% of total pension pot (at first access) is tax-free lifetime allowance. Remaining withdrawals taxed at marginal rate. MPAA applies (£10k contribution limit).'
+    }
+  }
+}
+
+function transformRecurringPensionWithdrawal(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // Regular monthly withdrawals from Pension or ISA
+  const monthlyAmount = ensureNumber(data.monthlyAmount, 2000)
+  const durationYears = ensureNumber(data.durationYears, 20)
+  const startDate = ensureDate(data.startDate)
+  const accountType = (data.accountType as string || 'pension').toLowerCase()
+  const currentAge = ensureNumber(profile?.currentAge, 55)
+  
+  const targetDate = new Date(startDate)
+  targetDate.setFullYear(targetDate.getFullYear() + durationYears)
+  
+  // ISA: Tax-free recurring withdrawals
+  if (accountType === 'isa') {
+    const annualWithdrawal = monthlyAmount * 12
+    return {
+      id: `action-${ActionType.RECURRING_PENSION_WITHDRAWAL}`,
+      name: ActionType.RECURRING_PENSION_WITHDRAWAL,
+      archetype: ScenarioArchetype.RECURRING_ACCOUNT_WITHDRAWAL,
+      targetAmount: annualWithdrawal * durationYears,
+      monthlyContribution: monthlyAmount,
+      targetDate: targetDate,
+      startDate: startDate,
+      duration: durationYears,
+      frequency: 'monthly' as const,
+      assumptions: {
+        accountType: 'ISA',
+        monthlyGross: monthlyAmount,
+        annualGross: annualWithdrawal,
+        annualNet: annualWithdrawal,
+        monthlyNet: monthlyAmount,
+        durationYears: durationYears,
+        totalGross: annualWithdrawal * durationYears,
+        totalNet: annualWithdrawal * durationYears,
+        note: 'ISA withdrawals are 100% tax-free. No age restrictions.'
+      }
+    }
+  }
+  
+  // Pension: Route through proper UK pension withdrawal system
+  // This ensures 25% lifetime allowance is tracked correctly across all withdrawals
+  const MIN_PENSION_AGE = 55
+  if (currentAge < MIN_PENSION_AGE) {
+    console.warn(`Pension withdrawal at age ${currentAge} is below minimum age ${MIN_PENSION_AGE}`)
+  }
+  
+  const annualWithdrawal = monthlyAmount * 12
+  
+  return {
+    id: `action-${ActionType.RECURRING_PENSION_WITHDRAWAL}`,
+    name: ActionType.RECURRING_PENSION_WITHDRAWAL,
+    archetype: ScenarioArchetype.RECURRING_ACCOUNT_WITHDRAWAL,
+    targetAmount: annualWithdrawal * durationYears,  // Gross amount - net calculated by pension system
+    monthlyContribution: monthlyAmount,  // Gross monthly withdrawal
+    targetDate: targetDate,
+    startDate: startDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    amountInterpretation: 'monthly' as const,
+    pensionWithdrawalRequest: {
+      grossAmount: monthlyAmount,
+      isRecurring: true
+    },
+    assumptions: {
+      accountType: 'Pension',
+      monthlyGross: monthlyAmount,
+      annualGross: annualWithdrawal,
+      durationYears: durationYears,
+      totalGross: annualWithdrawal * durationYears,
+      currentAge: currentAge,
+      note: '25% of total pension pot (at first access) is tax-free lifetime allowance shared across all withdrawals. Remaining withdrawals taxed at marginal rate. MPAA applies (£10k contribution limit).'
+    }
+  }
+}
+
+function transformWithdrawPensionISA(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // DEPRECATED: Legacy ISA-only transformer - redirect to unified transformer
+  // This ensures backward compatibility for existing scenarios while using the new unified logic
+  console.log('[MIGRATION] Redirecting legacy WITHDRAW_PENSION_ISA to unified ONE_OFF with accountType=isa')
+  return transformOneOffPensionWithdrawal({ ...data, accountType: 'isa' }, profile)
+}
+
+// ============= ADDITIONAL EVENT TRANSFORMERS =============
+
+function transformPermanentIncomeReduction(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // Direct ScenarioModifier creation: permanent reduction in income (salary cut, reduced hours)
+  const baselineGrossSalary = ensureNumber(profile?.currentSalary, 75000)
+  const monthlyReduction = ensureNumber(data.monthlyReduction, 1000)
+  const annualReduction = monthlyReduction * 12
+  const scenarioGrossSalary = Math.max(0, baselineGrossSalary - annualReduction)
+  const startDate = ensureDate(data.reductionDate)
+  
+  // Calculate net income difference using UK tax calculator
+  const baselineNet = calculateNetSalary(baselineGrossSalary)
+  const scenarioNet = calculateNetSalary(scenarioGrossSalary)
+  const annualNetDifference = scenarioNet - baselineNet  // Negative for income reduction
+  const monthlyNetDifference = annualNetDifference / 12
+  
+  // Permanent reduction until retirement (assume 30 years)
+  const durationYears = 30
+  const targetDate = new Date(startDate)
+  targetDate.setFullYear(targetDate.getFullYear() + durationYears)
+  
+  // Use RECURRING_EXPENSE archetype to properly model income loss as an outflow
+  const monthlyLoss = Math.abs(monthlyNetDifference)  // Convert negative to positive for expense
+  
+  return {
+    id: `event-${EventType.PERMANENT_INCOME_REDUCTION}`,
+    name: EventType.PERMANENT_INCOME_REDUCTION,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: monthlyLoss * 12 * durationYears,  // Total loss over period
+    amountInterpretation: 'monthly' as const,
+    monthlyContribution: monthlyLoss,  // Positive value for expense archetype
+    targetDate: targetDate,
+    startDate: startDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    cashFlowBehavior: 'sinking_expense' as const,
+    assumptions: {
+      baselineGrossSalary: baselineGrossSalary,
+      scenarioGrossSalary: scenarioGrossSalary,
+      baselineNet: baselineNet,
+      scenarioNet: scenarioNet,
+      monthlyReduction: monthlyReduction
+    }
+  }
+}
+
+function transformTemporaryIncomeInterruption(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // Direct ScenarioModifier creation: temporary income reduction (sabbatical, reduced hours)
+  const baselineGrossSalary = ensureNumber(profile?.currentSalary, 75000)
+  const monthlyIncomeLost = ensureNumber(data.monthlyIncomeLost, 2000)
+  const annualReduction = monthlyIncomeLost * 12
+  const scenarioGrossSalary = Math.max(0, baselineGrossSalary - annualReduction)
+  const durationMonths = ensureNumber(data.durationMonths, 3)
+  const startDate = ensureDate(data.interruptionDate)
+  
+  // Calculate net income difference using UK tax calculator
+  const baselineNet = calculateNetSalary(baselineGrossSalary)
+  const scenarioNet = calculateNetSalary(scenarioGrossSalary)
+  const annualNetDifference = scenarioNet - baselineNet  // Negative for income loss
+  const monthlyNetDifference = annualNetDifference / 12
+  
+  const durationYears = durationMonths / 12
+  const targetDate = new Date(startDate)
+  targetDate.setMonth(targetDate.getMonth() + durationMonths)
+  
+  // Use RECURRING_EXPENSE archetype to properly model income loss as an outflow
+  const monthlyLoss = Math.abs(monthlyNetDifference)  // Convert negative to positive for expense
+  
+  return {
+    id: `event-${EventType.TEMPORARY_INCOME_INTERRUPTION}`,
+    name: EventType.TEMPORARY_INCOME_INTERRUPTION,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: monthlyLoss * durationMonths,  // Total loss over period
+    amountInterpretation: 'monthly' as const,
+    monthlyContribution: monthlyLoss,  // Positive value for expense archetype
+    targetDate: targetDate,
+    startDate: startDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    cashFlowBehavior: 'sinking_expense' as const,
+    assumptions: {
+      baselineGrossSalary: baselineGrossSalary,
+      scenarioGrossSalary: scenarioGrossSalary,
+      baselineNet: baselineNet,
+      scenarioNet: scenarioNet,
+      monthlyIncomeLost: monthlyIncomeLost,
+      durationMonths: durationMonths
+    }
+  }
+}
+
+function transformCashLumpSum(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: one-time cash receipt (gift, inheritance, bonus)
+  const amount = ensureNumber(data.amount, 10000)
+  const receiptDate = ensureDate(data.receiptDate)
+  
+  return {
+    id: `event-${EventType.CASH_LUMP_SUM_RECEIVED}`,
+    name: EventType.CASH_LUMP_SUM_RECEIVED,
+    archetype: ScenarioArchetype.ONE_OFF_INFLOW,  // One-time cash receipt
+    targetAmount: amount,  // One-time cash receipt
+    startingAmount: amount,  // Amount received into account
+    targetDate: receiptDate,
+    startDate: receiptDate,
+    assumptions: {
+      sourceType: 'gift_inheritance_bonus'
+    }
+  }
+}
+
+function transformFamilyMemberIllness(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: recurring care costs for ill family member
+  const monthlyCareCosts = ensureNumber(data.monthlyCareCosts, 1500)
+  const durationMonths = ensureNumber(data.durationMonths, 24)
+  const startDate = ensureDate(data.diagnosisDate)
+  
+  const durationYears = durationMonths / 12
+  const targetDate = new Date(startDate)
+  targetDate.setMonth(targetDate.getMonth() + durationMonths)
+  
+  const totalCosts = monthlyCareCosts * durationMonths
+  
+  return {
+    id: `event-${EventType.FAMILY_MEMBER_ILLNESS}`,
+    name: EventType.FAMILY_MEMBER_ILLNESS,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: totalCosts,  // Total care costs
+    monthlyContribution: -monthlyCareCosts,  // Monthly expense (negative)
+    targetDate: targetDate,
+    startDate: startDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    assumptions: {
+      monthlyCareCosts: monthlyCareCosts,
+      durationMonths: durationMonths
+    }
+  }
+}
+
+function transformLifeInsurancePayout(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: large one-time life insurance payout
+  const payoutAmount = ensureNumber(data.payoutAmount, 200000)
+  const payoutDate = ensureDate(data.payoutDate)
+  
+  return {
+    id: `event-${EventType.LIFE_INSURANCE_PAYOUT}`,
+    name: EventType.LIFE_INSURANCE_PAYOUT,
+    archetype: ScenarioArchetype.ONE_OFF_INFLOW,  // One-time large payout
+    targetAmount: payoutAmount,  // One-time large payout
+    startingAmount: payoutAmount,  // Amount received into account
+    targetDate: payoutDate,
+    startDate: payoutDate,
+    assumptions: {
+      payoutAmount: payoutAmount,
+      eventType: 'life_insurance'
+    }
+  }
+}
+
+function transformDisabilityLongTerm(data: Record<string, any>, profile?: any): ScenarioModifier {
+  // Direct ScenarioModifier creation: long-term disability with income loss
+  const baselineGrossSalary = ensureNumber(profile?.currentSalary, 75000)
+  const monthlyIncomeLost = ensureNumber(data.monthlyIncomeLost, 2000)
+  const annualReduction = monthlyIncomeLost * 12
+  const scenarioGrossSalary = Math.max(0, baselineGrossSalary - annualReduction)
+  const startDate = ensureDate(data.diagnosisDate)
+  
+  // Calculate net income difference using UK tax calculator
+  const baselineNet = calculateNetSalary(baselineGrossSalary)
+  const scenarioNet = calculateNetSalary(scenarioGrossSalary)
+  const annualNetDifference = scenarioNet - baselineNet  // Negative for income loss
+  const monthlyNetDifference = annualNetDifference / 12
+  
+  // Assume until retirement (30 years)
+  const durationYears = 30
+  const targetDate = new Date(startDate)
+  targetDate.setFullYear(targetDate.getFullYear() + durationYears)
+  
+  // Use RECURRING_EXPENSE archetype to properly model income loss as an outflow
+  const monthlyLoss = Math.abs(monthlyNetDifference)  // Convert negative to positive for expense
+  
+  return {
+    id: `event-${EventType.DISABILITY_LONG_TERM}`,
+    name: EventType.DISABILITY_LONG_TERM,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: monthlyLoss * 12 * durationYears,  // Total loss over period
+    amountInterpretation: 'monthly' as const,
+    monthlyContribution: monthlyLoss,  // Positive value for expense archetype
+    targetDate: targetDate,
+    startDate: startDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    cashFlowBehavior: 'sinking_expense' as const,
+    assumptions: {
+      baselineGrossSalary: baselineGrossSalary,
+      scenarioGrossSalary: scenarioGrossSalary,
+      baselineNet: baselineNet,
+      scenarioNet: scenarioNet,
+      monthlyIncomeLost: monthlyIncomeLost
+    }
+  }
+}
+
+function transformMarketCrash(data: Record<string, any>): ScenarioModifier[] {
+  // Market crash affects ISAs and General Investment accounts
+  // Uses additive performance decline (reduces annual return rate by X%)
+  const portfolioDeclinePercent = ensureNumber(data.portfolioDeclinePercent, 5)  // Default: -5% annual return reduction
+  const crashDate = ensureDate(data.crashDate)
+  
+  // Return modifiers for each investment account type
+  // The simulator will match these to actual accounts by name
+  return [
+    {
+      id: `event-${EventType.MARKET_CRASH}-isa`,
+      name: EventType.MARKET_CRASH,
+      scenarioId: EventType.MARKET_CRASH,
+      archetype: ScenarioArchetype.INTEREST_RATE_CHANGE,
+      linkedAccountName: 'Private ISA',  // Targets ISA accounts
+      targetAmount: 0,
+      targetDate: crashDate,
+      startDate: crashDate,
+      performance: -portfolioDeclinePercent,  // Additive decline (e.g., 7% → 2%)
+      assumptions: {
+        portfolioDeclinePercent: portfolioDeclinePercent,
+        eventType: 'market_crash',
+        accountType: 'ISA',
+        rebalancingEnabled: true  // Mark as additive (subtract from baseline rate)
+      }
+    },
+    {
+      id: `event-${EventType.MARKET_CRASH}-gia`,
+      name: EventType.MARKET_CRASH,
+      scenarioId: EventType.MARKET_CRASH,
+      archetype: ScenarioArchetype.INTEREST_RATE_CHANGE,
+      linkedAccountName: 'General Investment',  // Targets GIA accounts
+      targetAmount: 0,
+      targetDate: crashDate,
+      startDate: crashDate,
+      performance: -portfolioDeclinePercent,  // Additive decline
+      assumptions: {
+        portfolioDeclinePercent: portfolioDeclinePercent,
+        eventType: 'market_crash',
+        accountType: 'General Investment',
+        rebalancingEnabled: true  // Mark as additive
+      }
+    }
+  ]
+}
+
+function transformMarketBoom(data: Record<string, any>): ScenarioModifier[] {
+  // Market boom affects ISAs and General Investment accounts
+  // Uses additive performance gain (increases annual return rate by X%)
+  const portfolioGainPercent = ensureNumber(data.portfolioGainPercent, 3)  // Default: +3% annual return boost
+  const boomDate = ensureDate(data.boomDate)
+  
+  // Return modifiers for each investment account type
+  return [
+    {
+      id: `event-${EventType.MARKET_BOOM}-isa`,
+      name: EventType.MARKET_BOOM,
+      scenarioId: EventType.MARKET_BOOM,
+      archetype: ScenarioArchetype.INTEREST_RATE_CHANGE,
+      linkedAccountName: 'Private ISA',  // Targets ISA accounts
+      targetAmount: 0,
+      targetDate: boomDate,
+      startDate: boomDate,
+      performance: portfolioGainPercent,  // Additive boost (e.g., 7% → 10%)
+      assumptions: {
+        portfolioGainPercent: portfolioGainPercent,
+        eventType: 'market_boom',
+        accountType: 'ISA',
+        rebalancingEnabled: true  // Mark as additive (add to baseline rate)
+      }
+    },
+    {
+      id: `event-${EventType.MARKET_BOOM}-gia`,
+      name: EventType.MARKET_BOOM,
+      scenarioId: EventType.MARKET_BOOM,
+      archetype: ScenarioArchetype.INTEREST_RATE_CHANGE,
+      linkedAccountName: 'General Investment',  // Targets GIA accounts
+      targetAmount: 0,
+      targetDate: boomDate,
+      startDate: boomDate,
+      performance: portfolioGainPercent,  // Additive boost
+      assumptions: {
+        portfolioGainPercent: portfolioGainPercent,
+        eventType: 'market_boom',
+        accountType: 'General Investment',
+        rebalancingEnabled: true  // Mark as additive
+      }
+    }
+  ]
+}
+
+function transformInterestRateIncrease(data: Record<string, any>): ScenarioModifier[] {
+  // Bank of England rate increase affects savings accounts and mortgages
+  // Uses additive rate change (adds X% to current rate)
+  // User enters percentage directly (e.g., 1 for 1%)
+  const percentageIncrease = ensureNumber(data.percentageIncrease, 1)  // Default: 1%
+  const effectiveDate = ensureDate(data.effectiveDate)
+  
+  // Return modifiers for savings and debt accounts
+  return [
+    {
+      id: `event-${EventType.INTEREST_RATE_INCREASE}-hysa`,
+      name: EventType.INTEREST_RATE_INCREASE,
+      scenarioId: EventType.INTEREST_RATE_INCREASE,
+      archetype: ScenarioArchetype.INTEREST_RATE_CHANGE,
+      linkedAccountName: 'HYSA',  // Targets high-yield savings accounts
+      targetAmount: 0,
+      targetDate: effectiveDate,
+      startDate: effectiveDate,
+      performance: percentageIncrease,  // Additive increase (e.g., 4.5% → 5.5%)
+      assumptions: {
+        percentageIncrease: percentageIncrease,
+        accountType: 'HYSA',
+        rebalancingEnabled: true  // Mark as additive
+      }
+    },
+    {
+      id: `event-${EventType.INTEREST_RATE_INCREASE}-mortgage`,
+      name: EventType.INTEREST_RATE_INCREASE,
+      scenarioId: EventType.INTEREST_RATE_INCREASE,
+      archetype: ScenarioArchetype.INTEREST_RATE_CHANGE,
+      linkedAccountName: 'Mortgage',  // Targets mortgage accounts
+      targetAmount: 0,
+      targetDate: effectiveDate,
+      startDate: effectiveDate,
+      performance: percentageIncrease,  // Additive increase (e.g., 3.5% → 4.5%)
+      assumptions: {
+        percentageIncrease: percentageIncrease,
+        accountType: 'Mortgage',
+        rebalancingEnabled: true  // Mark as additive
+      }
+    }
+  ]
+}
+
+function transformInterestRateDecrease(data: Record<string, any>): ScenarioModifier[] {
+  // Bank of England rate decrease affects savings accounts and mortgages
+  // Uses additive rate change (subtracts X% from current rate)
+  // User enters percentage directly (e.g., 0.5 for 0.5%)
+  const percentageDecrease = ensureNumber(data.percentageDecrease, 0.5)  // Default: 0.5%
+  const effectiveDate = ensureDate(data.effectiveDate)
+  
+  // Return modifiers for savings and debt accounts
+  return [
+    {
+      id: `event-${EventType.INTEREST_RATE_DECREASE}-hysa`,
+      name: EventType.INTEREST_RATE_DECREASE,
+      scenarioId: EventType.INTEREST_RATE_DECREASE,
+      archetype: ScenarioArchetype.INTEREST_RATE_CHANGE,
+      linkedAccountName: 'HYSA',  // Targets high-yield savings accounts
+      targetAmount: 0,
+      targetDate: effectiveDate,
+      startDate: effectiveDate,
+      performance: -percentageDecrease,  // Additive decrease (e.g., 4.5% → 4.0%)
+      assumptions: {
+        percentageDecrease: percentageDecrease,
+        accountType: 'HYSA',
+        rebalancingEnabled: true  // Mark as additive
+      }
+    },
+    {
+      id: `event-${EventType.INTEREST_RATE_DECREASE}-mortgage`,
+      name: EventType.INTEREST_RATE_DECREASE,
+      scenarioId: EventType.INTEREST_RATE_DECREASE,
+      archetype: ScenarioArchetype.INTEREST_RATE_CHANGE,
+      linkedAccountName: 'Mortgage',  // Targets mortgage accounts
+      targetAmount: 0,
+      targetDate: effectiveDate,
+      startDate: effectiveDate,
+      performance: -percentageDecrease,  // Additive decrease (e.g., 3.5% → 3.0%)
+      assumptions: {
+        percentageDecrease: percentageDecrease,
+        accountType: 'Mortgage',
+        rebalancingEnabled: true  // Mark as additive
+      }
+    }
+  ]
+}
+
+function transformDivorceSeparation(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: divorce/separation settlement cost
+  const settlementCost = ensureNumber(data.settlementCost, 50000)
+  const separationDate = ensureDate(data.separationDate)
+  
+  return {
+    id: `event-${EventType.DIVORCE_SEPARATION}`,
+    name: EventType.DIVORCE_SEPARATION,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    targetAmount: settlementCost,  // One-time settlement payment
+    targetDate: separationDate,
+    startDate: separationDate,
+    assumptions: {
+      settlementCost: settlementCost
+    }
+  }
+}
+
+function transformUnexpectedTaxBill(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: unexpected tax bill
+  const billAmount = ensureNumber(data.billAmount, 5000)
+  const dueDate = ensureDate(data.dueDate)
+  
+  return {
+    id: `event-${EventType.UNEXPECTED_TAX_BILL}`,
+    name: EventType.UNEXPECTED_TAX_BILL,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    targetAmount: billAmount,  // One-time tax payment
+    targetDate: dueDate,
+    startDate: dueDate,
+    assumptions: {
+      billAmount: billAmount
+    }
+  }
+}
+
+function transformFraudTheft(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: fraud/theft loss
+  const lossAmount = ensureNumber(data.lossAmount, 3000)
+  const lossDate = ensureDate(data.lossDate)
+  
+  return {
+    id: `event-${EventType.FRAUD_THEFT}`,
+    name: EventType.FRAUD_THEFT,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    targetAmount: lossAmount,  // One-time loss
+    targetDate: lossDate,
+    startDate: lossDate,
+    assumptions: {
+      lossAmount: lossAmount
+    }
+  }
+}
+
+function transformPropertyDamage(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: property damage expense minus insurance coverage
+  const repairCost = ensureNumber(data.repairCost, 10000)
+  const insuranceCover = ensureNumber(data.insuranceCover, 0)
+  const outOfPocket = Math.max(repairCost - insuranceCover, 0)
+  const damageDate = ensureDate(data.damageDate)
+  
+  return {
+    id: `event-${EventType.PROPERTY_DAMAGE}`,
+    name: EventType.PROPERTY_DAMAGE,
+    archetype: ScenarioArchetype.ONE_OFF_EXPENSE,
+    targetAmount: outOfPocket,  // Net repair cost after insurance
+    targetDate: damageDate,
+    startDate: damageDate,
+    assumptions: {
+      repairCost: repairCost,
+      insuranceCover: insuranceCover,
+      outOfPocket: outOfPocket
+    }
+  }
+}
+
+function transformChildbirthUnplanned(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: unplanned childbirth with ongoing childcare costs
+  const monthlyChildcareCost = ensureNumber(data.monthlyChildcareCost, 800)
+  const durationYears = ensureNumber(data.durationYears, 10)
+  const birthDate = ensureDate(data.birthDate)
+  
+  const targetDate = new Date(birthDate)
+  targetDate.setFullYear(targetDate.getFullYear() + durationYears)
+  
+  return {
+    id: `event-${EventType.CHILDBIRTH_UNPLANNED}`,
+    name: EventType.CHILDBIRTH_UNPLANNED,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: monthlyChildcareCost * 12 * durationYears,  // Total childcare costs
+    monthlyContribution: -monthlyChildcareCost,  // Monthly childcare expense (negative)
+    targetDate: targetDate,
+    startDate: birthDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    assumptions: {
+      monthlyChildcareCost: monthlyChildcareCost,
+      durationYears: durationYears
+    }
+  }
+}
+
+function transformDeathOfBreadwinner(data: Record<string, any>): ScenarioModifier {
+  // Direct ScenarioModifier creation: death of breadwinner with ongoing income loss
+  const monthlyIncomeLost = ensureNumber(data.monthlyIncomeLost, 3000)
+  const durationYears = ensureNumber(data.durationYears, 10)
+  const deathDate = ensureDate(data.deathDate)
+  
+  const targetDate = new Date(deathDate)
+  targetDate.setFullYear(targetDate.getFullYear() + durationYears)
+  
+  // Use RECURRING_EXPENSE archetype to properly model income loss as an outflow
+  return {
+    id: `event-${EventType.DEATH_OF_BREADWINNER}`,
+    name: EventType.DEATH_OF_BREADWINNER,
+    archetype: ScenarioArchetype.RECURRING_EXPENSE,
+    targetAmount: monthlyIncomeLost * 12 * durationYears,  // Total loss over period
+    amountInterpretation: 'monthly' as const,
+    monthlyContribution: monthlyIncomeLost,  // Positive value for expense archetype
+    targetDate: targetDate,
+    startDate: deathDate,
+    duration: durationYears,
+    frequency: 'monthly' as const,
+    cashFlowBehavior: 'sinking_expense' as const,
+    assumptions: {
+      monthlyIncomeLost: monthlyIncomeLost,
+      durationYears: durationYears
+    }
+  }
+}

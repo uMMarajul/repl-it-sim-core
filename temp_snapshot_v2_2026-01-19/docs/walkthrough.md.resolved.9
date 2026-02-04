@@ -1,0 +1,52 @@
+# Walkthrough: Template Clean-up and Integration Fixes
+
+## 1. Simplified Templates Cleanup
+The configuration file [app-ui/src/config/simplifiedTemplates.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/config/simplifiedTemplates.ts) contained duplicate entries and syntax errors from previous merge operations.
+
+### Fixes Applied:
+- **Removed Floating Junk**: Deleted orphaned code fragments (lines 119-121).
+- **Consolidated Duplicates**: Removed duplicate legacy definitions for:
+  - `house_deposit_fund` (lines 254-261)
+  - `salary_increase` (lines 272-278)
+  - `apply_mortgage` (lines 325-337)
+- **Standardized Field Keys**: Updated new templates to match [configTransformers.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/config/configTransformers.ts) contracts:
+  - **`house_deposit_fund`**: Removed `monthlyContribution` (handled by allocator), verified `targetAmount`/`targetDate`.
+  - **`start_investing_isa`**: Changed to allocation model (`allocationPercentage` + `startDate`) to match [transformPortfolioSwitch](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/config/configTransformers.ts#1651-1719).
+  - `salary_increase`: Changed `newSalary` to `targetAmount` ("Annual Raise Amount") to match [transformIncreaseSalary](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/config/configTransformers.ts#1252-1292).
+  - `job_loss`: Renamed keys to `jobLossDate` and `unemploymentDuration` to match [transformJobLoss](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/config/configTransformers.ts#1497-1543). Note: Ultimately deleted the top-level `job_loss` definition in favor of the existing, correct definition at line 446.
+  - `start_investing_isa`: Ultimately deleted the top-level definition in favor of the existing, correct definition at line 393 (which correctly supports account switching).
+- **Verified Syntax**: Confirmed file structure is valid JSON-like object export.
+
+## 2. Scenario Auto-Activation
+Scenarios saved via the "Configure" dialog were updating data but not explicitly enabling them in the store.
+
+### Fixes Applied:
+- **[scenarioStore.tsx](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/state/scenarioStore.tsx)**: Updated `UPDATE_SCENARIO` reducer case to set `enabled: true` automatically.
+  ```typescript
+  [action.scenarioId]: {
+    ...state.scenarios[action.scenarioId],
+    enabled: true, // Auto-enable when configuration is saved
+    data: action.data,
+    ...
+  }
+  ```
+- This ensures any scenario configured by the user takes immediate effect without requiring a separate toggle action.
+
+## 3. Verification
+- **Build Integrity**: [simplifiedTemplates.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/config/simplifiedTemplates.ts) is now duplicate-free and syntactically correct.
+- **Backend Compatibility**: Template keys now align with the backend transformers, preventing runtime errors during simulation updates.
+
+## 4. Full Scenario Audit
+Performed a comprehensive cross-reference between backend transformers and UI templates to ensure 100% coverage.
+- **Scope**: ~58 scenarios defined in [configTransformers.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/config/configTransformers.ts).
+- **Finding**: Identified `long_term_illness` as the only scenario missing from the UI configuration.
+- **Fix**: Added `long_term_illness` template (Line 526) with correct fields (`monthlyMedicalCosts`, `durationMonths`, `startDate`).
+- **Conclusion**: All 55+ backend scenarios are now fully exposed and functional in the UI.
+
+## 5. AI Experience Improvements
+To address feedback about the AI being too technical/interrogative:
+- **Prompt Engineering**: Updated [agent_service.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent_service.py) to impose strict brevity (1-2 sentences) and prevent unsolicited calculations/lists.
+- **Human-Like Flow**: Enforced a "one question at a time" rule to avoid overwhelming the user.
+- **Action Triggers**: AI now uses specific `[INTENT]` tags to force the configuration window to open when details are confirmed, preventing text-only responses.
+- **Auto-Defaults**: AI now silently assumes standard UK rates for defaults rather than asking technical questions.
+- **Workflow**: Logic updated to trigger the "Configure" dialog immediately upon capturing the core Goal + Date, rather than stalling for fine-grained parameters.

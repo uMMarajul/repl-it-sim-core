@@ -1,0 +1,464 @@
+# AI Agent Orchestration for Financial Goals
+
+## Overview
+
+Build an AI agent system that enhances the existing financial simulator by providing intelligent goal recommendations, configuring standardized scenarios, and generating custom scenarios when standard ones don't fit user needs.
+
+---
+
+## Current System Analysis
+
+### ✅ Existing Infrastructure
+
+**Scenario Registry System**
+- 54 pre-built financial scenarios organized into 6 themes:
+  - **Foundational Stability** (9): Emergency funds, savings, debt, pensions, investments
+  - **Housing & Assets** (7): Property, vehicles, mortgages, renovations
+  - **Family & Care** (7): Marriage, children, education, elder care
+  - **Career & Income** (12): Salary changes, job moves, business ventures
+  - **Health & Protection** (7): Medical emergencies, insurance
+  - **Market & Economic** (12): Market movements, windfalls, withdrawals
+
+**Deterministic Rules Engine** (`sim-core/src/agents/`)
+- GDPR-compliant recommendation system
+- Rule-based evaluation with full traceability
+- [UserProfile](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/agents/types.ts#160-191) structure with demographics, income, assets, debts
+- Sample rules implemented: emergency fund, ISA maximization, pension contributions, mortgage overpayment
+- Confidence scoring and priority ranking
+- Calculation trace for explainability
+
+**Gaps to Address**
+1. ❌ Natural language user input not supported
+2. ❌ No conversational interface for gathering requirements
+3. ❌ Limited rules (only 4 basic rules exist)
+4. ❌ No custom scenario generation capability
+5. ❌ No intelligent parameter suggestion beyond simple formulas
+
+---
+
+## Proposed Architecture
+
+### Hybrid Approach: Rules Engine + LLM Agent
+
+```mermaid
+graph TB
+    User[User Input] --> NLU[AI Agent: NLU Layer]
+    NLU --> Profile[Extract User Profile]
+    NLU --> Intent[Understand Financial Goals]
+    
+    Profile --> Rules[Deterministic Rules Engine]
+    Intent --> Rules
+    Rules --> StdRec[Standard Scenario Recommendations]
+    
+    Intent --> CustomCheck{Custom Scenario Needed?}
+    CustomCheck -->|Yes| GenAgent[AI Agent: Scenario Generator]
+    CustomCheck -->|No| StdRec
+    
+    GenAgent --> CustomSc[Custom Scenario Modifiers]
+    
+    StdRec --> Merge[Merge Recommendations]
+    CustomSc --> Merge
+    
+    Merge --> Config[AI Agent: Parameter Configurator]
+    Config --> Final[Final Scenario Configuration]
+    
+    Final --> Sim[Financial Simulator]
+    Sim --> Results[Projection Results]
+    Results --> Explain[AI Agent: Explainer]
+    Explain --> UserOut[User-Friendly Explanation]
+```
+
+### Three-Layer Agent System
+
+#### **Layer 1: Natural Language Understanding (NLU) Agent**
+**Purpose**: Convert conversational input to structured [UserProfile](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/agents/types.ts#160-191)
+
+**Capabilities**:
+- Extract demographics (age, retirement age)
+- Parse income and expenses
+- Identify assets and debts
+- Detect financial goals from free-form text
+- Handle follow-up questions for missing information
+
+**Input**: Natural language conversation  
+**Output**: [UserProfile](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/agents/types.ts#160-191) object + list of goal intents
+
+---
+
+#### **Layer 2: Recommendation Orchestrator**
+**Purpose**: Decide which scenarios to recommend
+
+**Components**:
+- **Existing Rules Engine**: For standard, well-defined recommendations
+- **AI Recommendation Agent**: For nuanced, edge-case recommendations
+- **Relevance Scorer**: Ranks scenarios by user situation
+
+**Logic**:
+1. Run deterministic rules engine on UserProfile
+2. Use LLM to analyze user goals + profile for additional recommendations
+3. Check if goals can be met by existing 54 scenarios
+4. If gaps exist, invoke custom scenario generator
+
+---
+
+#### **Layer 3: Scenario Configuration Agent**
+**Purpose**: Intelligently configure scenario parameters
+
+**Capabilities**:
+- Suggest realistic parameter values (amounts, dates, rates)
+- Use UK-specific financial guidelines (e.g., ISA limits, typical mortgage rates)
+- Consider user's affordability and risk tolerance
+- Generate custom scenarios when standard ones don't fit
+
+**Custom Scenario Generation**:
+- Identify archetype combinations needed
+- Generate `ScenarioModifier` objects
+- Provide explanation of custom scenario logic
+- Ensure UK tax compliance
+
+---
+
+## Proposed Changes
+
+### Component 1: AI Agent Service Layer
+
+#### [NEW] [sim-core/src/agents/ai/aiAgentService.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/agents/ai/aiAgentService.ts)
+
+**Purpose**: Main orchestration service for AI agent interactions
+
+**Key Functions**:
+- `processUserInput(userMessage: string, conversationHistory?: Message[])` → `AgentResponse`
+- `extractUserProfile(conversation: Message[])` → [UserProfile](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/agents/types.ts#160-191)
+- `generateRecommendations(profile: UserProfile, goals: string[])` → `Recommendation[]`
+- `configureScenario(scenarioId: ScenarioId, profile: UserProfile)` → `ScenarioModifier`
+- `generateCustomScenario(goalDescription: string, profile: UserProfile)` → `CustomScenario`
+
+---
+
+#### [NEW] [sim-core/src/agents/ai/llmClient.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/agents/ai/llmClient.ts)
+
+**Purpose**: Abstraction layer for LLM API calls (OpenAI, Anthropic, etc.)
+
+**Configuration**:
+- Support multiple providers (OpenAI GPT-4, Anthropic Claude)
+- Structured output using JSON mode
+- Retry logic and error handling
+- Token usage tracking
+
+**Key Functions**:
+- `chat(messages: Message[], schema?: JSONSchema)` → `LLMResponse`
+- `embedText(text: string)` → `number[]` (for semantic search)
+
+---
+
+#### [NEW] [sim-core/src/agents/ai/prompts/](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/agents/ai/prompts/)
+
+**Purpose**: Prompt templates for different agent tasks
+
+**Files**:
+- `profileExtraction.ts` - Extract UserProfile from conversation
+- `goalUnderstanding.ts` - Identify financial goals and intent
+- `scenarioRecommendation.ts` - Recommend scenarios intelligently
+- `parameterConfiguration.ts` - Suggest realistic parameter values
+- `customScenarioGeneration.ts` - Generate custom scenarios
+- `explanationGenerator.ts` - Explain recommendations in plain English
+
+**Each prompt includes**:
+- System instructions with UK financial context
+- Few-shot examples
+- JSON schema for structured output
+- Guidelines for FCA compliance
+
+---
+
+#### [NEW] [sim-core/src/agents/ai/types.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/agents/ai/types.ts)
+
+**Purpose**: TypeScript interfaces for AI agent system
+
+**New Types**:
+```typescript
+interface Message {
+  role: 'user' | 'assistant' | 'system'
+  content: string
+  timestamp: Date
+}
+
+interface GoalIntent {
+  intentType: string  // e.g., "save_for_house", "reduce_debt_burden"
+  confidence: number
+  extractedDetails: Record<string, any>
+}
+
+interface AgentResponse {
+  message: string
+  recommendations: Recommendation[]
+  questionsForUser?: string[]
+  profileExtracted?: Partial<UserProfile>
+  confidence: number
+}
+
+interface CustomScenario {
+  description: string
+  modifiers: ScenarioModifier[]
+  reasoning: string
+  archetypesUsed: ScenarioArchetype[]
+  ukTaxConsiderations: string[]
+}
+```
+
+---
+
+### Component 2: Enhanced Rules Engine
+
+#### [MODIFY] [sim-core/src/agents/rulesEngine.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/agents/rulesEngine.ts)
+
+**Changes**:
+- Add `evaluateWithAIAssist()` function that combines rules + LLM recommendations
+- Add confidence scoring adjustments based on LLM analysis
+- Support for "fuzzy" conditions using semantic similarity
+
+---
+
+#### [MODIFY] [sim-core/src/agents/ruleDefinitions.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/agents/ruleDefinitions.ts)
+
+**Changes**:
+- Expand rule set to cover all 54 scenarios (currently only 4 rules exist)
+- Add priority rules for competing recommendations
+- Add rules for detecting when custom scenarios are needed
+
+---
+
+### Component 3: UI Integration
+
+#### [NEW] [app-ui/src/components/AgentChat.tsx](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/components/AgentChat.tsx)
+
+**Purpose**: Conversational UI for agent interaction
+
+**Features**:
+- Chat interface for natural language input
+- Display recommended scenarios with explanations
+- Show confidence scores and reasoning
+- Allow editing of AI-extracted profile data
+- "Apply Recommendation" buttons to add scenarios
+
+---
+
+#### [MODIFY] [app-ui/src/App.tsx](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/App.tsx)
+
+**Changes**:
+- Add AgentChat component to UI
+- Wire up agent service to backend
+- Show AI recommendations alongside manual scenario selection
+
+---
+
+### Component 4: Backend API (Optional - for production)
+
+> [!NOTE]
+> For local development/testing, AI agent can run directly in the browser using client-side API calls. For production, you'd want a backend service.
+
+#### [NEW] [api/agent-service.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent-service.py) (if backend needed)
+
+**Purpose**: Python backend for LLM calls (if preferred over client-side)
+
+---
+
+## Implementation Phases
+
+### Phase 1: Foundation (Week 1)
+**Goal**: Get basic AI agent working with profile extraction
+
+**Tasks**:
+1. Set up LLM client with OpenAI/Anthropic integration
+2. Create profile extraction prompt and test
+3. Build basic chat UI component
+4. Test: User can chat and get profile extracted
+
+**Deliverables**:
+- `llmClient.ts` functional
+- `profileExtraction.ts` prompt tested
+- Basic `AgentChat.tsx` component
+- Manual test: Input conversation, verify profile extraction
+
+---
+
+### Phase 2: Recommendation Engine (Week 2)
+**Goal**: AI agent recommends standardized scenarios
+
+**Tasks**:
+1. Expand rules engine to cover more scenarios (10-15 rules)
+2. Create scenario recommendation prompt
+3. Build hybrid recommender (rules + LLM)
+4. Add explanation generation
+5. Test: Agent recommends appropriate scenarios for sample profiles
+
+**Deliverables**:
+- Expanded rule set
+- Recommendation prompt with UK context
+- `generateRecommendations()` function
+- Test suite with 5 sample user profiles
+
+---
+
+### Phase 3: Custom Scenario Generation (Week 3)
+**Goal**: AI generates custom scenarios for unique needs
+
+**Tasks**:
+1. Create custom scenario generation prompt
+2. Build scenario validator (ensures valid modifiers)
+3. Add parameter suggestion intelligence
+4. Test: Uncommon user goals get custom scenarios
+
+**Deliverables**:
+- Custom scenario generator
+- Validation logic
+- Integration tests with edge cases
+
+---
+
+## Technology Stack
+
+**LLM Provider** (Choose One):
+- **OpenAI GPT-4** (recommended for structured output)
+- **Anthropic Claude 3.5 Sonnet** (excellent for reasoning)
+- **Google Gemini 1.5 Pro** (cost-effective, long context)
+
+**Dependencies**:
+```json
+{
+  "openai": "^4.0.0",          // If using OpenAI
+  "@anthropic-ai/sdk": "^0.9.0", // If using Claude
+  "zod": "^3.22.0"             // Already installed - for schema validation
+}
+```
+
+**API Keys Required**:
+- LLM provider API key (stored in [.env](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/.env))
+
+---
+
+## Verification Plan
+
+### Automated Tests
+
+#### Unit Tests
+**File**: [sim-core/tests/agents/aiAgentService.test.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/tests/agents/aiAgentService.test.ts)
+
+**Test Cases**:
+1. Profile extraction from conversation
+2. Scenario recommendation accuracy
+3. Parameter value suggestions are reasonable
+4. Custom scenario generation validates correctly
+
+**Run Command**:
+```bash
+cd sim-core
+npm test -- aiAgentService.test.ts
+```
+
+---
+
+#### Integration Tests
+**File**: [sim-core/tests/agents/endToEnd.test.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/tests/agents/endToEnd.test.ts)
+
+**Test Scenarios**:
+1. **Young Professional**: Age 28, £45k salary, wants to save for house deposit
+   - Expected: Emergency fund + House deposit fund recommendations
+2. **High Earner with Mortgage**: Age 40, £85k salary, 4% mortgage
+   - Expected: ISA maximization + Mortgage overpayment recommendations
+3. **Unique Goal**: "I want to start a business in 3 years while keeping my job"
+   - Expected: Custom scenario generated combining business venture + side income
+
+**Run Command**:
+```bash
+cd sim-core
+npm test -- endToEnd.test.ts
+```
+
+---
+
+### Manual Testing
+
+#### Test 1: Chat Interface
+1. Start dev server: `cd app-ui && npm run dev`
+2. Open http://localhost:5001/
+3. Navigate to "AI Assistant" (new tab)
+4. Enter: "I'm 32, earn £50k, rent for £1200/month, no savings. Help me plan."
+5. **Verify**: Agent extracts profile, asks clarifying questions, suggests scenarios
+6. **Verify**: Can apply recommendations to add scenarios to simulation
+
+---
+
+#### Test 2: Recommendation Quality
+1. Use 5 different user personas (will provide specific profiles)
+2. For each: Chat with agent and get recommendations
+3. **Verify**: Recommendations are sensible for UK context
+4. **Verify**: Parameter suggestions are realistic (e.g., ISA limit £20k, mortgage rates 3-6%)
+5. **Verify**: Explanations are clear and reference UK tax rules where relevant
+
+---
+
+#### Test 3: Custom Scenario Generation
+1. Enter unusual goal: "I want to take a 6-month sabbatical in 2 years and travel, but keep pension contributions going"
+2. **Verify**: Agent recognizes no standard scenario fits
+3. **Verify**: Generates custom scenario with income interruption + pension continuation
+4. **Verify**: Provides clear explanation of custom scenario logic
+
+---
+
+## User Review Required
+
+> [!IMPORTANT]
+> **LLM Provider Choice**
+> 
+> Which LLM provider would you prefer?
+> - **OpenAI GPT-4o**: Best structured output, excellent for this use case ($$$)
+> - **Anthropic Claude 3.5 Sonnet**: Great reasoning, cheaper ($$)
+> - **Google Gemini 1.5 Pro**: Cost-effective, already in your conversation history ($)
+> 
+> I recommend **OpenAI GPT-4o-mini** for development (cheap, fast) and GPT-4o for production.
+
+> [!IMPORTANT]
+> **Implementation Scope**
+> 
+> This is a comprehensive 3-week plan. Would you like to:
+> 1. **Start with Phase 1 only** (profile extraction + basic chat) - ~5-8 hours
+> 2. **Full implementation** across all phases - ~3 weeks
+> 3. **Modified scope** - Tell me which specific capabilities matter most
+
+> [!WARNING]
+> **Breaking Changes**
+> 
+> The AI agent system is additive - no breaking changes to existing code:
+> - Existing UI continues to work
+> - Rules engine enhanced, not replaced
+> - New features are opt-in via AI chat interface
+
+---
+
+## Open Questions
+
+1. **Where should LLM calls happen?**
+   - Client-side (browser) - simpler for local dev, but exposes API keys
+   - Server-side (Python/Node backend) - more secure, requires backend setup
+   
+2. **How much guidance should the agent provide?**
+   - Conservative: Stick close to standard scenarios, minimal custom generation
+   - Balanced: Recommend standards, generate custom when clearly needed
+   - Creative: Actively suggest creative scenario combinations
+
+3. **Should the agent learn from user feedback?**
+   - Track which recommendations users accept/reject?
+   - Use feedback to improve future suggestions?
+
+---
+
+## Next Steps
+
+Once you review this plan, I can:
+1. Answer any questions about the architecture
+2. Adjust scope based on your priorities
+3. Begin implementation starting with your preferred phase
+4. Set up the LLM provider integration
+
+**What would you like to focus on first?**

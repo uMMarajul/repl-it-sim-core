@@ -1,0 +1,81 @@
+# AI Intent Detection + Config Window Integration
+
+## Goal
+
+Enable the AI chat to:
+1. **Detect user intents** (e.g., "I want to buy a house" → `BUY_HOME` scenario)
+2. **Extract parameters** from conversation (e.g., "£300k house" → `targetAmount: 300000`)
+3. **Trigger config window** automatically with pre-filled values
+
+## Architecture
+
+```
+User Message → Backend AI → Intent Detection → Frontend → Config Window
+                  ↓              ↓                ↓           ↓
+              GPT-5 Nano    Scenario ID    ChatAssistant   Modal Opens
+                           + Parameters   triggerScenario  Pre-filled
+```
+
+## Implementation Steps
+
+### 1. Backend: Add Intent Detection
+
+**File**: [api/agent_service.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent_service.py)
+
+- Update AI system prompt to include intent detection instructions
+- Use structured output or JSON parsing to extract:
+  - `intent`: ScenarioId (e.g., "BUY_HOME", "EMERGENCY_FUND")
+  - `params`: Extracted parameters (e.g., `{targetAmount: 300000, timeframe: 60}`)
+- Return intent in [ChatResponse](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent_service.py#129-136)
+
+**Scenarios to detect**:
+- Emergency Fund (`EMERGENCY_FUND`)
+- Buy Home (`BUY_HOME`)
+- Pension Contribution (`PENSION_CONTRIBUTION`)
+- Debt Consolidation (`DEBT_CONSOLIDATION`)
+- ISA Contribution (`ISA_CONTRIBUTION`)
+- Career Break (`CAREER_BREAK`)
+- etc.
+
+### 2. Frontend: Update ChatAssistant
+
+**File**: [app-ui/src/components/ChatAssistant.tsx](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/components/ChatAssistant.tsx)
+
+- Check backend response for `intent` field
+- When intent detected:
+  1. Show confirmation message in chat
+  2. Call [triggerScenarioConfig(scenarioId, params)](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/components/ChatAssistant.tsx#57-63)
+  3. Wait 1-2 seconds, then dispatch `openScenarioConfig` event
+
+**Existing code** already has this structure, just need to connect it to backend response.
+
+### 3. Parameter Extraction Logic
+
+**Common parameters to extract**:
+- `targetAmount`: Money amounts (£300k, £1m)
+- `timeframe`: Time periods (5 years, 60 months)
+- `monthlyContribution`: Monthly amounts
+- `currentBalance`: Existing savings
+- `interestRate`: Rates for debt
+
+### 4. Testing
+
+**Test cases**:
+1. "I want to save £10k emergency fund" → Opens EMERGENCY_FUND with targetAmount=10000
+2. "Buy house for £350k in 5 years" → Opens BUY_HOME with amount + timeframe
+3. "Start pension, contribute £500/month" → Opens PENSION with monthly amount
+4. General chat → No config window (normal conversation)
+
+## Files to Modify
+
+1. [api/agent_service.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent_service.py) - Add intent detection logic
+2. [app-ui/src/components/ChatAssistant.tsx](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/components/ChatAssistant.tsx) - Connect backend intent to config trigger
+3. Update [ChatResponse](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent_service.py#129-136) model to include intent/params
+
+## Success Criteria
+
+✅ AI detects user goals from natural conversation  
+✅ Config window opens automatically when intent detected  
+✅ Parameters pre-filled from conversation context  
+✅ User can still edit/confirm before applying  
+✅ General chat works normally without triggering configs

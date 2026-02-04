@@ -1,0 +1,16 @@
+injected.js:37 [useSimulation] Recomputing with scenarios: {Job Loss (Temporary Unemployment): {…}}
+injected.js:37 [buildScenarioModifiers] START - Processing scenarios: ['Job Loss (Temporary Unemployment)']0: "Job Loss (Temporary Unemployment)"length: 1[[Prototype]]: Array(0)
+injected.js:37 [buildScenarioModifiers] Processing Job Loss (Temporary Unemployment): enabled=true, hasData=true
+injected.js:37 [useSimulation] Adding ScenarioModifier for Job Loss (Temporary Unemployment)
+injected.js:37 [useSimulation] Recomputing with scenarios: {Job Loss (Temporary Unemployment): {…}}Job Loss (Temporary Unemployment): {id: 'Job Loss (Temporary Unemployment)', type: 'event', enabled: true, data: {…}, _simplifiedInputs: {…}}[[Prototype]]: Object
+injected.js:37 [buildScenarioModifiers] START - Processing scenarios: ['Job Loss (Temporary Unemployment)']0: "Job Loss (Temporary Unemployment)"length: 1[[Prototype]]: Array(0)
+injected.js:37 [buildScenarioModifiers] Processing Job Loss (Temporary Unemployment): enabled=true, hasData=true
+injected.js:37 [useSimulation] Adding ScenarioModifier for Job Loss (Temporary Unemployment)
+injected.js:37 [useSimulation] Recomputing with scenarios: {Job Loss (Temporary Unemployment): {…}}Job Loss (Temporary Unemployment): {id: 'Job Loss (Temporary Unemployment)', type: 'event', enabled: true, data: {…}, _simplifiedInputs: {…}}[[Prototype]]: Object
+injected.js:37 [buildScenarioModifiers] START - Processing scenarios: ['Job Loss (Temporary Unemployment)']0: "Job Loss (Temporary Unemployment)"length: 1[[Prototype]]: Array(0)
+injected.js:37 [buildScenarioModifiers] Processing Job Loss (Temporary Unemployment): enabled=true, hasData=true
+injected.js:37 [useSimulation] Adding ScenarioModifier for Job Loss (Temporary Unemployment)
+injected.js:37 [useSimulation] Recomputing with scenarios: {Job Loss (Temporary Unemployment): {…}}
+injected.js:37 [buildScenarioModifiers] START - Processing scenarios: ['Job Loss (Temporary Unemployment)']
+injected.js:37 [buildScenarioModifiers] Processing Job Loss (Temporary Unemployment): enabled=true, hasData=true
+injected.js:37 [useSimulation] Adding ScenarioModifier for Job Loss (Temporary Unemployment)

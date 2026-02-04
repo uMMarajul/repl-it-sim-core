@@ -1,0 +1,55 @@
+# Financial AI Assistant - Project Update
+
+## 🚀 Project Evolution (v1 vs v2)
+Since our initial prototype, the application has transformed from a simple **Text-Command Interface** into a **Visual Planning Experience**.
+
+**What Changed?**
+*   **From "Blank Page" to "Guided Journeys"**: Users no longer guess what to type. They now select a path (Set Goals, Improve Health, Test Events) and the AI guides them.
+*   **From "Text Confirmation" to "Visual Feedback"**: We moved from text replies ("Ok, done.") to **Chat Charts** that show the graph moving in real-time.
+*   **From "Prototype" to "Product"**: Added animations, smart typing indicators, and refined UI styling to make it feel like a polished app.
+
+## 📋 Detailed Updates (Phases 5-7)
+
+## 🔗 Architecture & Integration
+The system uses a **Bidirectional Loop** between the Python Backend (AI) and the React Frontend (Simulation).
+
+1.  **Context Awareness (Frontend -> AI)**:
+    *   The frontend captures the current simulation state (Profile, Active Scenarios, Surplus).
+    *   This context is sent to the Python API (`/api/chat`) with every message.
+    *   The AI uses this to give personalized advice (e.g., "You have £500 monthly surplus").
+
+2.  **Action System (AI -> Frontend)**:
+    *   The Python AI ([agent_service.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent_service.py)) analyzes user intent using a hybrid approach (Regex + LLM).
+    *   It determines the desired Scenario (e.g., `buy_home`) and Parameters (e.g., `targetAmount: 50000`).
+    *   It returns a structured **Action** (`OPEN_CONFIG`) to the frontend.
+    *   The frontend automatically opens the correct configuration dialog with fields pre-filled.
+
+## 📊 Current Status
+We are currently **mid-way through Phase 5**.
+
+*   ✅ **Phase 1-3 (Foundation)**: Backend API setup, Context passing, Financial Knowledge Base (ISA rules, etc.).
+*   ✅ **Phase 4a (Custom Goals)**: Smart detection of unique goals (e.g. "Space Trip").
+*   ✅ **Phase 4b (Universal Scenarios)**: **JUST COMPLETED**. The "Custom Scenario" engine now supports:
+    *   **Income/Windfalls** ("I got a £5k inheritance")
+    *   **Debt/Loans** ("I need a £10k car loan")
+    *   **Withdrawals** ("I need to take out £2k")
+    *   **Savings/Expenses** (Standard goals)
+*   ✅ **Phase 5 (Guided Journeys)**: **COMPLETE**. Added specific "Journeys" (Goals/Health/Events) and refined AI personas to be more direct.
+*   ✅ **Phase 6 (UI Polish)**: **COMPLETE**. Added slide animations, typing indicators, and sleek scrollbars.
+*   ✅ **Phase 7 (Plan Visualizer - "Chat Charts")**: **JUST COMPLETED**.
+    *   **Micro-Charts in Chat**: You can now see the *immediate impact* of your decisions inside the chat bubble.
+    *   **Snapshots**: Each chart captures the plan *as it was then*, creating a visual history of your simulation.
+    *   **Technical**: Built a lightweight [ChatChart](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/components/ChatChart.tsx#11-91) component that shares the same [useSimulation](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/hooks/useSimulation.ts#1192-1265) brain as the main dashboard.
+
+## 🛠️ For Contributors
+**Key Files to Watch:**
+*   [api/agent_service.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/agent_service.py): Main AI logic, prompt definitions, and parameter extraction.
+*   [app-ui/src/config/configTransformers.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/app-ui/src/config/configTransformers.ts): Logic that converts simplified UI data into complex Simulation Modifiers. **(Heavily modified in Phase 4b)**.
+*   [sim-core/src/config/scenarioRegistryData.ts](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/sim-core/src/config/scenarioRegistryData.ts): Metadata definitions for all scenarios.
+
+**Running the Stack:**
+1.  **Frontend**: `npm run dev` (Port 5001)
+2.  **Backend**: `python -m uvicorn api.agent_service:app --reload --port 8000`
+
+**Environment:**
+Ensure `OPENAI_API_KEY` is set in your environment variables.

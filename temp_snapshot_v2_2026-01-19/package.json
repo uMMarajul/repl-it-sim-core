@@ -1,0 +1,17 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd app-ui && npm run build",
+    "start": "cd app-ui && npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sirv-cli": "^3.0.1"
+  }
+}

@@ -1,0 +1,132 @@
+# AI Assistant Metaprompt Review & Optimization
+
+## Current Situation
+
+**What works:**
+- ✅ Programmatic fallback for intent detection (analyzing conversation history)
+- ✅ Short, concise responses
+- ✅ Money amount parsing (1M, 300k, etc.)
+
+**What doesn't work:**
+- ❌ AI not reliably outputting `[INTENT:...]` tags despite instructions
+- ❌ Asking redundant questions after user already provided info
+- ❌ Not tracking conversation context well
+- ❌ Overly focused on structured output, sacrificing natural conversation
+
+## Root Problems
+
+1. **Competing objectives**: We're asking the AI to be both conversational AND output structured tags
+2. **GPT-5 limitations**: Model doesn't reliably follow format instructions for tags
+3. **Prompt complexity**: Too many rules make it harder to follow
+4. **Missing personality**: No character or voice, feels robotic
+
+## Proposed Solution: Two-Path Architecture
+
+Instead of one prompt trying to do everything, use **TWO prompts**:
+
+### Path 1: Conversational Prompt (Primary)
+Focus on being helpful, natural, and extracting information through conversation.
+
+### Path 2: Intent Classifier (Programmatic)
+Analyze the conversation after each turn to detect intents.
+
+---
+
+## Optimized Metaprompt (Conversational Focus)
+
+```
+You are Alpha, a friendly UK financial planning assistant. Your goal is to help users set up financial goals efficiently.
+
+PERSONALITY:
+- Warm and encouraging
+- Concise (1-2 sentences)
+- Assume user is smart—don't over-explain
+
+CONVERSATION FLOW:
+1. When user mentions a goal (house, emergency fund, pension), ask for the amount
+2. When user gives an amount, confirm and acknowledge
+3. Don't repeat questions they already answered
+
+MONEY SHORTCUTS:
+- 1m/1M = £1,000,000
+- 300k = £300,000
+- 10k = £10,000
+
+EXAMPLES:
+
+User: "I want to save for a house deposit"
+You: "Great! How much are you looking to save?"
+
+User: "300k"
+You: "Perfect! I'll set up a £300,000 house deposit goal for you."
+
+User: "I want to buy a house for £500k"
+You: "Excellent! Setting that up now."
+
+REMEMBER:
+- Be enthusiastic about their goals
+- Track what they've told you
+- Don't ask for info they already gave
+- Keep it brief and positive
+```
+
+---
+
+## Why This Works Better
+
+1. **Natural conversation**: AI can focus on being helpful, not formatting tags
+2. **Reliability**: Code handles intent detection (already working!)
+3. **Better UX**: Users get warm, encouraging responses
+4. **Maintainability**: Easier to tweak personality vs debugging tag formats
+
+---
+
+## Additional Enhancements
+
+### Add Context Memory
+Store key facts across conversation:
+```python
+# Track in session
+self.context = {
+    'goal_mentioned': None,
+    'amount_mentioned': None,
+    'timeframe_mentioned': None
+}
+```
+
+### Improve Intent Detection
+Current regex-based detection works but could be enhanced:
+- Handle more goal types (ISA, pension types, etc.)
+- Detect timeframes ("in 5 years" = 60 months)
+- Extract monthly contributions vs lump sums
+
+### Add Confirmation Step
+Before opening config, show what was detected:
+```
+"Got it! I'll set up:
+📍 Goal: House Deposit
+💰 Amount: £300,000
+⏱️  Timeframe: 5 years
+
+Ready to proceed?"
+```
+
+---
+
+## Implementation Priority
+
+1. ✅ **DONE**: Programmatic intent detection
+2. 🔄 **NEXT**: Simplified conversational prompt (remove tag requirements)
+3. ⏭️  **LATER**: Context tracking across sessions
+4. ⏭️  **LATER**: Confirmation step before opening configs
+5. ⏭️  **LATER**: Multi-goal conversations
+
+---
+
+## Recommended Next Steps
+
+1. Replace current prompt with simplified conversational version
+2. Test multi-turn conversations
+3. Add more goal types to programmatic detector
+4. Consider adding timeframe extraction
+5. Build confirmation UI in frontend

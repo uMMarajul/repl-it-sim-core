@@ -1,0 +1,100 @@
+modules = ["nodejs-20", "web", "bun", "python-3.11"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+packages = ["nodejs_20"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "app-ui"
+
+[[workflows.workflow]]
+name = "app-ui"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd app-ui && npm run dev"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 33339
+externalPort = 3000
+
+[[ports]]
+localPort = 35293
+externalPort = 8080
+
+[[ports]]
+localPort = 37195
+externalPort = 3002
+
+[[ports]]
+localPort = 39383
+externalPort = 8099
+
+[[ports]]
+localPort = 40027
+externalPort = 4200
+
+[[ports]]
+localPort = 40603
+externalPort = 8000
+
+[[ports]]
+localPort = 41409
+externalPort = 6000
+
+[[ports]]
+localPort = 42771
+externalPort = 6800
+
+[[ports]]
+localPort = 44137
+externalPort = 9000
+
+[[ports]]
+localPort = 45241
+externalPort = 3003
+
+[[ports]]
+localPort = 45335
+externalPort = 5000
+
+[[ports]]
+localPort = 45773
+externalPort = 5173
+
+[[ports]]
+localPort = 45915
+externalPort = 3001
+
+[[ports]]
+localPort = 46045
+externalPort = 8081
+
+[[ports]]
+localPort = 46769
+externalPort = 8008
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["npm", "run", "start"]
+build = ["npm", "run", "build"]

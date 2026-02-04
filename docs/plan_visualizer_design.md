@@ -1,0 +1,42 @@
+# Design: Plan Visualizer (Chat Charts) 📊
+
+## 1. The Core Concept: "Mirrors, not Copies"
+The charts in the Chat Assistant will **NOT** be separate simulations. They will use the **exact same** `useSimulation` engine as the main dashboard, ensuring 100% data consistency.
+
+### How they relate:
+*   **Main Dashboard**: The "Macro View". Shows the entire 50-year projection, all accounts, all scenarios overlaid.
+*   **Chat Assistant**: The "Micro View". Shows the **Specific Impact** of the action you just took.
+
+## 2. Implementation Strategy
+
+### A. New Component: `ChatChart.tsx`
+A lightweight, stripped-down chart component optimized for the 400px chat window.
+*   **Library**: Recharts (same as main).
+*   **Styles**: Minimal axes, no grid lines, compact tooltips.
+*   **Modes**:
+    *   `IMPACT`: Shows specific delta (e.g., "Cash Flow dropped by £5k in 2026").
+    *   `SNAPSHOT`: Shows a Sparkline of Net Worth trend.
+
+### B. Data Flow & Consistency
+1.  **Shared Hook**: `ChatAssistant` will consume `useSimulation()`.
+2.  **Snapshotting**: When a scenario is added/modified:
+    *   We capture a lightweight **Snapshot** of the key metrics (e.g., `NetWorth` array) *at that moment*.
+    *   This ensures that if you scroll back up in the chat, the chart shows the state *as it was then*, not the current state.
+
+### C. Example User Flow
+1.  **User**: "Buy a standardized house in 2028."
+2.  **AI**: "Configured." (Updates Store).
+3.  **Chat UI**:
+    *   Detects `OPEN_CONFIG` or `SAVE_CONFIG`.
+    *   Renders a `ChatChart` showing:
+        *   **Red Bar** in 2028 (Deposit payment).
+        *   **Green Line** shift (Net Worth impact over time).
+    *   "See how this dip in 2028 recovers by 2035 due to property value?"
+
+## 3. Technical Requirements
+- [ ] Create `components/ChatChart.tsx`.
+- [ ] Update `ChatAssistant.tsx` to handle `type: 'CHART_SNAPSHOT'` messages.
+- [ ] Integrate `useSimulation` into `ChatAssistant` for real-time data access.
+
+## 4. Addressing "Option C" (UI Polish)
+This dovetails perfectly with the UI Polish. The charts will use the same color palette (`#ff6b35` orange, `#1a2332` dark blue) to feel like a native part of the conversation.

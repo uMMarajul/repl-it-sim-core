@@ -1,0 +1,44 @@
+# Walkthrough: Guided Journeys & Multi-Persona AI 🧠
+
+Use this guide to understand the new "Context-Switched Agent" architecture.
+
+## 1. The "Guided Journey" UI
+We moved away from a static chat to a **Goal-Oriented Interface**.
+- **Journey Menu**: 3-column chip grid (Set Goals, Improve Health, Test Events).
+- **Dynamic Suggestions**: Chips change based on the selected journey.
+- **Mode Switching**: Clicking a journey sends a `mode` signal ('goals', 'health', 'events') to the backend.
+
+## 2. Multi-Persona Architecture ([api/prompts.py](file:///c:/Users/harri/Downloads/replit-sim-core/replit-sim-core/api/prompts.py))
+Instead of one massive prompt, we now split logic into 3 personas. The backend dynamically selects the prompt based on the `mode` signal.
+
+### 🐣 Goal Setter (Mode: 'goals')
+- **Vibe**: Enthusiastic, Efficient.
+- **Rules**: Celebrates ONCE. Focuses on getting `targetAmount` and `targetDate` ASAP.
+- **Goal**: Open the config window in 2-3 turns.
+
+### 💪 Health Optimizer (Mode: 'health')
+- **Vibe**: Analytical, Direct.
+- **Focus**: Efficiency. Suggests ISAs, Pensions, and high-interest debt repayment.
+
+### ⚡ Stress Tester (Mode: 'events')
+- **Vibe**: Cautious, Protective.
+- **Focus**: Resilience. Tests "What-If" scenarios (Job Loss, Market Crash) and checks Emergency Funds.
+
+## 3. Universal Custom Scenario Logic
+We empowered the `custom_goal` template to handle ANY financial concept using a **Decision Tree**:
+
+1.  **Standard Match**: If user asks for "House", use `buy_home` (Specific fields).
+2.  **Universal Fallback**: If user asks for "Horse", "Inheritance", or "Student Loan":
+    -   AI maps it to `custom_goal`.
+    -   AI assigns `direction`:
+        -   `save` (Horse)
+        -   `income` (Inheritance)
+        -   `debt` (Student Loan)
+    -   Result: One template to rule them all.
+
+## 4. Verification
+Run the verification scripts to test the agent's brain:
+```bash
+python test_stress_tester.py
+# Should trigger: job_loss, market_crash, and custom_goal (unexpected_expense)
+```

@@ -1,0 +1,31 @@
+Scenario-specific challenges: - Scenario-specific comments:
+- For education and training, the salary increase is still showing in the year of retirement, and it shouldn't.
+- For work equipment and tools we should not expect a salary increase, only consider the one off expense when it is incurred
+- For build emergency fund, this should not have an impact on cash flow, but it should have an impact on contributions and the allocation preference logic. After expenses, debt repayments and automations are covered, all additional income shold go to an emergency fund account (let's assume this is held in an HYSA account with a representative APR%) until the emergency fund balance is reached, when it follows the normal allocation order of preference (i.e. defaulting back to 0% savings)
+- For the rental deposit and moving costs, let's combine this into one field in the configuration dialog box ("Rental deposit/ moving costs") and remove the "Amount already saved" field
+- For "Pay Off Debt" can we split this into two actions, "Pay off debt (one-time repayment)" and "Pay off debt (increase monthly repayments)"? We should also update the archetypes so that we have a lump sum account contribution and a regular contribution in there
+- We can remove the Cover Annual Bills goal as this already gets counted in expenses (please remove fully from codebase)
+- Child's education fund should have the exact same treatment as emergency fund
+- Wedding fund should be renamed "pay for wedding" but the logic is fine. 
+- Remove "current savings" from all dialog boxes and schema
+-Remove the Entertainment and Discretionary goal as this is too broad, remove fullly from codebase
+- Buying a cash goal does not impact the charts
+- Saving for house deposit, please treat this the same as the other savings goals, where it's a contribution impact and we save in an HYSA
+- Buying a property should include some lens of asset appreciation, can you ask for the expected annual value increase, and also make sure that is represented in the net wealth charts too
+-•	Can we rename furniture or home decor to "Furniture or Renovations", treat it as a one time expense, and just ask the customer how much it costs and when
+* Remove the goal "plan retirement lifestyle" from the list and the codebase.
+* "Increase salary" gives numbers that are way too high, please just sense check this
+* "Add side income" also gives numbers that are much too high
+* "Reduce expense" shows up in the impact modelling as a reduction in net cash flow but it should be an increase
+* "Make lump sum contribution" should withdraw money from 0% savings and then HYSA to distribute into asset class, please add an account for every new equity type the customer conrtibutes to. there should be no impact on net cash flow
+* "Set up regular contributions" should also follow the liquidation preference like the lump sum contribution
+* "Switch to HYSA" should allocate all the cash the user has in a 0% cash savings account to an HYSA account and apply interest, as well as for the cash flow that is projected to go into a 0% account.
+* "Switch portfolio allocation should have no impact on cash flow or account contributions, but change the amounts in each account and the interest applied to them
+* "Enable auto rebalancing" should rebalance the portfolio annually on the date selected (please make this clear to the customer in the configuration dialog box)
+* - Can you make "Open an ISA" and "Max out an ISA" instead "Contribute to an ISA" and ask the user for the initial funding amount (one-time contribution) and their regular annual contribution (recurring contribution)
+* - For pension contributions, we need a sense of before and after. we need to link from their current contributions to future.
+* - Remove "transfer pension to a new provider"
+* Can you add an action called Quit Job? the user can define when they want to quit their job. At this point, their salary and workplace pension drops to zero, but there is no impact on other sources of income.
+* - Please split "Withdraw from pension (one off)" and "Withdraw from pension" recurring, provide guidance on tax free allowances and also include calculations on what tax would be applied based on the user's inputs
+* - none of the events seem to have an impact on the charts, please can you look into this
+

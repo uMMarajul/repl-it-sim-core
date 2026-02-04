@@ -1,0 +1,42 @@
+# Financial AI Assistant - Project Update
+
+## What We've Built (So Far)
+We have transformed the prototype into a fully functional visual planning tool. Here is a breakdown of what is now working:
+
+### 1. Guided Journeys (Completed)
+*   **What it does:** Instead of staring at a blank chat box, you can now click buttons to **"Set Goals"**, **"Improve Health"**, or **"Test Events"**.
+*   **Why it matters:** It guides you through the process step-by-step. For example, if you choose "Test Events", the AI automatically knows to help you stress-test your plan against job loss or market crashes.
+
+### 2. Live "Chat Charts" (Completed)
+*   **What it does:** When you add a life event (like buying a house), a graph appears *inside* the chat message showing exactly how it changes your bank balance or net worth.
+*   **Why it matters:** You can see the immediate impact of your decisions without leaving the conversation. Each chart acts as a "snapshot" in time, so you can scroll up and see how your plan evolved.
+
+### 3. Visual Polish (Completed)
+*   **What it does:** The app now has smooth animations, typing indicators, and better styling.
+*   **Why it matters:** It feels like a finished product, not a developer prototype.
+
+### 4. Smart Scenario Engine (Completed)
+*   **What it does:** The system can now handle complex financial requests like:
+    *   "I inherited £5,000" (Windfalls)
+    *   "I need to take out a £10k loan" (Debt)
+    *   "I need to withdraw cash from my savings" (Withdrawals)
+*   **Why it matters:** You aren't limited to just "buying things". You can model real-life financial complexity.
+
+## How It Works (Simplified)
+The system connects our **Simulation Engine** (the math) with an **AI Coach** (the logic):
+1.  **It Reads Your Plan:** The AI constantly checks your current age, income, and savings.
+2.  **It Listens to You:** You type a goal in plain English (e.g., "I want to retire at 55").
+3.  **It Updates the Math:** The AI converts your words into settings and updates the simulation instantly.
+
+## 🛠️ For Contributors
+**Key Files to Watch:**
+*   `api/agent_service.py`: Main AI logic, prompt definitions, and parameter extraction.
+*   `app-ui/src/config/configTransformers.ts`: Logic that converts simplified UI data into complex Simulation Modifiers. **(Heavily modified in Phase 4b)**.
+*   `sim-core/src/config/scenarioRegistryData.ts`: Metadata definitions for all scenarios.
+
+**Running the Stack:**
+1.  **Frontend**: `npm run dev` (Port 5001)
+2.  **Backend**: `python -m uvicorn api.agent_service:app --reload --port 8000`
+
+**Environment:**
+Ensure `OPENAI_API_KEY` is set in your environment variables.

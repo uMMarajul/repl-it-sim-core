@@ -1,0 +1,78 @@
+# AI Agent Orchestration for Financial Goals
+
+## Research Phase
+- [x] Explore current scenario/goal system architecture
+- [x] Review scenario registry and metadata structure
+- [x] Understand configuration transformers
+- [x] Analyze user input/profile structure
+- [x] Identify integration points for AI agent
+
+## Planning Phase
+- [x] Design AI agent architecture
+- [x] Define agent capabilities and constraints
+- [x] Plan API/LLM integration approach
+- [x] Design goal recommendation logic
+- [x] Plan custom goal generation workflow
+- [x] Define input/output formats
+
+## Implementation Planning
+- [x] Create detailed implementation plan
+- [x] Review and iterate with user
+- [x] Finalize approach and tech stack
+
+## Phase 1: Foundation (OpenAI + Profile Extraction)
+- [x] Install OpenAI SDK
+- [x] Create AI agent types and interfaces
+- [x] Build LLM client abstraction layer
+- [x] Create profile extraction prompt
+- [x] Implement profile extraction service
+- [x] Build basic chat UI component
+- [x] Test profile extraction end-to-end
+
+## Backend Transition ✅
+- [x] Create Python FastAPI backend service
+- [x] Set up API endpoints for chat
+- [x] Secure API key in environment
+- [x] Update frontend to use backend API
+- [x] Convert to chat widget (not separate page)
+- [x] Test end-to-end with backend
+- [x] Fix model compatibility (GPT-5 Nano)
+- [x] Optimize response length
+
+## AI Intent Detection & Config Integration ✅
+- [x] Add intent detection to backend
+- [x] Detect existing scenarios (BUY_HOME, EMERGENCY_FUND, etc.)
+- [x] Extract parameters from conversation
+- [x] Update frontend to trigger config windows
+- [x] Pre-fill parameters from chat context
+- [x] Implement rule-based intent detection (deterministic)
+- [x] Professional financial planner conversational tone
+- [ ] User browser testing
+
+## Bidirectional AI-Simulation Integration
+- [ ] Phase 1: Context Passing
+  - [ ] Update API models (ChatRequest, ChatResponse with context)
+  - [ ] Frontend: Extract and send simulation state
+  - [ ] Backend: Parse context in AI prompt
+- [ ] Phase 2: Action System
+  - [ ] Define action types (CREATE, MODIFY, ACTIVATE, etc.)
+  - [ ] Backend: Generate scenario actions
+  - [ ] Frontend: Action executor
+- [ ] Phase 3: Financial Coaching
+  - [ ] Expand AI knowledge base (emergency funds, pensions, ISAs)
+  - [ ] Add educational guidance capabilities
+  - [ ] Implement compliance guardrails (non-FCA)
+  - [ ] Add disclaimers to UI
+
+## Phase 2: Recommendation Engine
+- [ ] Expand rules engine with more scenarios
+- [ ] Create scenario recommendation prompts
+- [ ] Build hybrid recommender (rules + AI)
+- [ ] Add explanation generation
+- [ ] Test recommendations with sample profiles
+
+## Phase 3: Custom Scenario Generation
+- [ ] Create custom scenario generation prompts
+- [ ] Build scenario validator
+- [ ] Add intelligent parameter suggestion
+- [ ] Test with edge cases
