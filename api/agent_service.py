@@ -21,7 +21,7 @@ app = FastAPI(title="Financial AI Agent API", version="1.0.0")
 # Enable CORS for local development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5001", "http://localhost:5173", "http://localhost:5005", "https://localhost:3000"],  # Vite dev server
+    allow_origins=["http://localhost:5001", "http://localhost:5173", "http://localhost:5005", "https://localhost:3000", "https://test.moola-money.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
